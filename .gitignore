@@ -1,0 +1,46 @@
+# ============================================================
+#  STM32CubeMX + Keil MDK-ARM 專案
+#  忽略可重新生成的 build 產物與 IDE cache。
+#  保留：.ioc、.uvprojx、Core/、Drivers/、docs/、tools/、
+#        protocol/app 原始碼。
+# ============================================================
+
+# --- Keil MDK-ARM IDE cache / 使用者設定 ---
+MDK-ARM/*.uvguix.*
+MDK-ARM/*.uvoptx
+MDK-ARM/*.bak
+MDK-ARM/DebugConfig/
+MDK-ARM/RTE/
+
+# --- Keil 產生的 scatter / 燒錄設定 ---
+*.sct
+*.scvd
+MDK-ARM/*/JLinkLog.txt
+MDK-ARM/*/JLinkSettings.ini
+
+# --- 編譯/連結產物（依副檔名，位置無關） ---
+*.o
+*.d
+*.crf
+*.axf
+*.hex
+*.lnp
+*.map
+*.dep
+*.lst
+*.htm
+
+# --- CubeMX 產生的專案 metadata（可重新生成） ---
+.mxproject
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+
+# --- 工具輸出資料 ---
+tools/*.csv
+
+# --- OS / 編輯器暫存 ---
+Thumbs.db
+Desktop.ini
+.DS_Store
