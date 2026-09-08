@@ -77,6 +77,19 @@ typedef struct __attribute__((packed))
   uint16_t crc16;
 } pkt_frame_t;
 
+/* Compile-time layout guards. These lock the packed frame layout so that any
+ * accidental field reordering / padding / endianness change breaks the build
+ * (the packet must remain byte-identical with tools/packet.py). */
+typedef char proto_assert_frame_size[(sizeof(pkt_frame_t) == PKT_TOTAL_LEN) ? 1 : -1];
+typedef char proto_assert_off_sequence[(offsetof(pkt_frame_t, sequence) == 4) ? 1 : -1];
+typedef char proto_assert_off_timestamp[(offsetof(pkt_frame_t, timestamp_ms) == 6) ? 1 : -1];
+typedef char proto_assert_off_adc[(offsetof(pkt_frame_t, adc_raw) == 10) ? 1 : -1];
+typedef char proto_assert_off_can_status[(offsetof(pkt_frame_t, can_status) == 24) ? 1 : -1];
+typedef char proto_assert_off_can1[(offsetof(pkt_frame_t, can1_data) == 25) ? 1 : -1];
+typedef char proto_assert_off_can2[(offsetof(pkt_frame_t, can2_data) == 33) ? 1 : -1];
+typedef char proto_assert_off_rf[(offsetof(pkt_frame_t, rf_status) == 41) ? 1 : -1];
+typedef char proto_assert_off_crc[(offsetof(pkt_frame_t, crc16) == 44) ? 1 : -1];
+
 /* CRC-16/MODBUS: poly 0x8005 (reflected 0xA001), init 0xFFFF.
  * Known-answer check: proto_crc16("123456789", 9) == 0x4B37. */
 uint16_t proto_crc16(const uint8_t *data, uint32_t len);
@@ -89,6 +102,13 @@ void proto_packet_finalize(pkt_frame_t *f);
 
 /* Return the total frame size in bytes. */
 uint32_t proto_packet_size(void);
+
+/* Self-test: build a golden frame from a fixed input vector and compare the
+ * full 46-byte binary image (including CRC) against the expected bytes.
+ * The same golden vector is mirrored in tools/packet.py (golden_test) so the
+ * STM32 C and the Python implementations are proven byte-identical.
+ * @retval 1 on pass, 0 on mismatch. */
+int proto_selftest(void);
 
 #ifdef __cplusplus
 }

@@ -35,6 +35,29 @@ CAN_ST_CAN2_PASS = 0x08
 # RF status bit flags
 RF_ST_AUX = 0x01
 
+# Golden test vector: fixed inputs -> fixed 46-byte frame (incl. CRC).
+# Mirrored 1:1 in the STM32 protocol.c (PROTO_GOLDEN_FRAME / proto_selftest).
+GOLDEN_SEQUENCE = 0x0102
+GOLDEN_TIMESTAMP = 0x04030201
+GOLDEN_ADC = [0x0100, 0x0201, 0x0302, 0x0403, 0x0504, 0x0605, 0x0706]
+GOLDEN_CAN_STATUS = 0x0F
+GOLDEN_CAN1 = [0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18]
+GOLDEN_CAN2 = [0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28]
+GOLDEN_RF_STATUS = 0x01
+
+GOLDEN_FRAME = bytes([
+    0xA5, 0x5A, 0x01, 0x28,        # sof, magic, version, length
+    0x02, 0x01,                    # sequence (LE)
+    0x01, 0x02, 0x03, 0x04,        # timestamp_ms (LE)
+    0x00, 0x01, 0x01, 0x02, 0x02, 0x03, 0x03, 0x04, 0x04, 0x05, 0x05, 0x06, 0x06, 0x07,
+    0x0F,                          # can_status
+    0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18,  # can1_data
+    0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28,  # can2_data
+    0x01,                          # rf_status
+    0x00, 0x00,                    # reserved
+    0x68, 0xDA,                    # crc16 = 0xDA68 (LE)
+])
+
 # Full frame format (little-endian); crc16 appended separately below.
 _FRAME_FMT = "<BBBBHI7HB8B8BB2B"
 _CRC_FMT = "<H"
@@ -119,12 +142,40 @@ def parse(frame: bytes):
     }
 
 
+def mock_frame(sequence: int, timestamp_ms: int, version: int = PKT_VERSION) -> bytes:
+    """Build a frame that mirrors the STM32 app.c mock generator (APP_MOCK_MODE).
+
+    ADC = 1000 + i*200 + (sequence % 100); can_status = 0x0F; can1 = 0x11+i;
+    can2 = 0x21+i; rf_status = RF_ST_AUX. Byte-identical to the firmware.
+    """
+    adc = [(1000 + i * 200 + (sequence % 100)) & 0xFFFF
+           for i in range(PKT_ADC_CHANNELS)]
+    can_status = (CAN_ST_CAN1_RUN | CAN_ST_CAN2_RUN |
+                  CAN_ST_CAN1_PASS | CAN_ST_CAN2_PASS)
+    can1 = [0x11 + i for i in range(PKT_CAN_DATA_LEN)]
+    can2 = [0x21 + i for i in range(PKT_CAN_DATA_LEN)]
+    return pack(sequence, timestamp_ms, adc, can_status, can1, can2,
+                RF_ST_AUX, version=version)
+
+
+def golden_test() -> bool:
+    """Verify the fixed golden vector reproduces the expected bytes exactly."""
+    frame = pack(GOLDEN_SEQUENCE, GOLDEN_TIMESTAMP, GOLDEN_ADC,
+                 GOLDEN_CAN_STATUS, GOLDEN_CAN1, GOLDEN_CAN2,
+                 GOLDEN_RF_STATUS)
+    return frame == GOLDEN_FRAME
+
+
 def self_test() -> bool:
-    """Validate CRC known-answer + pack/parse round-trip."""
+    """Validate CRC known-answer + golden vector + pack/parse round-trip."""
     ok = True
 
     if crc16(b"123456789") != 0x4B37:
         print("FAIL: CRC known-answer mismatch")
+        ok = False
+
+    if not golden_test():
+        print("FAIL: golden vector mismatch")
         ok = False
 
     adc = [1000 + i * 200 for i in range(PKT_ADC_CHANNELS)]

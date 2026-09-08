@@ -46,6 +46,9 @@ static void app_collect(pkt_frame_t *f);
 void APP_Init(void)
 {
   s_sequence = 0;
+
+  /* Boot-time protocol self-test (fixed golden vector, no hardware needed). */
+  (void)proto_selftest();
 }
 
 #if (APP_MOCK_MODE == 1)
@@ -61,7 +64,7 @@ static void app_collect(pkt_frame_t *f)
 
   for (i = 0U; i < PKT_ADC_CHANNELS; i++)
   {
-    f->adc_raw[i] = (uint16_t)(1000U + ((uint32_t)i * 200U) + (s_sequence % 100U));
+    f->adc_raw[i] = (uint16_t)(1000U + ((uint32_t)i * 200U) + (f->sequence % 100U));
   }
 
   f->can_status = CAN_ST_CAN1_RUN | CAN_ST_CAN2_RUN

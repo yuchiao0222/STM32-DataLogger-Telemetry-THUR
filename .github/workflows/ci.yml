@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  protocol-tests:
+    name: Protocol & parser tests (no hardware)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Python packet self-test (CRC known-answer + golden vector + round-trip)
+        run: python3 tools/packet.py
+
+      - name: Python offline parser tests (continuous / bad CRC / truncated / noise resync)
+        run: python3 tools/test_offline.py
+
+      - name: Build & run C golden test (host gcc, protocol.c vs packet.py parity)
+        run: |
+          gcc -Wall -Wextra -Werror -I Core/Inc tools/host_proto_test.c Core/Src/protocol.c -o host_proto_test
+          ./host_proto_test
