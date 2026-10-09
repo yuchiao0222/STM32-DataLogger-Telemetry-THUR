@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """PC-side telemetry receiver / parser for the AEBS_RF_Test data link.
 
-Reads the binary packet stream from a CH343 USB-serial port (or a raw log
-file), syncs on SOF+MAGIC, validates CRC-16/MODBUS, prints each packet and
-appends it to a CSV file.
+Reads the extensible TLV packet stream from a serial port (or a raw log file),
+syncs on SOF+MAGIC, validates CRC-16/MODBUS, prints each packet and appends it
+to a CSV file. Unknown field tags are skipped, so the receiver stays compatible
+as fields are added/removed on the firmware side.
 
 Usage:
     python serial_parser.py --port COM3 --baud 9600 --csv out.csv
@@ -17,20 +18,21 @@ Dependencies:
 import argparse
 import csv
 import sys
-import time
 
 import packet
 
+# Fixed set of columns for CSV (subset of the known field names).
 CSV_HEADER = [
     "sequence", "timestamp_ms",
-    "adc0", "adc1", "adc2", "adc3", "adc4", "adc5", "adc6",
-    "can_status", "can1_data", "can2_data", "rf_status",
+    "motor_a_temp", "motor_b_temp", "motor_c_temp", "motor_d_temp",
+    "ctrl_a_temp", "ctrl_b_temp", "ctrl_c_temp", "ctrl_d_temp",
+    "bat_soc",
     "crc_ok",
 ]
 
 
 class FrameExtractor:
-    """Extract fixed-size frames from a byte stream, resyncing on SOF+MAGIC."""
+    """Extract variable-size frames from a byte stream, resyncing on SOF+MAGIC."""
 
     def __init__(self):
         self._buf = bytearray()
@@ -40,53 +42,40 @@ class FrameExtractor:
         while True:
             idx = self._buf.find(bytes([packet.PKT_SOF, packet.PKT_MAGIC]))
             if idx < 0:
-                # No sync found; keep at most the last byte (could be a SOF).
                 self._buf = self._buf[-1:]
                 return
             if idx > 0:
                 del self._buf[:idx]
-            if len(self._buf) < packet.PKT_TOTAL_LEN:
+            if len(self._buf) < 6:
                 return
-            frame = bytes(self._buf[:packet.PKT_TOTAL_LEN])
-            # Validate sync + parse; a valid frame advances a full frame,
-            # otherwise advance one byte to resync.
+            # length is at offset 3; total = 4 + length + 2 (crc)
+            total = 4 + self._buf[3] + 2
+            if len(self._buf) < total:
+                return
+            frame = bytes(self._buf[:total])
             parsed = packet.parse(frame)
             if parsed is not None:
-                del self._buf[:packet.PKT_TOTAL_LEN]
+                del self._buf[:total]
                 yield parsed
             else:
                 del self._buf[:1]
 
 
-def format_can(data):
-    return " ".join("%02X" % b for b in data)
-
-
 def print_packet(p):
-    print(
-        "seq=%5d ts=%8d ms  "
-        "ADC=[%5d %5d %5d %5d %5d %5d %5d]  "
-        "CAN_st=0x%02X  CAN1=[%s]  CAN2=[%s]  RF=0x%02X"
-        % (
-            p["sequence"], p["timestamp_ms"],
-            p["adc_raw"][0], p["adc_raw"][1], p["adc_raw"][2],
-            p["adc_raw"][3], p["adc_raw"][4], p["adc_raw"][5],
-            p["adc_raw"][6],
-            p["can_status"],
-            format_can(p["can1_data"]), format_can(p["can2_data"]),
-            p["rf_status"],
-        )
-    )
+    dec = packet.decode_fields(p["fields"])
+    row = " ".join("%s=%.1f" % (k, v) for k, v in sorted(dec.items()))
+    print("seq=%5d ts=%8d ms  %s" % (p["sequence"], p["timestamp_ms"], row))
 
 
 def row_of(p):
+    dec = packet.decode_fields(p["fields"])
     return [
         p["sequence"], p["timestamp_ms"],
-        *p["adc_raw"],
-        p["can_status"],
-        " ".join("%02X" % b for b in p["can1_data"]),
-        " ".join("%02X" % b for b in p["can2_data"]),
-        p["rf_status"],
+        dec.get("motor_a_temp", ""), dec.get("motor_b_temp", ""),
+        dec.get("motor_c_temp", ""), dec.get("motor_d_temp", ""),
+        dec.get("ctrl_a_temp", ""), dec.get("ctrl_b_temp", ""),
+        dec.get("ctrl_c_temp", ""), dec.get("ctrl_d_temp", ""),
+        dec.get("bat_soc", ""),
         1,
     ]
 

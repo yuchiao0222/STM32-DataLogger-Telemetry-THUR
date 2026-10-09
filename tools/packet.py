@@ -1,73 +1,72 @@
-"""Binary telemetry packet + CRC16 (mirror of the STM32 `protocol.h/.c`).
+"""Extensible binary telemetry packet (TLV) + CRC16 (mirror of protocol.h/.c).
 
-Frame layout (fixed 46 bytes, little-endian):
+Frame layout (little-endian):
     [0]     SOF         0xA5
     [1]     MAGIC       0x5A
-    [2]     version     0x01
-    [3]     length      payload length (=40)
+    [2]     version     0x02
+    [3]     length      payload byte count (offset 4 .. crc-1)
     [4:6]   sequence    uint16
     [6:10]  timestamp_ms uint32
-    [10:24] adc_raw[7]  uint16 x7
-    [24]    can_status  uint8 (bit flags)
-    [25:33] can1_data[8]
-    [33:41] can2_data[8]
-    [41]    rf_status   uint8 (bit flags)
-    [42:44] reserved
-    [44:46] crc16       uint16 (CRC-16/MODBUS over bytes [2:44])
+    [10]    field_count uint8
+    [11..]  fields      each = [tag:1][len:1][value:len]
+    [..]    crc16       uint16 (CRC-16/MODBUS over bytes [2..crc-1])
+
+Adding/removing a measurement = adding/removing one field. A decoder skips
+unknown tags, so both ends stay compatible across schema changes.
 """
 
 import struct
 
 PKT_SOF = 0xA5
 PKT_MAGIC = 0x5A
-PKT_VERSION = 0x01
-PKT_ADC_CHANNELS = 7
-PKT_CAN_DATA_LEN = 8
-PKT_PAYLOAD_LEN = 40
-PKT_TOTAL_LEN = 46
+PKT_VERSION = 0x02
 
-# CAN status bit flags
-CAN_ST_CAN1_RUN = 0x01
-CAN_ST_CAN2_RUN = 0x02
-CAN_ST_CAN1_PASS = 0x04
-CAN_ST_CAN2_PASS = 0x08
+# Field tags (keep in sync with Core/Inc/protocol.h).
+TAG_MOTOR_A_TEMP = 0x01  # int16, 0.1 degC
+TAG_MOTOR_B_TEMP = 0x02
+TAG_MOTOR_C_TEMP = 0x03
+TAG_MOTOR_D_TEMP = 0x04
+TAG_CTRL_A_TEMP = 0x05   # int16, 0.1 degC
+TAG_CTRL_B_TEMP = 0x06
+TAG_CTRL_C_TEMP = 0x07
+TAG_CTRL_D_TEMP = 0x08
+TAG_BAT_SOC = 0x09       # uint8, %
 
-# RF status bit flags
-RF_ST_AUX = 0x01
+# tag -> (name, decoder). decoder takes raw bytes and returns a physical value.
+FIELD_DECODERS = {
+    TAG_MOTOR_A_TEMP: ("motor_a_temp", lambda b: struct.unpack("<h", b)[0] / 10.0),
+    TAG_MOTOR_B_TEMP: ("motor_b_temp", lambda b: struct.unpack("<h", b)[0] / 10.0),
+    TAG_MOTOR_C_TEMP: ("motor_c_temp", lambda b: struct.unpack("<h", b)[0] / 10.0),
+    TAG_MOTOR_D_TEMP: ("motor_d_temp", lambda b: struct.unpack("<h", b)[0] / 10.0),
+    TAG_CTRL_A_TEMP: ("ctrl_a_temp", lambda b: struct.unpack("<h", b)[0] / 10.0),
+    TAG_CTRL_B_TEMP: ("ctrl_b_temp", lambda b: struct.unpack("<h", b)[0] / 10.0),
+    TAG_CTRL_C_TEMP: ("ctrl_c_temp", lambda b: struct.unpack("<h", b)[0] / 10.0),
+    TAG_CTRL_D_TEMP: ("ctrl_d_temp", lambda b: struct.unpack("<h", b)[0] / 10.0),
+    TAG_BAT_SOC: ("bat_soc", lambda b: b[0]),
+}
 
-# Golden test vector: fixed inputs -> fixed 46-byte frame (incl. CRC).
-# Mirrored 1:1 in the STM32 protocol.c (PROTO_GOLDEN_FRAME / proto_selftest).
+# Golden test vector (mirrors protocol.c PROTO_GOLDEN_FRAME).
 GOLDEN_SEQUENCE = 0x0102
 GOLDEN_TIMESTAMP = 0x04030201
-GOLDEN_ADC = [0x0100, 0x0201, 0x0302, 0x0403, 0x0504, 0x0605, 0x0706]
-GOLDEN_CAN_STATUS = 0x0F
-GOLDEN_CAN1 = [0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18]
-GOLDEN_CAN2 = [0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28]
-GOLDEN_RF_STATUS = 0x01
-
+GOLDEN_FIELDS = [
+    (TAG_MOTOR_A_TEMP, struct.pack("<h", 1000)),
+    (TAG_CTRL_A_TEMP, struct.pack("<h", 500)),
+    (TAG_BAT_SOC, bytes([80])),
+]
 GOLDEN_FRAME = bytes([
-    0xA5, 0x5A, 0x01, 0x28,        # sof, magic, version, length
-    0x02, 0x01,                    # sequence (LE)
-    0x01, 0x02, 0x03, 0x04,        # timestamp_ms (LE)
-    0x00, 0x01, 0x01, 0x02, 0x02, 0x03, 0x03, 0x04, 0x04, 0x05, 0x05, 0x06, 0x06, 0x07,
-    0x0F,                          # can_status
-    0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18,  # can1_data
-    0x21, 0x22, 0x23, 0x24, 0x25, 0x26, 0x27, 0x28,  # can2_data
-    0x01,                          # rf_status
-    0x00, 0x00,                    # reserved
-    0x68, 0xDA,                    # crc16 = 0xDA68 (LE)
+    0xA5, 0x5A, 0x02, 0x12,
+    0x02, 0x01,
+    0x01, 0x02, 0x03, 0x04,
+    0x03,
+    0x01, 0x02, 0xE8, 0x03,
+    0x05, 0x02, 0xF4, 0x01,
+    0x09, 0x01, 0x50,
+    0x24, 0xFA,
 ])
-
-# Full frame format (little-endian); crc16 appended separately below.
-_FRAME_FMT = "<BBBBHI7HB8B8BB2B"
-_CRC_FMT = "<H"
 
 
 def crc16(data: bytes) -> int:
-    """CRC-16/MODBUS (poly 0x8005 reflected = 0xA001, init 0xFFFF).
-
-    Known-answer: crc16(b"123456789") == 0x4B37.
-    """
+    """CRC-16/MODBUS (poly 0x8005 reflected = 0xA001, init 0xFFFF)."""
     crc = 0xFFFF
     for byte in data:
         crc ^= byte
@@ -79,95 +78,119 @@ def crc16(data: bytes) -> int:
     return crc & 0xFFFF
 
 
-def pack(sequence: int, timestamp_ms: int, adc_raw, can_status: int,
-         can1_data, can2_data, rf_status: int,
-         version: int = PKT_VERSION) -> bytes:
-    """Build a full frame (with correct CRC)."""
-    if len(adc_raw) != PKT_ADC_CHANNELS:
-        raise ValueError("adc_raw must have 7 values")
-    if len(can1_data) != PKT_CAN_DATA_LEN or len(can2_data) != PKT_CAN_DATA_LEN:
-        raise ValueError("can data must have 8 bytes each")
+# Typed value encoders (little-endian).
+def u8(v: int) -> bytes:
+    return bytes([v & 0xFF])
 
-    body = struct.pack(
-        _FRAME_FMT,
-        PKT_SOF, PKT_MAGIC, version, PKT_PAYLOAD_LEN,
-        sequence, timestamp_ms,
-        *adc_raw,
-        can_status,
-        *can1_data,
-        *can2_data,
-        rf_status,
-        0, 0,
-    )
-    crc = crc16(body[2:])
-    return body + struct.pack(_CRC_FMT, crc)
+
+def i16(v: int) -> bytes:
+    return struct.pack("<h", v)
+
+
+def u16(v: int) -> bytes:
+    return struct.pack("<H", v)
+
+
+def i32(v: int) -> bytes:
+    return struct.pack("<i", v)
+
+
+def u32(v: int) -> bytes:
+    return struct.pack("<I", v)
+
+
+def pack(sequence: int, timestamp_ms: int, fields) -> bytes:
+    """Build a full frame from a list of (tag, value_bytes) tuples."""
+    body = b"".join(bytes([tag, len(val)]) + val for tag, val in fields)
+    length = 2 + 4 + 1 + len(body)
+    inner = (bytes([PKT_VERSION, length])
+             + struct.pack("<H", sequence)
+             + struct.pack("<I", timestamp_ms)
+             + bytes([len(fields)])
+             + body)
+    crc = crc16(inner)
+    return bytes([PKT_SOF, PKT_MAGIC]) + inner + struct.pack("<H", crc)
 
 
 def parse(frame: bytes):
-    """Parse and validate a 46-byte frame.
+    """Parse and validate a frame. Returns a dict of fields, or None on error.
 
-    Returns a dict of fields, or None if length/sync/CRC check fails.
+    The returned dict has: version, length, sequence, timestamp_ms, and
+    'fields' = {tag: raw_value_bytes}. Unknown tags are kept raw so a caller
+    can decode what it recognizes and ignore the rest.
     """
-    if len(frame) != PKT_TOTAL_LEN:
+    if len(frame) < 11:
         return None
     if frame[0] != PKT_SOF or frame[1] != PKT_MAGIC:
         return None
 
-    crc_received = struct.unpack(_CRC_FMT, frame[-2:])[0]
-    crc_calc = crc16(frame[2:-2])
-    if crc_received != crc_calc:
+    length = frame[3]
+    if len(frame) != 4 + length + 2:
         return None
 
-    vals = struct.unpack(_FRAME_FMT, frame[:-2])
-    sof, magic, version, length, seq, ts = vals[:6]
-    adc = list(vals[6:6 + PKT_ADC_CHANNELS])
-    can_status = vals[13]
-    can1 = list(vals[14:14 + PKT_CAN_DATA_LEN])
-    can2 = list(vals[22:22 + PKT_CAN_DATA_LEN])
-    rf_status = vals[30]
+    crc_rx = struct.unpack("<H", frame[-2:])[0]
+    if crc_rx != crc16(frame[2:-2]):
+        return None
+
+    version = frame[2]
+    sequence = struct.unpack("<H", frame[4:6])[0]
+    timestamp_ms = struct.unpack("<I", frame[6:10])[0]
+    count = frame[10]
+
+    fields = {}
+    i = 11
+    try:
+        for _ in range(count):
+            tag = frame[i]
+            ln = frame[i + 1]
+            fields[tag] = frame[i + 2:i + 2 + ln]
+            i += 2 + ln
+    except IndexError:
+        return None
 
     return {
-        "sof": sof,
-        "magic": magic,
         "version": version,
         "length": length,
-        "sequence": seq,
-        "timestamp_ms": ts,
-        "adc_raw": adc,
-        "can_status": can_status,
-        "can1_data": can1,
-        "can2_data": can2,
-        "rf_status": rf_status,
-        "crc16": crc_received,
+        "sequence": sequence,
+        "timestamp_ms": timestamp_ms,
+        "fields": fields,
     }
 
 
-def mock_frame(sequence: int, timestamp_ms: int, version: int = PKT_VERSION) -> bytes:
-    """Build a frame that mirrors the STM32 app.c mock generator (APP_MOCK_MODE).
+def decode_fields(fields) -> dict:
+    """Decode raw fields into a dict of name -> physical value.
 
-    ADC = 1000 + i*200 + (sequence % 100); can_status = 0x0F; can1 = 0x11+i;
-    can2 = 0x21+i; rf_status = RF_ST_AUX. Byte-identical to the firmware.
+    Unknown tags are skipped, so new fields added by the firmware do not break
+    an older receiver.
     """
-    adc = [(1000 + i * 200 + (sequence % 100)) & 0xFFFF
-           for i in range(PKT_ADC_CHANNELS)]
-    can_status = (CAN_ST_CAN1_RUN | CAN_ST_CAN2_RUN |
-                  CAN_ST_CAN1_PASS | CAN_ST_CAN2_PASS)
-    can1 = [0x11 + i for i in range(PKT_CAN_DATA_LEN)]
-    can2 = [0x21 + i for i in range(PKT_CAN_DATA_LEN)]
-    return pack(sequence, timestamp_ms, adc, can_status, can1, can2,
-                RF_ST_AUX, version=version)
+    out = {}
+    for tag, raw in fields.items():
+        dec = FIELD_DECODERS.get(tag)
+        if dec is not None:
+            out[dec[0]] = dec[1](raw)
+    return out
+
+
+def mock_fields(sequence: int = 0):
+    """A plausible set of fields for offline tests (matches app.c tags)."""
+    base = sequence % 100
+    fields = []
+    for i in range(4):
+        fields.append((TAG_MOTOR_A_TEMP + i, i16((500 + i * 100 + base) & 0xFFFF)))
+        fields.append((TAG_CTRL_A_TEMP + i, i16((400 + i * 50 + base) & 0xFFFF)))
+    fields.append((TAG_BAT_SOC, u8(80 + (base % 20))))
+    return fields
+
+
+def mock_frame(sequence: int, timestamp_ms: int) -> bytes:
+    return pack(sequence, timestamp_ms, mock_fields(sequence))
 
 
 def golden_test() -> bool:
-    """Verify the fixed golden vector reproduces the expected bytes exactly."""
-    frame = pack(GOLDEN_SEQUENCE, GOLDEN_TIMESTAMP, GOLDEN_ADC,
-                 GOLDEN_CAN_STATUS, GOLDEN_CAN1, GOLDEN_CAN2,
-                 GOLDEN_RF_STATUS)
-    return frame == GOLDEN_FRAME
+    return pack(GOLDEN_SEQUENCE, GOLDEN_TIMESTAMP, GOLDEN_FIELDS) == GOLDEN_FRAME
 
 
 def self_test() -> bool:
-    """Validate CRC known-answer + golden vector + pack/parse round-trip."""
     ok = True
 
     if crc16(b"123456789") != 0x4B37:
@@ -178,26 +201,39 @@ def self_test() -> bool:
         print("FAIL: golden vector mismatch")
         ok = False
 
-    adc = [1000 + i * 200 for i in range(PKT_ADC_CHANNELS)]
-    can1 = [0x11 + i for i in range(PKT_CAN_DATA_LEN)]
-    can2 = [0x21 + i for i in range(PKT_CAN_DATA_LEN)]
-    frame = pack(42, 123456, adc, 0x0F, can1, can2, RF_ST_AUX)
+    # pack/parse round-trip
+    frame = mock_frame(42, 123456)
     parsed = parse(frame)
-
     if parsed is None:
-        print("FAIL: pack/parse round-trip returned None")
+        print("FAIL: round-trip returned None")
         ok = False
-    elif parsed["sequence"] != 42 or parsed["adc_raw"] != adc \
-            or parsed["can1_data"] != can1 or parsed["can2_data"] != can2:
-        print("FAIL: pack/parse round-trip field mismatch")
-        ok = False
+    else:
+        if parsed["sequence"] != 42 or parsed["timestamp_ms"] != 123456:
+            print("FAIL: round-trip header mismatch")
+            ok = False
+        decoded = decode_fields(parsed["fields"])
+        if "motor_a_temp" not in decoded or "bat_soc" not in decoded:
+            print("FAIL: round-trip fields missing")
+            ok = False
 
-    # Corrupt one byte -> CRC must fail
+    # corrupted byte must fail CRC
     bad = bytearray(frame)
     bad[10] ^= 0xFF
     if parse(bytes(bad)) is not None:
         print("FAIL: corrupted frame passed CRC")
         ok = False
+
+    # unknown tag must be ignored, not break parsing
+    frame2 = pack(7, 1, [(TAG_MOTOR_A_TEMP, i16(100)), (0xEE, b"\x01\x02\x03")])
+    parsed2 = parse(frame2)
+    if parsed2 is None:
+        print("FAIL: unknown tag broke parsing")
+        ok = False
+    else:
+        dec2 = decode_fields(parsed2["fields"])
+        if "motor_a_temp" not in dec2:
+            print("FAIL: known tag lost alongside unknown tag")
+            ok = False
 
     print("self_test:", "PASS" if ok else "FAIL")
     return ok

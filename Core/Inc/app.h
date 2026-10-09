@@ -2,7 +2,9 @@
 /**
   ******************************************************************************
   * @file    app.h
-  * @brief   Data-acquisition application layer.
+  * @brief   Data-acquisition application layer: reads the vehicle CAN bus,
+  *          decodes the DBC signals, packs them into the extensible telemetry
+  *          protocol and transmits over USART1 (2.4 GHz RF transparent link).
   ******************************************************************************
   */
 /* USER CODE END Header */
@@ -21,12 +23,8 @@ extern "C" {
 
 /* USER CODE END Includes */
 
-/* -------------------------------------------------------------------------- */
-/* Build switch                                                              */
-/*   1 = synthetic test data (offline chain verification, no sensor required) */
-/*   0 = real ADC / CAN / RF hardware data                                     */
-/* -------------------------------------------------------------------------- */
-#define APP_MOCK_MODE   1
+/* Telemetry transmission period in milliseconds. */
+#define APP_TX_PERIOD_MS    500U
 
 /* USER CODE BEGIN Private defines */
 

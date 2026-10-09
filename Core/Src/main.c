@@ -4,31 +4,18 @@
   * @file           : main.c
   * @brief          : Main program body
   ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2026 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
   */
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "usart.h"
 #include "gpio.h"
-#include "adc.h"
 #include "can.h"
-#include "dma.h"
 #include "app.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
-#include <string.h>
 #include <stdarg.h>
 
 /* USER CODE END Includes */
@@ -49,7 +36,6 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -63,7 +49,7 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
-/* Debug log helper: printf-style output over USART1 (RF port) */
+/* Debug log helper: printf-style output over USART1 (RF port). */
 static void dbg_log(const char *fmt, ...)
 {
   char buf[128];
@@ -112,53 +98,33 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_DMA_Init();
   MX_USART1_UART_Init();
-  MX_ADC1_Init();
   MX_CAN1_Init();
   MX_CAN2_Init();
   /* USER CODE BEGIN 2 */
-	HAL_GPIO_WritePin(RF_M0_GPIO_Port, RF_M0_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(RF_M1_GPIO_Port, RF_M1_Pin, GPIO_PIN_RESET);
 
-	HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
+  /* RF module -> transparent mode (M0=0, M1=0). */
+  HAL_GPIO_WritePin(RF_M0_GPIO_Port, RF_M0_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(RF_M1_GPIO_Port, RF_M1_Pin, GPIO_PIN_RESET);
 
-	/* ADC1: start 7-channel continuous scan into adc_raw[] via DMA1_Ch1 */
-	if (ADC1_StartContinuous(adc_raw, 7U) == HAL_OK)
-	{
-		dbg_log("[ADC] init OK, DMA circular started\r\n");
-	}
-	else
-	{
-		dbg_log("[ADC] start FAILED\r\n");
-	}
+  HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
 
-	/* CAN: configure shared filters then start both nodes */
-	if (CAN_ConfigFilters() != HAL_OK)
-	{
-		dbg_log("[CAN] filter config FAILED\r\n");
-	}
-	if (CAN_Start() != HAL_OK)
-	{
-		dbg_log("[CAN] start FAILED\r\n");
-	}
-	else
-	{
-		dbg_log("[CAN] init OK (CAN1/CAN2 loopback)\r\n");
-	}
+  /* CAN: configure shared accept-all filters then start both nodes (Normal). */
+  if (CAN_ConfigFilters() != HAL_OK)
+  {
+    dbg_log("[CAN] filter config FAILED\r\n");
+  }
+  if (CAN_Start() != HAL_OK)
+  {
+    dbg_log("[CAN] start FAILED\r\n");
+  }
+  else
+  {
+    dbg_log("[CAN] init OK (CAN1/CAN2 normal)\r\n");
+  }
 
-	/* CAN loopback self-test (TX -> RX, no external transceiver required) */
-	{
-		static const uint8_t payload[8] = {0x11,0x22,0x33,0x44,0x55,0x66,0x77,0x88};
-		HAL_StatusTypeDef s1 = CAN_LoopbackTest(&hcan1, 0x321U, payload, 8U);
-		HAL_StatusTypeDef s2 = CAN_LoopbackTest(&hcan2, 0x456U, payload, 8U);
-
-		dbg_log("[CAN1] loopback %s\r\n", (s1 == HAL_OK) ? "PASS" : "FAIL");
-		dbg_log("[CAN2] loopback %s\r\n", (s2 == HAL_OK) ? "PASS" : "FAIL");
-	}
-
-	/* Application layer: data-acquisition + binary telemetry over RF UART */
-	APP_Init();
+  /* Application layer: CAN decode + binary telemetry over RF UART. */
+  APP_Init();
 
   /* USER CODE END 2 */
 
@@ -166,11 +132,17 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-		APP_Process();
+    APP_Process();
 
-		HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+    /* Heartbeat LED (toggle every ~500 ms). */
+    static uint32_t led_ms = 0;
+    if ((HAL_GetTick() - led_ms) >= 500U)
+    {
+      led_ms = HAL_GetTick();
+      HAL_GPIO_TogglePin(LED_GPIO_Port, LED_Pin);
+    }
 
-		HAL_Delay(1000);
+    HAL_Delay(1);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

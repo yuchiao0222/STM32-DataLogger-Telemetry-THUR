@@ -7,6 +7,7 @@ against:
   * packets with corrupted CRC
   * truncated packets / split-across-chunks framing
   * noise injection followed by re-synchronization
+  * variable-size frames (field count differs per packet)
 
 Run:  python test_offline.py        (from this directory)
 """
@@ -22,7 +23,6 @@ import serial_parser
 
 
 def _drain(extractor, chunks):
-    """Feed chunks into a fresh extractor, return the list of parsed dicts."""
     out = []
     for chunk in chunks:
         out.extend(extractor.feed(chunk))
@@ -30,7 +30,6 @@ def _drain(extractor, chunks):
 
 
 def _frames(count, start_seq=0, ts_step=1000):
-    """Build `count` valid mock frames (mirrors STM32 app.c mock mode)."""
     return [packet.mock_frame(start_seq + i, i * ts_step) for i in range(count)]
 
 
@@ -41,9 +40,22 @@ def test_continuous():
     out = _drain(serial_parser.FrameExtractor(), [stream])
     assert len(out) == n, "expected %d, got %d" % (n, len(out))
     assert [p["sequence"] for p in out] == list(range(n)), "sequence mismatch"
-    for i, p in enumerate(out):
-        assert p["adc_raw"] == [(1000 + c * 200 + (i % 100)) & 0xFFFF
-                                for c in range(packet.PKT_ADC_CHANNELS)]
+    return n
+
+
+def test_variable_size():
+    # Different field counts must still frame correctly (variable length).
+    n = 20
+    frames = []
+    for i in range(n):
+        fields = packet.mock_fields(i)
+        # drop a variable number of trailing fields to vary the size
+        fields = fields[:1 + (i % 3)]
+        frames.append(packet.pack(i, i * 1000, fields))
+    stream = b"".join(frames)
+    out = _drain(serial_parser.FrameExtractor(), [stream])
+    assert len(out) == n, "variable-size framing lost frames: %d" % len(out)
+    assert [p["sequence"] for p in out] == list(range(n)), "seq mismatch"
     return n
 
 
@@ -52,7 +64,7 @@ def test_bad_crc():
     frames = _frames(n)
     bad_idx = 5
     corrupted = bytearray(frames[bad_idx])
-    corrupted[30] ^= 0xFF
+    corrupted[10] ^= 0xFF
     frames[bad_idx] = bytes(corrupted)
     stream = b"".join(frames)
     out = _drain(serial_parser.FrameExtractor(), [stream])
@@ -67,7 +79,7 @@ def test_truncated():
     frames = _frames(n)
     stream = b"".join(frames)
 
-    # (a) split the whole stream across awkward chunk boundaries
+    # (a) split the stream across awkward chunk boundaries
     chunks = []
     sizes = [1, 7, 3, 46, 5, 2, 100, 1, 9]
     pos = 0
@@ -80,15 +92,14 @@ def test_truncated():
     out = _drain(serial_parser.FrameExtractor(), chunks)
     assert len(out) == n, "split-stream framing lost frames: %d" % len(out)
 
-    # (b) a truncated tail (partial frame at end of stream) must be dropped
+    # (b) a truncated tail must be dropped
     partial = frames[0][:20]
     out = _drain(serial_parser.FrameExtractor(), [stream + partial])
     assert len(out) == n, "truncated tail produced wrong count: %d" % len(out)
 
-    # (c) a frame cut mid-body then resumed must still parse (buffering)
+    # (c) a frame cut mid-body then resumed must still parse
     cut = len(frames[0]) - 10
-    out = _drain(serial_parser.FrameExtractor(),
-                 [stream[:cut], stream[cut:]])
+    out = _drain(serial_parser.FrameExtractor(), [stream[:cut], stream[cut:]])
     assert len(out) == n, "mid-frame cut/resume lost frames: %d" % len(out)
     return n
 
@@ -98,11 +109,9 @@ def test_noise_resync():
     frames = _frames(n)
     stream = b"".join(frames)
 
-    # deterministic pseudo-random noise (seeded) mixed around the real frames
     rng = random.Random(1234)
     noise = bytes(rng.getrandbits(8) for _ in range(500))
 
-    # prepend noise + interleave noise chunks between every few frames
     parts = [noise]
     for idx, fr in enumerate(frames):
         parts.append(fr)
@@ -111,11 +120,10 @@ def test_noise_resync():
     out = _drain(serial_parser.FrameExtractor(), parts)
 
     seqs = [p["sequence"] for p in out]
-    assert seqs == list(range(n)), (
-        "resync after noise lost/reordered frames: %s" % seqs)
+    assert seqs == list(range(n)), "resync after noise lost frames: %s" % seqs
 
-    # a false SOF+MAGIC with bad CRC must be rejected, not emitted
-    false_sync = bytes([packet.PKT_SOF, packet.PKT_MAGIC]) + b"\x00" * 44
+    # a false SOF+MAGIC with bad CRC must be rejected
+    false_sync = bytes([packet.PKT_SOF, packet.PKT_MAGIC]) + b"\x00" * 40
     out = _drain(serial_parser.FrameExtractor(), [false_sync + stream])
     assert len(out) == n, "false sync emitted a bogus frame"
     return n
@@ -125,6 +133,7 @@ def main():
     results = []
     for name, fn in [
         ("continuous", test_continuous),
+        ("variable_size", test_variable_size),
         ("bad_crc", test_bad_crc),
         ("truncated", test_truncated),
         ("noise_resync", test_noise_resync),
