@@ -10,8 +10,6 @@
 #include "main.h"
 #include "usart.h"
 #include "gpio.h"
-#include "dma.h"
-#include "adc.h"
 #include "can.h"
 #include "app.h"
 
@@ -100,22 +98,10 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_DMA_Init();
   MX_USART1_UART_Init();
-  MX_ADC1_Init();
   MX_CAN1_Init();
   MX_CAN2_Init();
   /* USER CODE BEGIN 2 */
-
-  /* ADC1: start 7-rank scan + DMA circular into adc_raw[7]. */
-  if (ADC1_StartContinuous(adc_raw, 7U) != HAL_OK)
-  {
-    dbg_log("[ADC] start FAILED\r\n");
-  }
-  else
-  {
-    dbg_log("[ADC] init OK, DMA circular started\r\n");
-  }
 
   /* RF module -> transparent mode (M0=0, M1=0). */
   HAL_GPIO_WritePin(RF_M0_GPIO_Port, RF_M0_Pin, GPIO_PIN_RESET);

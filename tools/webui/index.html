@@ -57,7 +57,6 @@
   }
 
   .grid { display: grid; gap: 12px; }
-  .grid.adc { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
   .grid.temp { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
 
   .card {
@@ -112,9 +111,6 @@
     </div>
   </header>
 
-  <h2 class="section">感測器輸入</h2>
-  <div class="grid adc" id="adc-grid"></div>
-
   <h2 class="section">溫度</h2>
   <div class="grid temp" id="temp-grid"></div>
 
@@ -124,11 +120,6 @@
   <footer>AEBS DataLogger Telemetry · 每 500ms 更新</footer>
 
 <script>
-  const ADC_FIELDS = [
-    ["exad0", "EXAD0"], ["exad1", "EXAD1"], ["exad2", "EXAD2"],
-    ["exad3", "EXAD3"], ["exad4", "EXAD4"],
-    ["excc_ad0", "EXCC AD0"], ["excc_ad1", "EXCC AD1"],
-  ];
   const TEMP_FIELDS = [
     ["motor_a_temp", "馬達 A"], ["motor_b_temp", "馬達 B"],
     ["motor_c_temp", "馬達 C"], ["motor_d_temp", "馬達 D"],
@@ -143,17 +134,6 @@
       <div class="value empty">--</div>`;
     return el;
   }
-
-  const adcCards = ADC_FIELDS.map(([key, label]) => {
-    const el = card(label);
-    el.innerHTML = `<div class="label">${label}</div>
-      <div><span class="value" data-val>--</span><span class="unit">raw</span></div>
-      <div class="sub" data-sub>--</div>
-      <div class="bar"><span data-bar></span></div>`;
-    el.dataset.key = key;
-    document.getElementById("adc-grid").appendChild(el);
-    return el;
-  });
 
   const tempCards = TEMP_FIELDS.map(([key, label]) => {
     const el = card(label);
@@ -180,22 +160,6 @@
     document.getElementById("pkts").textContent = data.packets;
 
     const f = data.fields || {};
-
-    for (const el of adcCards) {
-      const v = f[el.dataset.key];
-      const valEl = el.querySelector("[data-val]");
-      const subEl = el.querySelector("[data-sub]");
-      const barEl = el.querySelector("[data-bar]");
-      if (v == null) {
-        valEl.textContent = "--"; valEl.classList.add("empty");
-        subEl.textContent = "--"; barEl.style.width = "0";
-      } else {
-        valEl.textContent = v; valEl.classList.remove("empty");
-        const volts = (v / 4095 * 3.3).toFixed(2);
-        subEl.textContent = volts + " V";
-        barEl.style.width = (v / 4095 * 100) + "%";
-      }
-    }
 
     for (const el of tempCards) {
       const v = f[el.dataset.key];

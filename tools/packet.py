@@ -31,13 +31,6 @@ TAG_CTRL_B_TEMP = 0x06
 TAG_CTRL_C_TEMP = 0x07
 TAG_CTRL_D_TEMP = 0x08
 TAG_BAT_SOC = 0x09       # uint8, %
-TAG_ADC0 = 0x0A          # uint16, raw 12-bit, EXAD0 (ADC1_IN0)
-TAG_ADC1 = 0x0B
-TAG_ADC2 = 0x0C
-TAG_ADC3 = 0x0D
-TAG_ADC4 = 0x0E
-TAG_ADC5 = 0x0F
-TAG_ADC6 = 0x10
 
 # tag -> (name, decoder). decoder takes raw bytes and returns a physical value.
 FIELD_DECODERS = {
@@ -50,13 +43,6 @@ FIELD_DECODERS = {
     TAG_CTRL_C_TEMP: ("ctrl_c_temp", lambda b: struct.unpack("<h", b)[0] / 10.0),
     TAG_CTRL_D_TEMP: ("ctrl_d_temp", lambda b: struct.unpack("<h", b)[0] / 10.0),
     TAG_BAT_SOC: ("bat_soc", lambda b: b[0]),
-    TAG_ADC0: ("exad0", lambda b: struct.unpack("<H", b)[0]),
-    TAG_ADC1: ("exad1", lambda b: struct.unpack("<H", b)[0]),
-    TAG_ADC2: ("exad2", lambda b: struct.unpack("<H", b)[0]),
-    TAG_ADC3: ("exad3", lambda b: struct.unpack("<H", b)[0]),
-    TAG_ADC4: ("exad4", lambda b: struct.unpack("<H", b)[0]),
-    TAG_ADC5: ("excc_ad0", lambda b: struct.unpack("<H", b)[0]),
-    TAG_ADC6: ("excc_ad1", lambda b: struct.unpack("<H", b)[0]),
 }
 
 # Golden test vector (mirrors protocol.c PROTO_GOLDEN_FRAME).

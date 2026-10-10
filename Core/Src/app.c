@@ -17,7 +17,6 @@
 #include "main.h"
 #include "can.h"
 #include "usart.h"
-#include "adc.h"
 #include "protocol.h"
 
 /* USER CODE BEGIN 0 */
@@ -161,12 +160,6 @@ static void app_transmit(void)
   if (s_soc_valid != 0U)
   {
     (void)pkt_add_u8(&frame, TAG_BAT_SOC, s_soc);
-  }
-
-  /* 7-channel analog inputs: EXAD0..4 (IN0..IN4), EXCC_AD0..1 (IN5..IN6). */
-  for (i = 0U; i < 7U; i++)
-  {
-    (void)pkt_add_u16(&frame, (uint8_t)(TAG_ADC0 + i), adc_raw[i]);
   }
 
   pkt_end(&frame);
