@@ -30,7 +30,7 @@ void MX_CAN1_Init(void)
   /* USER CODE END CAN1_Init 1 */
   hcan1.Instance = CAN1;
   hcan1.Init.Prescaler = 8;
-  hcan1.Init.Mode = CAN_MODE_NORMAL;
+  hcan1.Init.Mode = CAN_MODE_LOOPBACK;
   hcan1.Init.SyncJumpWidth = CAN_SJW_1TQ;
   hcan1.Init.TimeSeg1 = CAN_BS1_6TQ;
   hcan1.Init.TimeSeg2 = CAN_BS2_2TQ;
@@ -61,7 +61,7 @@ void MX_CAN2_Init(void)
   /* USER CODE END CAN2_Init 1 */
   hcan2.Instance = CAN2;
   hcan2.Init.Prescaler = 8;
-  hcan2.Init.Mode = CAN_MODE_NORMAL;
+  hcan2.Init.Mode = CAN_MODE_LOOPBACK;
   hcan2.Init.SyncJumpWidth = CAN_SJW_1TQ;
   hcan2.Init.TimeSeg1 = CAN_BS1_6TQ;
   hcan2.Init.TimeSeg2 = CAN_BS2_2TQ;
@@ -191,6 +191,72 @@ int CAN_RxPoll(can_rx_msg_t *msg)
   }
 
   return 0;
+}
+
+/**
+  * @brief  Offline self-test: transmit one standard data frame in loopback mode
+  *         and verify it is echoed back (same StdId / DLC / payload).
+  * @param  hcan     CAN handle (must be in CAN_MODE_LOOPBACK and started).
+  * @param  id       Standard 11-bit ID to test.
+  * @param  payload  8-byte payload buffer (may be NULL only if dlc == 0).
+  * @param  dlc      Data length (0..8).
+  * @retval HAL_OK on pass, HAL_ERROR/HAL_TIMEOUT otherwise.
+  */
+HAL_StatusTypeDef CAN_LoopbackTest(CAN_HandleTypeDef *hcan, uint32_t id,
+                                   const uint8_t *payload, uint8_t dlc)
+{
+  CAN_TxHeaderTypeDef tx = {0};
+  CAN_RxHeaderTypeDef rx = {0};
+  uint8_t rx_data[8] = {0};
+  uint32_t tx_mailbox = 0U;
+  uint32_t timeout = 0U;
+  HAL_StatusTypeDef status;
+
+  if ((hcan == NULL) || ((dlc > 0U) && (payload == NULL)) || (dlc > 8U))
+  {
+    return HAL_ERROR;
+  }
+
+  tx.StdId = id;
+  tx.ExtId = 0U;
+  tx.IDE = CAN_ID_STD;
+  tx.RTR = CAN_RTR_DATA;
+  tx.DLC = dlc;
+  tx.TransmitGlobalTime = DISABLE;
+
+  status = HAL_CAN_AddTxMessage(hcan, &tx, (uint8_t *)payload, &tx_mailbox);
+  if (status != HAL_OK)
+  {
+    return status;
+  }
+
+  while (HAL_CAN_GetRxFifoFillLevel(hcan, CAN_RX_FIFO0) == 0U)
+  {
+    if (++timeout > 100000U)
+    {
+      return HAL_TIMEOUT;
+    }
+  }
+
+  if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx, rx_data) != HAL_OK)
+  {
+    return HAL_ERROR;
+  }
+
+  if ((rx.IDE != CAN_ID_STD) || (rx.StdId != id) || (rx.DLC != dlc))
+  {
+    return HAL_ERROR;
+  }
+
+  for (uint8_t i = 0U; i < dlc; i++)
+  {
+    if (rx_data[i] != payload[i])
+    {
+      return HAL_ERROR;
+    }
+  }
+
+  return HAL_OK;
 }
 
 void HAL_CAN_MspInit(CAN_HandleTypeDef* canHandle)

@@ -50,6 +50,13 @@ HAL_StatusTypeDef CAN_Start(void);
   */
 int CAN_RxPoll(can_rx_msg_t *msg);
 
+/**
+  * @brief  Offline self-test: transmit one standard data frame in loopback mode
+  *         and verify it is echoed back (same StdId / DLC / payload).
+  */
+HAL_StatusTypeDef CAN_LoopbackTest(CAN_HandleTypeDef *hcan, uint32_t id,
+                                   const uint8_t *payload, uint8_t dlc);
+
 /* USER CODE BEGIN Prototypes */
 
 /* USER CODE END Prototypes */

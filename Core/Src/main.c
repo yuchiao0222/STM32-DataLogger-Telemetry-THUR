@@ -10,6 +10,8 @@
 #include "main.h"
 #include "usart.h"
 #include "gpio.h"
+#include "dma.h"
+#include "adc.h"
 #include "can.h"
 #include "app.h"
 
@@ -98,10 +100,22 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_USART1_UART_Init();
+  MX_ADC1_Init();
   MX_CAN1_Init();
   MX_CAN2_Init();
   /* USER CODE BEGIN 2 */
+
+  /* ADC1: start 7-rank scan + DMA circular into adc_raw[7]. */
+  if (ADC1_StartContinuous(adc_raw, 7U) != HAL_OK)
+  {
+    dbg_log("[ADC] start FAILED\r\n");
+  }
+  else
+  {
+    dbg_log("[ADC] init OK, DMA circular started\r\n");
+  }
 
   /* RF module -> transparent mode (M0=0, M1=0). */
   HAL_GPIO_WritePin(RF_M0_GPIO_Port, RF_M0_Pin, GPIO_PIN_RESET);
@@ -120,7 +134,19 @@ int main(void)
   }
   else
   {
-    dbg_log("[CAN] init OK (CAN1/CAN2 normal)\r\n");
+    dbg_log("[CAN] init OK (CAN1/CAN2 loopback)\r\n");
+  }
+
+  /* Offline (off-vehicle) CAN loopback self-test. */
+  {
+    static const uint8_t test_payload[8] = {0x11U, 0x22U, 0x33U, 0x44U,
+                                            0x55U, 0x66U, 0x77U, 0x88U};
+    dbg_log("[CAN1] loopback %s\r\n",
+            (CAN_LoopbackTest(&hcan1, 0x321U, test_payload, 8U) == HAL_OK)
+                ? "PASS" : "FAIL");
+    dbg_log("[CAN2] loopback %s\r\n",
+            (CAN_LoopbackTest(&hcan2, 0x456U, test_payload, 8U) == HAL_OK)
+                ? "PASS" : "FAIL");
   }
 
   /* Application layer: CAN decode + binary telemetry over RF UART. */

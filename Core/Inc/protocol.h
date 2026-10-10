@@ -57,6 +57,13 @@ extern "C" {
 #define TAG_CTRL_C_TEMP     0x07U   /* int16, 0.1 degC, DBC FC2_ControlerTemp  */
 #define TAG_CTRL_D_TEMP     0x08U   /* int16, 0.1 degC, DBC FD2_ControlerTemp  */
 #define TAG_BAT_SOC         0x09U   /* uint8, %, DBC BatSoc (BMS_HCU_INFO)     */
+#define TAG_ADC0            0x0AU   /* uint16, raw 12-bit, EXAD0 (ADC1_IN0)    */
+#define TAG_ADC1            0x0BU   /* uint16, raw 12-bit, EXAD1 (ADC1_IN1)    */
+#define TAG_ADC2            0x0CU   /* uint16, raw 12-bit, EXAD2 (ADC1_IN2)    */
+#define TAG_ADC3            0x0DU   /* uint16, raw 12-bit, EXAD3 (ADC1_IN3)    */
+#define TAG_ADC4            0x0EU   /* uint16, raw 12-bit, EXAD4 (ADC1_IN4)    */
+#define TAG_ADC5            0x0FU   /* uint16, raw 12-bit, EXCC_AD0 (ADC1_IN5) */
+#define TAG_ADC6            0x10U   /* uint16, raw 12-bit, EXCC_AD1 (ADC1_IN6) */
 
 /* Packet builder -------------------------------------------------------------*/
 typedef struct
