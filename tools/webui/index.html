@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AEBS 賽車遙測儀表</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --card: #161b22;
+    --border: #21262d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --accent: #38bdf8;
+    --ok: #3fb950;
+    --warn: #f0883e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, "Segoe UI", "Microsoft JhengHei", sans-serif;
+    padding: 24px;
+    min-height: 100vh;
+  }
+  header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  h1 { font-size: 22px; font-weight: 600; letter-spacing: .5px; }
+  .status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--muted);
+    transition: background .3s;
+  }
+  .dot.on { background: var(--ok); box-shadow: 0 0 8px var(--ok); }
+  .meta { margin-left: auto; font-size: 13px; color: var(--muted); }
+  .meta b { color: var(--text); font-weight: 600; }
+
+  h2.section {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin: 28px 0 12px;
+  }
+
+  .grid { display: grid; gap: 12px; }
+  .grid.adc { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+  .grid.temp { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .card .label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .card .value {
+    font-size: 28px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: .5px;
+  }
+  .card .unit { font-size: 13px; color: var(--muted); margin-left: 2px; }
+  .card .sub { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  .bar {
+    margin-top: 12px;
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .bar > span {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: var(--accent);
+    border-radius: 3px;
+    transition: width .5s ease;
+  }
+
+  .soc .value { font-size: 40px; }
+  .soc { max-width: 320px; }
+
+  .empty { color: var(--muted); }
+  footer { margin-top: 32px; font-size: 12px; color: var(--muted); }
+</style>
+</head>
+<body>
+  <header>
+    <h1>AEBS 賽車遙測</h1>
+    <span class="status"><span class="dot" id="dot"></span><span id="conn">未連線</span></span>
+    <div class="meta">
+      序號 <b id="seq">--</b> · 封包 <b id="pkts">0</b> · 更新 <b id="age">--</b>
+    </div>
+  </header>
+
+  <h2 class="section">類比輸入</h2>
+  <div class="grid adc" id="adc-grid"></div>
+
+  <h2 class="section">溫度</h2>
+  <div class="grid temp" id="temp-grid"></div>
+
+  <h2 class="section">電池</h2>
+  <div class="grid" id="soc-grid"></div>
+
+  <footer>AEBS DataLogger Telemetry · 每 500ms 更新</footer>
+
+<script>
+  const ADC_FIELDS = [
+    ["exad0", "EXAD0"], ["exad1", "EXAD1"], ["exad2", "EXAD2"],
+    ["exad3", "EXAD3"], ["exad4", "EXAD4"],
+    ["excc_ad0", "EXCC AD0"], ["excc_ad1", "EXCC AD1"],
+  ];
+  const TEMP_FIELDS = [
+    ["motor_a_temp", "馬達 A"], ["motor_b_temp", "馬達 B"],
+    ["motor_c_temp", "馬達 C"], ["motor_d_temp", "馬達 D"],
+    ["ctrl_a_temp", "控制器 A"], ["ctrl_b_temp", "控制器 B"],
+    ["ctrl_c_temp", "控制器 C"], ["ctrl_d_temp", "控制器 D"],
+  ];
+
+  function card(label) {
+    const el = document.createElement("div");
+    el.className = "card";
+    el.innerHTML = `<div class="label">${label}</div>
+      <div class="value empty">--</div>`;
+    return el;
+  }
+
+  const adcCards = ADC_FIELDS.map(([key, label]) => {
+    const el = card(label);
+    el.innerHTML = `<div class="label">${label}</div>
+      <div><span class="value" data-val>--</span><span class="unit">raw</span></div>
+      <div class="sub" data-sub>--</div>
+      <div class="bar"><span data-bar></span></div>`;
+    el.dataset.key = key;
+    document.getElementById("adc-grid").appendChild(el);
+    return el;
+  });
+
+  const tempCards = TEMP_FIELDS.map(([key, label]) => {
+    const el = card(label);
+    el.innerHTML = `<div class="label">${label}</div>
+      <div><span class="value" data-val>--</span><span class="unit">°C</span></div>`;
+    el.dataset.key = key;
+    document.getElementById("temp-grid").appendChild(el);
+    return el;
+  });
+
+  const socEl = document.createElement("div");
+  socEl.className = "card soc";
+  socEl.innerHTML = `<div class="label">電池 SOC</div>
+    <div><span class="value" data-val>--</span><span class="unit">%</span></div>
+    <div class="bar"><span data-bar></span></div>`;
+  document.getElementById("soc-grid").appendChild(socEl);
+
+  function fmt(v, digits) {
+    return (v == null) ? "--" : v.toFixed(digits == null ? 1 : digits);
+  }
+
+  function update(data) {
+    document.getElementById("seq").textContent = (data.sequence == null) ? "--" : data.sequence;
+    document.getElementById("pkts").textContent = data.packets;
+
+    const f = data.fields || {};
+
+    for (const el of adcCards) {
+      const v = f[el.dataset.key];
+      const valEl = el.querySelector("[data-val]");
+      const subEl = el.querySelector("[data-sub]");
+      const barEl = el.querySelector("[data-bar]");
+      if (v == null) {
+        valEl.textContent = "--"; valEl.classList.add("empty");
+        subEl.textContent = "--"; barEl.style.width = "0";
+      } else {
+        valEl.textContent = v; valEl.classList.remove("empty");
+        const volts = (v / 4095 * 3.3).toFixed(2);
+        subEl.textContent = volts + " V";
+        barEl.style.width = (v / 4095 * 100) + "%";
+      }
+    }
+
+    for (const el of tempCards) {
+      const v = f[el.dataset.key];
+      const valEl = el.querySelector("[data-val]");
+      valEl.textContent = fmt(v, 1);
+      valEl.classList.toggle("empty", v == null);
+    }
+
+    const soc = f["bat_soc"];
+    const socVal = socEl.querySelector("[data-val]");
+    const socBar = socEl.querySelector("[data-bar]");
+    socVal.textContent = fmt(soc, 0);
+    socVal.classList.toggle("empty", soc == null);
+    socBar.style.width = (soc == null ? 0 : soc) + "%";
+
+    document.getElementById("age").textContent = new Date().toLocaleTimeString();
+  }
+
+  function setConn(on) {
+    document.getElementById("dot").classList.toggle("on", on);
+    document.getElementById("conn").textContent = on ? "已連線" : "未連線";
+  }
+
+  function connect() {
+    const ws = new WebSocket((location.protocol === "https:" ? "wss://" : "ws://") + location.host + "/ws");
+    ws.onopen = () => setConn(true);
+    ws.onmessage = (e) => update(JSON.parse(e.data));
+    ws.onclose = () => { setConn(false); setTimeout(connect, 2000); };
+    ws.onerror = () => ws.close();
+  }
+  connect();
+</script>
+</body>
+</html>
