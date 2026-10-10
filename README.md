@@ -1,11 +1,15 @@
 # STM32 DataLogger Telemetry THUR
 
-STM32F105VCT6-based data acquisition and telemetry system for multi-channel analog sampling, dual CAN communication, and wireless data transmission.
+STM32F105VCT6-based data acquisition and telemetry system for dual CAN communication and wireless data transmission.
+
+> **當前版本狀態（2026-10）**：已移除 ADC 類比採樣（原 7 路 EXAD/EXCC）。
+> 韌體現在只透過 CAN 解碼並無線回傳：馬達溫度×4、控制器溫度×4、電池 SOC。
+> `adc.c/adc.h/dma.c/dma.h` 檔案仍保留但未啟用，如需恢復 ADC 請聯絡韌體維護者。
 
 ## Features
 
-* 7-channel ADC data acquisition
-* ADC1 scan mode with DMA circular sampling
+* ~~7-channel ADC data acquisition~~（已移除）
+* ~~ADC1 scan mode with DMA circular sampling~~（已移除）
 * Dual CAN interfaces
 
   * CAN1: PA11 / PA12
