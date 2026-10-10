@@ -39,6 +39,7 @@ __pycache__/
 
 # --- 工具輸出資料 ---
 tools/*.csv
+*.bin
 
 # --- OS / 編輯器暫存 ---
 Thumbs.db
