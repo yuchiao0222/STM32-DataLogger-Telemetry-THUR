@@ -27,6 +27,7 @@ CSV_HEADER = [
     "motor_a_temp", "motor_b_temp", "motor_c_temp", "motor_d_temp",
     "ctrl_a_temp", "ctrl_b_temp", "ctrl_c_temp", "ctrl_d_temp",
     "bat_soc",
+    "test_counter",
     "crc_ok",
 ]
 
@@ -76,6 +77,7 @@ def row_of(p):
         dec.get("ctrl_a_temp", ""), dec.get("ctrl_b_temp", ""),
         dec.get("ctrl_c_temp", ""), dec.get("ctrl_d_temp", ""),
         dec.get("bat_soc", ""),
+        dec.get("test_counter", ""),
         1,
     ]
 

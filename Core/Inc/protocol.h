@@ -57,6 +57,7 @@ extern "C" {
 #define TAG_CTRL_C_TEMP     0x07U   /* int16, 0.1 degC, DBC FC2_ControlerTemp  */
 #define TAG_CTRL_D_TEMP     0x08U   /* int16, 0.1 degC, DBC FD2_ControlerTemp  */
 #define TAG_BAT_SOC         0x09U   /* uint8, %, DBC BatSoc (BMS_HCU_INFO)     */
+#define TAG_TEST            0x20U   /* uint8, test counter, increments each pkt */
 
 /* Packet builder -------------------------------------------------------------*/
 typedef struct

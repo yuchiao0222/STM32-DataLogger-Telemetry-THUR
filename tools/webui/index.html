@@ -107,7 +107,7 @@
     <h1>AEBS 賽車遙測</h1>
     <span class="status"><span class="dot" id="dot"></span><span id="conn">未連線</span></span>
     <div class="meta">
-      序號 <b id="seq">--</b> · 封包 <b id="pkts">0</b> · 更新 <b id="age">--</b>
+      測試 <b id="test">--</b> · 序號 <b id="seq">--</b> · 封包 <b id="pkts">0</b> · 更新 <b id="age">--</b>
     </div>
   </header>
 
@@ -160,6 +160,9 @@
     document.getElementById("pkts").textContent = data.packets;
 
     const f = data.fields || {};
+
+    const tc = f["test_counter"];
+    document.getElementById("test").textContent = (tc == null) ? "--" : tc;
 
     for (const el of tempCards) {
       const v = f[el.dataset.key];

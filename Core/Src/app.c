@@ -47,6 +47,7 @@
 /* Private variables ---------------------------------------------------------*/
 static uint16_t s_sequence = 0;
 static uint32_t s_last_tx_ms = 0;
+static uint8_t s_test_counter = 0;
 
 /* Latest decoded values (physical units) + validity flags. */
 static int16_t s_motor_temp[4] = {0, 0, 0, 0};
@@ -161,6 +162,9 @@ static void app_transmit(void)
   {
     (void)pkt_add_u8(&frame, TAG_BAT_SOC, s_soc);
   }
+
+  /* Test counter: increments every packet, used to verify the RF link. */
+  (void)pkt_add_u8(&frame, TAG_TEST, s_test_counter++);
 
   pkt_end(&frame);
 

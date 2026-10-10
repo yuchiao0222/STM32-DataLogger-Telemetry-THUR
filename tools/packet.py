@@ -31,6 +31,7 @@ TAG_CTRL_B_TEMP = 0x06
 TAG_CTRL_C_TEMP = 0x07
 TAG_CTRL_D_TEMP = 0x08
 TAG_BAT_SOC = 0x09       # uint8, %
+TAG_TEST = 0x20          # uint8, test counter
 
 # tag -> (name, decoder). decoder takes raw bytes and returns a physical value.
 FIELD_DECODERS = {
@@ -43,6 +44,7 @@ FIELD_DECODERS = {
     TAG_CTRL_C_TEMP: ("ctrl_c_temp", lambda b: struct.unpack("<h", b)[0] / 10.0),
     TAG_CTRL_D_TEMP: ("ctrl_d_temp", lambda b: struct.unpack("<h", b)[0] / 10.0),
     TAG_BAT_SOC: ("bat_soc", lambda b: b[0]),
+    TAG_TEST: ("test_counter", lambda b: b[0]),
 }
 
 # Golden test vector (mirrors protocol.c PROTO_GOLDEN_FRAME).
