@@ -22,6 +22,12 @@ extern "C" {
 
 /* USER CODE END Includes */
 
+/* CAN 運作模式開關（換場景只需改這一行）：
+ *   1 = Loopback（離車自測，不需外部 CAN 收發器/對端）
+ *   0 = Normal  （上車，接真實 CAN 總線）
+ */
+#define CAN_USE_LOOPBACK  1U
+
 extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2;
 

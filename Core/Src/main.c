@@ -109,7 +109,7 @@ int main(void)
 
   HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
 
-  /* CAN: configure shared accept-all filters then start both nodes (Normal). */
+  /* CAN: configure shared accept-all filters then start both nodes. */
   if (CAN_ConfigFilters() != HAL_OK)
   {
     dbg_log("[CAN] filter config FAILED\r\n");
@@ -120,9 +120,14 @@ int main(void)
   }
   else
   {
+#if CAN_USE_LOOPBACK
     dbg_log("[CAN] init OK (CAN1/CAN2 loopback)\r\n");
+#else
+    dbg_log("[CAN] init OK (CAN1/CAN2 normal)\r\n");
+#endif
   }
 
+#if CAN_USE_LOOPBACK
   /* Offline (off-vehicle) CAN loopback self-test. */
   {
     static const uint8_t test_payload[8] = {0x11U, 0x22U, 0x33U, 0x44U,
@@ -134,6 +139,7 @@ int main(void)
             (CAN_LoopbackTest(&hcan2, 0x456U, test_payload, 8U) == HAL_OK)
                 ? "PASS" : "FAIL");
   }
+#endif
 
   /* Application layer: CAN decode + binary telemetry over RF UART. */
   APP_Init();
