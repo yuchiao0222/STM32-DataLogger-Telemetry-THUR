@@ -26,7 +26,7 @@ extern "C" {
  *   1 = Loopback（離車自測，不需外部 CAN 收發器/對端）
  *   0 = Normal  （上車，接真實 CAN 總線）
  */
-#define CAN_USE_LOOPBACK  1U
+#define CAN_USE_LOOPBACK  0U
 
 extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2;
