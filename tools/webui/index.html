@@ -111,6 +111,12 @@
     </div>
   </header>
 
+  <h2 class="section">加速度</h2>
+  <div class="grid temp" id="acc-grid"></div>
+
+  <h2 class="section">車況</h2>
+  <div class="grid temp" id="veh-grid"></div>
+
   <h2 class="section">溫度</h2>
   <div class="grid temp" id="temp-grid"></div>
 
@@ -126,6 +132,14 @@
     ["ctrl_a_temp", "控制器 A"], ["ctrl_b_temp", "控制器 B"],
     ["ctrl_c_temp", "控制器 C"], ["ctrl_d_temp", "控制器 D"],
   ];
+  const ACC_FIELDS = [
+    ["acc_x", "X 軸"], ["acc_y", "Y 軸"], ["acc_z", "Z 軸"],
+  ];
+  const VEH_FIELDS = [
+    ["motor_speed", "電機轉速", "rpm", 0],
+    ["bus_voltage", "母線電壓", "V", 0],
+    ["bat_voltage", "電池電壓", "V", 1],
+  ];
 
   function card(label) {
     const el = document.createElement("div");
@@ -134,6 +148,25 @@
       <div class="value empty">--</div>`;
     return el;
   }
+
+  const accCards = ACC_FIELDS.map(([key, label]) => {
+    const el = card(label);
+    el.innerHTML = `<div class="label">${label}</div>
+      <div><span class="value" data-val>--</span><span class="unit">g</span></div>`;
+    el.dataset.key = key;
+    document.getElementById("acc-grid").appendChild(el);
+    return el;
+  });
+
+  const vehCards = VEH_FIELDS.map(([key, label, unit]) => {
+    const el = card(label);
+    el.innerHTML = `<div class="label">${label}</div>
+      <div><span class="value" data-val>--</span><span class="unit">${unit}</span></div>`;
+    el.dataset.key = key;
+    el.dataset.digits = (key === "bat_voltage") ? 1 : 0;
+    document.getElementById("veh-grid").appendChild(el);
+    return el;
+  });
 
   const tempCards = TEMP_FIELDS.map(([key, label]) => {
     const el = card(label);
@@ -163,6 +196,20 @@
 
     const tc = f["test_counter"];
     document.getElementById("test").textContent = (tc == null) ? "--" : tc;
+
+    for (const el of accCards) {
+      const v = f[el.dataset.key];
+      const valEl = el.querySelector("[data-val]");
+      valEl.textContent = fmt(v, 3);
+      valEl.classList.toggle("empty", v == null);
+    }
+
+    for (const el of vehCards) {
+      const v = f[el.dataset.key];
+      const valEl = el.querySelector("[data-val]");
+      valEl.textContent = fmt(v, el.dataset.digits === "1" ? 1 : 0);
+      valEl.classList.toggle("empty", v == null);
+    }
 
     for (const el of tempCards) {
       const v = f[el.dataset.key];

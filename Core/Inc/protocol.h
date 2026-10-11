@@ -57,6 +57,12 @@ extern "C" {
 #define TAG_CTRL_C_TEMP     0x07U   /* int16, 0.1 degC, DBC FC2_ControlerTemp  */
 #define TAG_CTRL_D_TEMP     0x08U   /* int16, 0.1 degC, DBC FD2_ControlerTemp  */
 #define TAG_BAT_SOC         0x09U   /* uint8, %, DBC BatSoc (BMS_HCU_INFO)     */
+#define TAG_ACC_X           0x0AU   /* int16, milli-g, DBC Acc_X (CH110)       */
+#define TAG_ACC_Y           0x0BU   /* int16, milli-g, DBC Acc_Y (CH110)       */
+#define TAG_ACC_Z           0x0CU   /* int16, milli-g, DBC Acc_Z (CH110)       */
+#define TAG_BAT_VOLTAGE     0x0DU   /* uint16, 0.1 V, DBC BatVoltage           */
+#define TAG_BUS_VOLTAGE     0x0EU   /* uint16, V, DBC FA3_BusVoltage           */
+#define TAG_MOTOR_SPEED     0x0FU   /* int16, rpm, DBC FA1_Motor_speed         */
 #define TAG_TEST            0x20U   /* uint8, test counter, increments each pkt */
 
 /* Packet builder -------------------------------------------------------------*/

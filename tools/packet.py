@@ -31,6 +31,12 @@ TAG_CTRL_B_TEMP = 0x06
 TAG_CTRL_C_TEMP = 0x07
 TAG_CTRL_D_TEMP = 0x08
 TAG_BAT_SOC = 0x09       # uint8, %
+TAG_ACC_X = 0x0A         # int16, milli-g
+TAG_ACC_Y = 0x0B         # int16, milli-g
+TAG_ACC_Z = 0x0C         # int16, milli-g
+TAG_BAT_VOLTAGE = 0x0D   # uint16, 0.1V
+TAG_BUS_VOLTAGE = 0x0E   # uint16, V
+TAG_MOTOR_SPEED = 0x0F   # int16, rpm
 TAG_TEST = 0x20          # uint8, test counter
 
 # tag -> (name, decoder). decoder takes raw bytes and returns a physical value.
@@ -44,6 +50,12 @@ FIELD_DECODERS = {
     TAG_CTRL_C_TEMP: ("ctrl_c_temp", lambda b: struct.unpack("<h", b)[0] / 10.0),
     TAG_CTRL_D_TEMP: ("ctrl_d_temp", lambda b: struct.unpack("<h", b)[0] / 10.0),
     TAG_BAT_SOC: ("bat_soc", lambda b: b[0]),
+    TAG_ACC_X: ("acc_x", lambda b: struct.unpack("<h", b)[0] / 1000.0),
+    TAG_ACC_Y: ("acc_y", lambda b: struct.unpack("<h", b)[0] / 1000.0),
+    TAG_ACC_Z: ("acc_z", lambda b: struct.unpack("<h", b)[0] / 1000.0),
+    TAG_BAT_VOLTAGE: ("bat_voltage", lambda b: struct.unpack("<H", b)[0] * 0.1),
+    TAG_BUS_VOLTAGE: ("bus_voltage", lambda b: struct.unpack("<H", b)[0]),
+    TAG_MOTOR_SPEED: ("motor_speed", lambda b: struct.unpack("<h", b)[0]),
     TAG_TEST: ("test_counter", lambda b: b[0]),
 }
 
