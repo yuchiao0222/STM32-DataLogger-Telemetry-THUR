@@ -38,6 +38,8 @@ TAG_BAT_VOLTAGE = 0x0D   # uint16, 0.1V
 TAG_BUS_VOLTAGE = 0x0E   # uint16, V
 TAG_MOTOR_SPEED = 0x0F   # int16, rpm
 TAG_TEST = 0x20          # uint8, test counter
+TAG_CAN_RX_COUNT = 0x21  # uint32, total CAN frames received (debug)
+TAG_CAN_TEST = 0x22      # uint8, CAN loopback test result bitfield
 
 # tag -> (name, decoder). decoder takes raw bytes and returns a physical value.
 FIELD_DECODERS = {
@@ -57,6 +59,8 @@ FIELD_DECODERS = {
     TAG_BUS_VOLTAGE: ("bus_voltage", lambda b: struct.unpack("<H", b)[0]),
     TAG_MOTOR_SPEED: ("motor_speed", lambda b: struct.unpack("<h", b)[0]),
     TAG_TEST: ("test_counter", lambda b: b[0]),
+    TAG_CAN_RX_COUNT: ("can_rx_count", lambda b: struct.unpack("<I", b)[0]),
+    TAG_CAN_TEST: ("can_test", lambda b: b[0]),
 }
 
 # Golden test vector (mirrors protocol.c PROTO_GOLDEN_FRAME).

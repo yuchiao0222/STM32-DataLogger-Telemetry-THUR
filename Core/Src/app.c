@@ -51,6 +51,7 @@
 static uint16_t s_sequence = 0;
 static uint32_t s_last_tx_ms = 0;
 static uint8_t s_test_counter = 0;
+static uint32_t s_can_rx_count = 0;
 
 /* Latest decoded values (physical units) + validity flags. */
 static int16_t s_motor_temp[4] = {0, 0, 0, 0};
@@ -228,6 +229,12 @@ static void app_transmit(void)
   /* Test counter: increments every packet, used to verify the RF link. */
   (void)pkt_add_u8(&frame, TAG_TEST, s_test_counter++);
 
+  /* Debug: total CAN frames received so far. */
+  (void)pkt_add_u32(&frame, TAG_CAN_RX_COUNT, s_can_rx_count);
+
+  /* Debug: CAN loopback test result (bit0=CAN1, bit1=CAN2). */
+  (void)pkt_add_u8(&frame, TAG_CAN_TEST, g_can_test_result);
+
   pkt_end(&frame);
 
   (void)HAL_UART_Transmit(&huart1, (uint8_t *)pkt_data(&frame),
@@ -244,6 +251,7 @@ void APP_Process(void)
   /* Drain all pending CAN frames into the latest-value cache. */
   while (CAN_RxPoll(&msg) == 1)
   {
+    s_can_rx_count++;
     app_decode(&msg);
   }
 

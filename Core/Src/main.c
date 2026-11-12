@@ -132,12 +132,16 @@ int main(void)
   {
     static const uint8_t test_payload[8] = {0x11U, 0x22U, 0x33U, 0x44U,
                                             0x55U, 0x66U, 0x77U, 0x88U};
-    dbg_log("[CAN1] loopback %s\r\n",
-            (CAN_LoopbackTest(&hcan1, 0x321U, test_payload, 8U) == HAL_OK)
-                ? "PASS" : "FAIL");
-    dbg_log("[CAN2] loopback %s\r\n",
-            (CAN_LoopbackTest(&hcan2, 0x456U, test_payload, 8U) == HAL_OK)
-                ? "PASS" : "FAIL");
+    g_can_test_result = 0;
+    if (CAN_LoopbackTest(&hcan1, 0x321U, test_payload, 8U) == HAL_OK)
+    {
+      g_can_test_result |= 0x01U;
+    }
+    if (CAN_LoopbackTest(&hcan2, 0x456U, test_payload, 8U) == HAL_OK)
+    {
+      g_can_test_result |= 0x02U;
+    }
+    dbg_log("[CAN] loopback test result = %02X\r\n", g_can_test_result);
   }
 #endif
 

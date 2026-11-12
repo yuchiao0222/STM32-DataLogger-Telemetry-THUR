@@ -18,6 +18,9 @@
 CAN_HandleTypeDef hcan1;
 CAN_HandleTypeDef hcan2;
 
+/* CAN loopback 自測結果：bit0 = CAN1, bit1 = CAN2（1 = PASS, 0 = FAIL）。 */
+uint8_t g_can_test_result = 0;
+
 /* CAN1 init function */
 void MX_CAN1_Init(void)
 {

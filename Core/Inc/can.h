@@ -31,6 +31,9 @@ extern "C" {
 extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2;
 
+/* CAN loopback 自測結果：bit0 = CAN1, bit1 = CAN2（1 = PASS, 0 = FAIL）。 */
+extern uint8_t g_can_test_result;
+
 /* A received CAN frame, normalized to (ide, id, data). */
 typedef struct
 {
