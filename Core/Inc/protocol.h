@@ -66,6 +66,19 @@ extern "C" {
 #define TAG_TEST            0x20U   /* uint8, test counter, increments each pkt */
 #define TAG_CAN_RX_COUNT    0x21U   /* uint32, total CAN frames received (debug) */
 #define TAG_CAN_TEST        0x22U   /* uint8, CAN loopback test result bitfield  */
+#define TAG_CAN_LAST_ID     0x23U   /* uint32, last received CAN ID (debug)     */
+#define TAG_CAN_ID0         0x24U   /* uint32, distinct CAN ID slot 0 (debug)  */
+#define TAG_CAN_ID1         0x25U   /* uint32, distinct CAN ID slot 1 (debug)  */
+#define TAG_CAN_ID2         0x26U   /* uint32, distinct CAN ID slot 2 (debug)  */
+#define TAG_CAN_ID3         0x27U   /* uint32, distinct CAN ID slot 3 (debug)  */
+#define TAG_CAN_ID4         0x28U   /* uint32, distinct CAN ID slot 4 (debug)  */
+#define TAG_CAN_ID5         0x29U   /* uint32, distinct CAN ID slot 5 (debug)  */
+#define TAG_CAN_ID6         0x2AU   /* uint32, distinct CAN ID slot 6 (debug)  */
+#define TAG_CAN_ID7         0x2BU   /* uint32, distinct CAN ID slot 7 (debug)  */
+#define TAG_CAN_ID8         0x2CU   /* uint32, distinct CAN ID slot 8 (debug)  */
+#define TAG_CAN_ID9         0x2DU   /* uint32, distinct CAN ID slot 9 (debug)  */
+#define TAG_CAN_ID10        0x2EU   /* uint32, distinct CAN ID slot 10 (debug) */
+#define TAG_CAN_ID11        0x2FU   /* uint32, distinct CAN ID slot 11 (debug) */
 
 /* Packet builder -------------------------------------------------------------*/
 typedef struct

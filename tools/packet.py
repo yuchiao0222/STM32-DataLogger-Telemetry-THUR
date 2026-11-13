@@ -40,6 +40,19 @@ TAG_MOTOR_SPEED = 0x0F   # int16, rpm
 TAG_TEST = 0x20          # uint8, test counter
 TAG_CAN_RX_COUNT = 0x21  # uint32, total CAN frames received (debug)
 TAG_CAN_TEST = 0x22      # uint8, CAN loopback test result bitfield
+TAG_CAN_LAST_ID = 0x23   # uint32, last received CAN ID (debug)
+TAG_CAN_ID0 = 0x24       # uint32, distinct CAN ID slot 0 (debug)
+TAG_CAN_ID1 = 0x25
+TAG_CAN_ID2 = 0x26
+TAG_CAN_ID3 = 0x27
+TAG_CAN_ID4 = 0x28
+TAG_CAN_ID5 = 0x29
+TAG_CAN_ID6 = 0x2A
+TAG_CAN_ID7 = 0x2B
+TAG_CAN_ID8 = 0x2C
+TAG_CAN_ID9 = 0x2D
+TAG_CAN_ID10 = 0x2E
+TAG_CAN_ID11 = 0x2F
 
 # tag -> (name, decoder). decoder takes raw bytes and returns a physical value.
 FIELD_DECODERS = {
@@ -61,6 +74,19 @@ FIELD_DECODERS = {
     TAG_TEST: ("test_counter", lambda b: b[0]),
     TAG_CAN_RX_COUNT: ("can_rx_count", lambda b: struct.unpack("<I", b)[0]),
     TAG_CAN_TEST: ("can_test", lambda b: b[0]),
+    TAG_CAN_LAST_ID: ("can_last_id", lambda b: struct.unpack("<I", b)[0]),
+    TAG_CAN_ID0: ("can_id0", lambda b: struct.unpack("<I", b)[0]),
+    TAG_CAN_ID1: ("can_id1", lambda b: struct.unpack("<I", b)[0]),
+    TAG_CAN_ID2: ("can_id2", lambda b: struct.unpack("<I", b)[0]),
+    TAG_CAN_ID3: ("can_id3", lambda b: struct.unpack("<I", b)[0]),
+    TAG_CAN_ID4: ("can_id4", lambda b: struct.unpack("<I", b)[0]),
+    TAG_CAN_ID5: ("can_id5", lambda b: struct.unpack("<I", b)[0]),
+    TAG_CAN_ID6: ("can_id6", lambda b: struct.unpack("<I", b)[0]),
+    TAG_CAN_ID7: ("can_id7", lambda b: struct.unpack("<I", b)[0]),
+    TAG_CAN_ID8: ("can_id8", lambda b: struct.unpack("<I", b)[0]),
+    TAG_CAN_ID9: ("can_id9", lambda b: struct.unpack("<I", b)[0]),
+    TAG_CAN_ID10: ("can_id10", lambda b: struct.unpack("<I", b)[0]),
+    TAG_CAN_ID11: ("can_id11", lambda b: struct.unpack("<I", b)[0]),
 }
 
 # Golden test vector (mirrors protocol.c PROTO_GOLDEN_FRAME).

@@ -52,6 +52,8 @@ static uint16_t s_sequence = 0;
 static uint32_t s_last_tx_ms = 0;
 static uint8_t s_test_counter = 0;
 static uint32_t s_can_rx_count = 0;
+static uint32_t s_can_last_id = 0;
+static uint32_t s_can_ids[12] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 /* Latest decoded values (physical units) + validity flags. */
 static int16_t s_motor_temp[4] = {0, 0, 0, 0};
@@ -235,6 +237,23 @@ static void app_transmit(void)
   /* Debug: CAN loopback test result (bit0=CAN1, bit1=CAN2). */
   (void)pkt_add_u8(&frame, TAG_CAN_TEST, g_can_test_result);
 
+  /* Debug: last received CAN ID. */
+  (void)pkt_add_u32(&frame, TAG_CAN_LAST_ID, s_can_last_id);
+
+  /* Debug: distinct CAN IDs seen so far. */
+  (void)pkt_add_u32(&frame, TAG_CAN_ID0, s_can_ids[0]);
+  (void)pkt_add_u32(&frame, TAG_CAN_ID1, s_can_ids[1]);
+  (void)pkt_add_u32(&frame, TAG_CAN_ID2, s_can_ids[2]);
+  (void)pkt_add_u32(&frame, TAG_CAN_ID3, s_can_ids[3]);
+  (void)pkt_add_u32(&frame, TAG_CAN_ID4, s_can_ids[4]);
+  (void)pkt_add_u32(&frame, TAG_CAN_ID5, s_can_ids[5]);
+  (void)pkt_add_u32(&frame, TAG_CAN_ID6, s_can_ids[6]);
+  (void)pkt_add_u32(&frame, TAG_CAN_ID7, s_can_ids[7]);
+  (void)pkt_add_u32(&frame, TAG_CAN_ID8, s_can_ids[8]);
+  (void)pkt_add_u32(&frame, TAG_CAN_ID9, s_can_ids[9]);
+  (void)pkt_add_u32(&frame, TAG_CAN_ID10, s_can_ids[10]);
+  (void)pkt_add_u32(&frame, TAG_CAN_ID11, s_can_ids[11]);
+
   pkt_end(&frame);
 
   (void)HAL_UART_Transmit(&huart1, (uint8_t *)pkt_data(&frame),
@@ -251,7 +270,25 @@ void APP_Process(void)
   /* Drain all pending CAN frames into the latest-value cache. */
   while (CAN_RxPoll(&msg) == 1)
   {
+    uint8_t k;
+
     s_can_rx_count++;
+    s_can_last_id = msg.id;
+
+    /* Record distinct CAN IDs (up to 12 slots). */
+    for (k = 0U; k < 12U; k++)
+    {
+      if (s_can_ids[k] == msg.id)
+      {
+        break;
+      }
+      if (s_can_ids[k] == 0U)
+      {
+        s_can_ids[k] = msg.id;
+        break;
+      }
+    }
+
     app_decode(&msg);
   }
 
