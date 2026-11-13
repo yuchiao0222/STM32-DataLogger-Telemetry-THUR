@@ -1,0 +1,148 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: Panel VCU
+
+
+BO_ 1559 VehicleMode: 2 Panel
+ SG_ PowerMode : 0|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DriveMode : 2|2@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ LSD_Param : 8|8@1+ (0.04,0) [0|10] "" Vector__XXX
+
+BO_ 1560 PadelAndTrq: 8 VCU
+ SG_ AccPct : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ BrakePct : 8|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ TrqCommand_FL : 32|8@1+ (0.25,-40) [0|0] "" Vector__XXX
+ SG_ TrqCommand_RL : 40|8@1+ (0.25,-40) [0|0] "" Vector__XXX
+ SG_ TrqCommand_FR : 48|8@1+ (0.25,-40) [0|0] "" Vector__XXX
+ SG_ TrqCommand_RR : 56|8@1+ (0.25,-40) [0|0] "" Vector__XXX
+ SG_ VehSpd_kph : 16|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ TestSignal : 24|8@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 226 MotorAndMCUTemp: 8 VCU
+ SG_ FL_MCUTemp : 0|8@1+ (1,-60) [0|0] "" Vector__XXX
+ SG_ FL_MotorTemp : 8|8@1+ (1,-40) [0|0] "" Vector__XXX
+ SG_ RL_MCUTemp : 16|8@1+ (1,-60) [0|0] "" Vector__XXX
+ SG_ RL_MotorTemp : 24|8@1+ (1,-40) [0|0] "" Vector__XXX
+ SG_ FR_MCUTemp : 32|8@1+ (1,-60) [0|0] "" Vector__XXX
+ SG_ FR_MotorTemp : 40|8@1+ (1,-40) [0|0] "" Vector__XXX
+ SG_ RR_MCUTemp : 48|8@1+ (1,-60) [0|0] "" Vector__XXX
+ SG_ RR_MotorTemp : 56|8@1+ (1,-40) [0|0] "" Vector__XXX
+
+BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
+ SG_ FL_MotorSpd : 0|16@1+ (1,-30000) [0|0] "" Vector__XXX
+ SG_ RL_MotorSpd : 16|16@1+ (1,-30000) [0|0] "" Vector__XXX
+ SG_ FR_MotorSpd : 32|16@1+ (1,-30000) [0|0] "" Vector__XXX
+ SG_ RR_MotorSpd : 48|16@1+ (1,-30000) [0|0] "" Vector__XXX
+ SG_ NewSignal_0004 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ yTV_Mode : 4|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ BERS_Mode : 6|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ xTV_Mode : 5|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ LSD_Param : 8|8@1+ (0.04,0) [0|10] "" Vector__XXX
+
+BO_ 1561 TVMode: 2 Panel
+ SG_ yTV_Mode : 4|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ xTV_Mode : 5|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ BERS_Mode : 6|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ yParam : 8|8@1+ (0.04,0) [0|10] "" Vector__XXX
+
+BO_ 1568 TrqCoeff: 8 VCU
+ SG_ Y_FL : 0|8@1+ (0.007874,0) [0|0] "" Vector__XXX
+ SG_ X_FL : 8|8@1+ (0.007874,0) [0|0] "" Vector__XXX
+ SG_ Y_RL : 16|8@1+ (0.007874,0) [0|0] "" Vector__XXX
+ SG_ X_RL : 24|8@1+ (0.007874,0) [0|0] "" Vector__XXX
+ SG_ Y_FR : 32|8@1+ (0.007874,0) [0|0] "" Vector__XXX
+ SG_ X_FR : 40|8@1+ (0.007874,0) [0|0] "" Vector__XXX
+ SG_ Y_RR : 48|8@1+ (0.007874,0) [0|0] "" Vector__XXX
+ SG_ X_RR : 56|8@1+ (0.007874,0) [0|0] "" Vector__XXX
+
+
+
+VAL_ 1559 PowerMode 0 "20 kW" 1 "40 kW" 2 "60 kW" 3 "80 kW" ;
+VAL_ 1559 DriveMode 0 "AWD" 1 "RWD" 3 "Reverse" 2 "FWD" ;
+VAL_ 3221225472 yTV_Mode 1 "On" 0 "Off" ;
+VAL_ 3221225472 BERS_Mode 1 "On" 0 "Off" ;
+VAL_ 3221225472 xTV_Mode 0 "Off" 1 "On" ;
+VAL_ 1561 yTV_Mode 1 "On" 0 "Off" ;
+VAL_ 1561 xTV_Mode 1 "On" 0 "Off" ;
+VAL_ 1561 BERS_Mode 1 "On" 0 "Off" ;
+
+
+
+BO_ 805 SuspensionVoltage: 8 Panel
+ SG_ SuspensionVoltage_RR_mV : 0|16@1+ (1,0) [0|65534] "mV" VCU
+ SG_ SuspensionVoltage_RL_mV : 16|16@1+ (1,0) [0|65534] "mV" VCU
+ SG_ SuspensionVoltage_FL_mV : 32|16@1+ (1,0) [0|65534] "mV" VCU
+ SG_ SuspensionVoltage_FR_mV : 48|16@1+ (1,0) [0|65534] "mV" VCU
+
+
+BO_ 806 SuspensionPosition: 8 VCU
+ SG_ DamperPosition_FR_mm : 0|16@1+ (0.01,0) [0|650] "mm" Panel
+ SG_ DamperPosition_FL_mm : 16|16@1+ (0.01,0) [0|650] "mm" Panel
+ SG_ DamperPosition_RR_mm : 32|16@1+ (0.01,0) [0|650] "mm" Panel
+ SG_ DamperPosition_RL_mm : 48|16@1+ (0.01,0) [0|650] "mm" Panel
+
+
+BO_ 807 SuspensionWheelTravel: 8 VCU
+ SG_ WheelTravel_FR_mm : 0|16@1- (0.01,0) [-327.67|327.67] "mm" Panel
+ SG_ WheelTravel_FL_mm : 16|16@1- (0.01,0) [-327.67|327.67] "mm" Panel
+ SG_ WheelTravel_RR_mm : 32|16@1- (0.01,0) [-327.67|327.67] "mm" Panel
+ SG_ WheelTravel_RL_mm : 48|16@1- (0.01,0) [-327.67|327.67] "mm" Panel
+
+
+BO_ 808 SuspensionZeroPosition: 8 VCU
+ SG_ DamperZeroPosition_FR_mm : 0|16@1+ (0.01,0) [0|650] "mm" Panel
+ SG_ DamperZeroPosition_FL_mm : 16|16@1+ (0.01,0) [0|650] "mm" Panel
+ SG_ DamperZeroPosition_RR_mm : 32|16@1+ (0.01,0) [0|650] "mm" Panel
+ SG_ DamperZeroPosition_RL_mm : 48|16@1+ (0.01,0) [0|650] "mm" Panel
+
+
+BO_ 809 SuspensionStatus: 8 VCU
+ SG_ SuspensionFresh : 0|1@1+ (1,0) [0|1] "" Panel
+ SG_ SuspensionZeroValid : 1|1@1+ (1,0) [0|1] "" Panel
+ SG_ SuspensionZeroPending : 2|1@1+ (1,0) [0|1] "" Panel
+ SG_ SuspensionReady : 3|1@1+ (1,0) [0|1] "" Panel
+ SG_ SuspensionStationary : 4|1@1+ (1,0) [0|1] "" Panel
+ SG_ DamperPositionValidMask : 8|8@1+ (1,0) [0|15] "" Panel
+ SG_ WheelTravelValidMask : 16|8@1+ (1,0) [0|15] "" Panel
+ SG_ SuspensionZeroSequence : 24|16@1+ (1,0) [0|65535] "" Panel
+ SG_ SuspensionCounter : 40|8@1+ (1,0) [0|255] "" Panel
+ SG_ SuspensionAge_ms : 48|16@1+ (1,0) [0|65535] "ms" Panel
+
+CM_ BO_ 805 "Protocol changed: four unsigned millivolt values RR RL FL FR; 65535 unavailable. Old 0.01mm payload is incompatible.";
+CM_ BO_ 806 "Sensor position from fixed voltage calibration, independent of ready zero. FR FL RR RL. 65535 unavailable.";
+CM_ BO_ 807 "Relative wheel travel from ready zero, signed 0.01mm. FR FL RR RL. Raw -32768 unavailable. Read validity mask in 0x329.";
+CM_ BO_ 808 "Ready zero sensor positions, FR FL RR RL. Resent periodically and on zero events. 65535 before zero.";
+CM_ BO_ 809 "Zero sequence increments only when stable zero completes; all masks use FR FL RR RL bits 0..3.";

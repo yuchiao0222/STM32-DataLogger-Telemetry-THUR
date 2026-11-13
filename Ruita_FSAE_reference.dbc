@@ -1,0 +1,723 @@
+VERSION "Ruita-FSAE-v2.0"
+
+
+NS_ :
+
+BS_: 
+
+BU_: VCU MCU_Motor_A MCU_Motor_B MCU_Motor_C MCU_Motor_D 
+
+
+BO_ 1697 MotorA_Frame1: 8 MCU_Motor_A
+ SG_ FA1_Motor_speed : 0|16@1+ (1,-30000) [-30000|30000] "rpm" VCU
+ SG_ FA1_Motor_Torque : 16|14@1+ (0.05,-30) [-30|30] "Nm" VCU
+ SG_ FA1_EvSpd_Validity : 30|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA1_Motor_Torque_Validity : 31|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA1_MotorMainState : 32|3@1+ (1,0) [0|7] "" VCU
+ SG_ FA1_RotatingDire : 35|2@1+ (1,0) [0|3] "" VCU
+ SG_ FA1_MotorWorkMode : 37|4@1+ (1,0) [1|10] "" VCU
+ SG_ FA1_CheckSum : 41|8@1+ (1,0) [0|255] "" VCU
+ SG_ FA1_RollingCounter : 49|8@1+ (1,0) [0|255] "" VCU
+
+BO_ 1698 MotorA_Frame2: 8 MCU_Motor_A
+ SG_ FA2_Motor_DriveTorqueMax : 0|12@1+ (0.1,0) [0|300] "Nm" VCU
+ SG_ FA2_Motor_BrakeTorqueMax : 12|12@1+ (0.1,-400) [-400|-300] "Nm" VCU
+ SG_ FA2_ControlerTemp : 24|8@1+ (1,-40) [-40|150] "deg" VCU
+ SG_ FA2_MotorTemp : 32|8@1+ (1,-40) [-40|150] "deg" VCU
+ SG_ FA2_MotorResolverAngle : 40|12@1+ (0.1,0) [0|360] "deg" VCU
+ SG_ FA2_RollingCounter : 52|8@1+ (1,0) [0|255] "" VCU
+
+BO_ 1699 MotorA_Frame3: 8 MCU_Motor_A
+ SG_ FA3_BusVoltage : 0|10@1+ (1,0) [0|1000] "V" VCU
+ SG_ FA3_IqCurrent : 10|12@1+ (0.1,-200) [-200|200] "A" VCU
+ SG_ FA3_IdCurrent : 22|12@1+ (0.1,-200) [-200|200] "A" VCU
+ SG_ FA3_PhaseCurrentIA : 34|12@1+ (0.1,-200) [-200|200] "A" VCU
+ SG_ FA3_PhaseCurrentIB : 46|12@1+ (0.1,-200) [-200|200] "A" VCU
+ SG_ FA3_RollingCounter : 58|6@1+ (1,0) [0|63] "" VCU
+
+BO_ 1700 MotorA_Frame4: 8 MCU_Motor_A
+ SG_ FA4_W_MotorFaultNum : 0|8@1+ (1,0) [0|254] "" VCU
+ SG_ FA4_W_ControlerOverheatW : 8|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_MotorOverheatW : 9|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_MotorControlerW : 10|2@1+ (1,0) [0|3] "" VCU
+ SG_ FA4_W_MotorW : 12|2@1+ (1,0) [0|3] "" VCU
+ SG_ FA4_W_PhaseOverCurrFault : 14|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_RotateTransformerFault : 15|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_St_PhaseCurrSensor : 16|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_MotorOverSpdFault : 17|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_DC_MainWireOverVoltFault : 18|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_Drv_MotorOverCoolFault : 19|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_TempSensorState : 20|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_MotorTempSensorState : 21|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_DC_VoltSensorState : 22|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_DC_LowVoltWarning : 23|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_MotorStallFault : 24|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_MotorResolverlFault : 25|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_MotorLackofPhaseFault : 26|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_HardwareFault : 27|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_SICDriveFault : 28|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_PhaseCurFault : 29|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_CanTimeoutFault : 30|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_BattUvFault : 31|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_BattUvWarning : 32|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_ActiveDisChgFault : 33|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_CanBusoffFault : 34|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_MgnFault : 35|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_IntDCFault : 36|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_BattOvFault : 37|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_IntComFault : 38|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_SoftFault : 39|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_InitFault : 40|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_MotorUndTempFault : 41|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_DeratingFault : 42|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_CommandOverrunFault : 43|1@1+ (1,0) [0|1] "" VCU
+ SG_ FA4_W_RollingCounter : 44|8@1+ (1,0) [0|1] "" VCU
+
+BO_ 1701 MotorA_Frame5: 8 VCU
+ SG_ FA5_C_MotorEnableReq : 0|1@1+ (1,0) [0|1] "" MCU_Motor_A
+ SG_ FA5_C_MotorWorkModeReq : 1|4@1+ (1,0) [1|10] "" MCU_Motor_A
+ SG_ FA5_C_MotorRotateSpeedReq : 5|16@1+ (1,-30000) [-30000|30000] "rpm" MCU_Motor_A
+ SG_ FA5_C_MotorTorqueReq : 21|11@1+ (0.5,-500) [-300|300] "Nm" MCU_Motor_A
+ SG_ FA5_C_MotorFaultClearReq : 32|1@1+ (1,0) [0|1] "" MCU_Motor_A
+ SG_ FA5_C_CheckSum : 33|8@1+ (1,0) [0|1] "" MCU_Motor_A
+ SG_ FA5_C_RollingCounter : 41|8@1+ (1,0) [0|1] "" MCU_Motor_A
+
+BO_ 1702 MotorA_Frame6: 8 MCU_Motor_A
+ SG_ FA6_Resolver_Angle : 0|16@1+ (1,0) [0|65535] "" VCU
+ SG_ FA6_Resolver_Speed : 16|16@1+ (1,0) [0|65535] "" VCU
+ SG_ FA6_Resolver_Fault_Register : 32|16@1+ (1,0) [0|65535] "" VCU
+ SG_ FA6_Reserved : 48|16@1+ (1,0) [0|65535] "" VCU
+
+BO_ 1703 MotorA_Frame7: 8 MCU_Motor_A
+ SG_ FA7_Posi_Algo_State : 0|8@1+ (1,0) [0|255] "" VCU
+ SG_ FA7_Pole_Pairs : 8|8@1+ (1,0) [0|255] "" VCU
+ SG_ FA7_Phase_Sequence : 16|8@1+ (1,0) [0|255] "" VCU
+ SG_ FA7_Angle_Offset : 24|32@1+ (1,0) [0|4294967295] "" VCU
+ SG_ FA7_Reserved : 56|8@1+ (1,0) [0|255] "" VCU
+
+
+
+
+BO_ 1713 MotorB_Frame1: 8 MCU_Motor_B
+ SG_ FB1_Motor_speed : 0|16@1+ (1,-30000) [-30000|30000] "rpm" VCU
+ SG_ FB1_Motor_Torque : 16|14@1+ (0.05,-30) [-30|30] "Nm" VCU
+ SG_ FB1_EvSpd_Validity : 30|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB1_Motor_Torque_Validity : 31|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB1_MotorMainState : 32|3@1+ (1,0) [0|7] "" VCU
+ SG_ FB1_RotatingDire : 35|2@1+ (1,0) [0|3] "" VCU
+ SG_ FB1_MotorWorkMode : 37|4@1+ (1,0) [1|10] "" VCU
+ SG_ FB1_CheckSum : 41|8@1+ (1,0) [0|255] "" VCU
+ SG_ FB1_RollingCounter : 49|8@1+ (1,0) [0|255] "" VCU
+
+BO_ 1714 MotorB_Frame2: 8 MCU_Motor_B
+ SG_ FB2_Motor_DriveTorqueMax : 0|12@1+ (0.1,0) [0|300] "Nm" VCU
+ SG_ FB2_Motor_BrakeTorqueMax : 12|12@1+ (0.1,-400) [-400|-300] "Nm" VCU
+ SG_ FB2_ControlerTemp : 24|8@1+ (1,-40) [-40|150] "deg" VCU
+ SG_ FB2_MotorTemp : 32|8@1+ (1,-40) [-40|150] "deg" VCU
+ SG_ FB2_MotorResolverAngle : 40|12@1+ (0.1,0) [0|360] "deg" VCU
+ SG_ FB2_RollingCounter : 52|8@1+ (1,0) [0|255] "" VCU
+
+BO_ 1715 MotorB_Frame3: 8 MCU_Motor_B
+ SG_ FB3_BusVoltage : 0|10@1+ (1,0) [0|1000] "V" VCU
+ SG_ FB3_IqCurrent : 10|12@1+ (0.1,-200) [-200|200] "A" VCU
+ SG_ FB3_IdCurrent : 22|12@1+ (0.1,-200) [-200|200] "A" VCU
+ SG_ FB3_PhaseCurrentIA : 34|12@1+ (0.1,-200) [-200|200] "A" VCU
+ SG_ FB3_PhaseCurrentIB : 46|12@1+ (0.1,-200) [-200|200] "A" VCU
+ SG_ FB3_RollingCounter : 58|6@1+ (1,0) [0|63] "" VCU
+
+BO_ 1716 MotorB_Frame4: 8 MCU_Motor_B
+ SG_ FB4_W_MotorFaultNum : 0|8@1+ (1,0) [0|254] "" VCU
+ SG_ FB4_W_ControlerOverheatW : 8|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_MotorOverheatW : 9|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_MotorControlerW : 10|2@1+ (1,0) [0|3] "" VCU
+ SG_ FB4_W_MotorW : 12|2@1+ (1,0) [0|3] "" VCU
+ SG_ FB4_W_PhaseOverCurrFault : 14|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_RotateTransformerFault : 15|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_St_PhaseCurrSensor : 16|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_MotorOverSpdFault : 17|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_DC_MainWireOverVoltFault : 18|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_Drv_MotorOverCoolFault : 19|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_TempSensorState : 20|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_MotorTempSensorState : 21|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_DC_VoltSensorState : 22|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_DC_LowVoltWarning : 23|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_MotorStallFault : 24|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_MotorResolverlFault : 25|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_MotorLackofPhaseFault : 26|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_HardwareFault : 27|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_SICDriveFault : 28|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_PhaseCurFault : 29|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_CanTimeoutFault : 30|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_BattUvFault : 31|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_BattUvWarning : 32|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_ActiveDisChgFault : 33|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_CanBusoffFault : 34|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_MgnFault : 35|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_IntDCFault : 36|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_BattOvFault : 37|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_IntComFault : 38|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_SoftFault : 39|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_InitFault : 40|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_MotorUndTempFault : 41|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_DeratingFault : 42|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_CommandOverrunFault : 43|1@1+ (1,0) [0|1] "" VCU
+ SG_ FB4_W_RollingCounter : 44|8@1+ (1,0) [0|1] "" VCU
+
+BO_ 1717 MotorB_Frame5: 8 VCU
+ SG_ FB5_C_MotorEnableReq : 0|1@1+ (1,0) [0|1] "" MCU_Motor_B
+ SG_ FB5_C_MotorWorkModeReq : 1|4@1+ (1,0) [1|10] "" MCU_Motor_B
+ SG_ FB5_C_MotorRotateSpeedReq : 5|16@1+ (1,-30000) [-30000|30000] "rpm" MCU_Motor_B
+ SG_ FB5_C_MotorTorqueReq : 21|11@1+ (0.5,-500) [-300|300] "Nm" MCU_Motor_B
+ SG_ FB5_C_MotorFaultClearReq : 32|1@1+ (1,0) [0|1] "" MCU_Motor_B
+ SG_ FB5_C_CheckSum : 33|8@1+ (1,0) [0|1] "" MCU_Motor_B
+ SG_ FB5_C_RollingCounter : 41|8@1+ (1,0) [0|1] "" MCU_Motor_B
+
+BO_ 1718 MotorB_Frame6: 8 MCU_Motor_B
+ SG_ FB6_Resolver_Angle : 0|16@1+ (1,0) [0|65535] "" VCU
+ SG_ FB6_Resolver_Speed : 16|16@1+ (1,0) [0|65535] "" VCU
+ SG_ FB6_Resolver_Fault_Register : 32|16@1+ (1,0) [0|65535] "" VCU
+ SG_ FB6_Reserved : 48|16@1+ (1,0) [0|65535] "" VCU
+
+BO_ 1719 MotorB_Frame7: 8 MCU_Motor_B
+ SG_ FB7_Posi_Algo_State : 0|8@1+ (1,0) [0|255] "" VCU
+ SG_ FB7_Pole_Pairs : 8|8@1+ (1,0) [0|255] "" VCU
+ SG_ FB7_Phase_Sequence : 16|8@1+ (1,0) [0|255] "" VCU
+ SG_ FB7_Angle_Offset : 24|32@1+ (1,0) [0|4294967295] "" VCU
+ SG_ FB7_Reserved : 56|8@1+ (1,0) [0|255] "" VCU
+
+
+
+BO_ 1729 MotorC_Frame1: 8 MCU_Motor_C
+ SG_ FC1_Motor_speed : 0|16@1+ (1,-30000) [-30000|30000] "rpm" VCU
+ SG_ FC1_Motor_Torque : 16|14@1+ (0.05,-30) [-30|30] "Nm" VCU
+ SG_ FC1_EvSpd_Validity : 30|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC1_Motor_Torque_Validity : 31|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC1_MotorMainState : 32|3@1+ (1,0) [0|7] "" VCU
+ SG_ FC1_RotatingDire : 35|2@1+ (1,0) [0|3] "" VCU
+ SG_ FC1_MotorWorkMode : 37|4@1+ (1,0) [1|10] "" VCU
+ SG_ FC1_CheckSum : 41|8@1+ (1,0) [0|255] "" VCU
+ SG_ FC1_RollingCounter : 49|8@1+ (1,0) [0|255] "" VCU
+
+BO_ 1730 MotorC_Frame2: 8 MCU_Motor_C
+ SG_ FC2_Motor_DriveTorqueMax : 0|12@1+ (0.1,0) [0|300] "Nm" VCU
+ SG_ FC2_Motor_BrakeTorqueMax : 12|12@1+ (0.1,-400) [-400|-300] "Nm" VCU
+ SG_ FC2_ControlerTemp : 24|8@1+ (1,-40) [-40|150] "deg" VCU
+ SG_ FC2_MotorTemp : 32|8@1+ (1,-40) [-40|150] "deg" VCU
+ SG_ FC2_MotorResolverAngle : 40|12@1+ (0.1,0) [0|360] "deg" VCU
+ SG_ FC2_RollingCounter : 52|8@1+ (1,0) [0|255] "" VCU
+
+BO_ 1731 MotorC_Frame3: 8 MCU_Motor_C
+ SG_ FC3_BusVoltage : 0|10@1+ (1,0) [0|1000] "V" VCU
+ SG_ FC3_IqCurrent : 10|12@1+ (0.1,-200) [-200|200] "A" VCU
+ SG_ FC3_IdCurrent : 22|12@1+ (0.1,-200) [-200|200] "A" VCU
+ SG_ FC3_PhaseCurrentIA : 34|12@1+ (0.1,-200) [-200|200] "A" VCU
+ SG_ FC3_PhaseCurrentIB : 46|12@1+ (0.1,-200) [-200|200] "A" VCU
+ SG_ FC3_RollingCounter : 58|6@1+ (1,0) [0|63] "" VCU
+
+BO_ 1732 MotorC_Frame4: 8 MCU_Motor_C
+ SG_ FC4_W_MotorFaultNum : 0|8@1+ (1,0) [0|254] "" VCU
+ SG_ FC4_W_ControlerOverheatW : 8|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_MotorOverheatW : 9|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_MotorControlerW : 10|2@1+ (1,0) [0|3] "" VCU
+ SG_ FC4_W_MotorW : 12|2@1+ (1,0) [0|3] "" VCU
+ SG_ FC4_W_PhaseOverCurrFault : 14|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_RotateTransformerFault : 15|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_St_PhaseCurrSensor : 16|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_MotorOverSpdFault : 17|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_DC_MainWireOverVoltFault : 18|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_Drv_MotorOverCoolFault : 19|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_TempSensorState : 20|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_MotorTempSensorState : 21|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_DC_VoltSensorState : 22|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_DC_LowVoltWarning : 23|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_MotorStallFault : 24|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_MotorResolverlFault : 25|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_MotorLackofPhaseFault : 26|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_HardwareFault : 27|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_SICDriveFault : 28|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_PhaseCurFault : 29|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_CanTimeoutFault : 30|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_BattUvFault : 31|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_BattUvWarning : 32|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_ActiveDisChgFault : 33|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_CanBusoffFault : 34|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_MgnFault : 35|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_IntDCFault : 36|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_BattOvFault : 37|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_IntComFault : 38|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_SoftFault : 39|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_InitFault : 40|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_MotorUndTempFault : 41|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_DeratingFault : 42|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_CommandOverrunFault : 43|1@1+ (1,0) [0|1] "" VCU
+ SG_ FC4_W_RollingCounter : 44|8@1+ (1,0) [0|1] "" VCU
+
+BO_ 1733 MotorC_Frame5: 8 VCU
+ SG_ FC5_C_MotorEnableReq : 0|1@1+ (1,0) [0|1] "" MCU_Motor_C
+ SG_ FC5_C_MotorWorkModeReq : 1|4@1+ (1,0) [1|10] "" MCU_Motor_C
+ SG_ FC5_C_MotorRotateSpeedReq : 5|16@1+ (1,-30000) [-30000|30000] "rpm" MCU_Motor_C
+ SG_ FC5_C_MotorTorqueReq : 21|11@1+ (0.5,-500) [-300|300] "Nm" MCU_Motor_C
+ SG_ FC5_C_MotorFaultClearReq : 32|1@1+ (1,0) [0|1] "" MCU_Motor_C
+ SG_ FC5_C_CheckSum : 33|8@1+ (1,0) [0|1] "" MCU_Motor_C
+ SG_ FC5_C_RollingCounter : 41|8@1+ (1,0) [0|1] "" MCU_Motor_C
+
+BO_ 1734 MotorC_Frame6: 8 MCU_Motor_C
+ SG_ FC6_Resolver_Angle : 0|16@1+ (1,0) [0|65535] "" VCU
+ SG_ FC6_Resolver_Speed : 16|16@1+ (1,0) [0|65535] "" VCU
+ SG_ FC6_Resolver_Fault_Register : 32|16@1+ (1,0) [0|65535] "" VCU
+ SG_ FC6_Reserved : 48|16@1+ (1,0) [0|65535] "" VCU
+
+BO_ 1735 MotorC_Frame7: 8 MCU_Motor_C
+ SG_ FC7_Posi_Algo_State : 0|8@1+ (1,0) [0|255] "" VCU
+ SG_ FC7_Pole_Pairs : 8|8@1+ (1,0) [0|255] "" VCU
+ SG_ FC7_Phase_Sequence : 16|8@1+ (1,0) [0|255] "" VCU
+ SG_ FC7_Angle_Offset : 24|32@1+ (1,0) [0|4294967295] "" VCU
+ SG_ FC7_Reserved : 56|8@1+ (1,0) [0|255] "" VCU
+
+
+
+BO_ 1745 MotorD_Frame1: 8 MCU_Motor_D
+ SG_ FD1_Motor_speed : 0|16@1+ (1,-30000) [-30000|30000] "rpm" VCU
+ SG_ FD1_Motor_Torque : 16|14@1+ (0.05,-30) [-30|30] "Nm" VCU
+ SG_ FD1_EvSpd_Validity : 30|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD1_Motor_Torque_Validity : 31|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD1_MotorMainState : 32|3@1+ (1,0) [0|7] "" VCU
+ SG_ FD1_RotatingDire : 35|2@1+ (1,0) [0|3] "" VCU
+ SG_ FD1_MotorWorkMode : 37|4@1+ (1,0) [1|10] "" VCU
+ SG_ FD1_CheckSum : 41|8@1+ (1,0) [0|255] "" VCU
+ SG_ FD1_RollingCounter : 49|8@1+ (1,0) [0|255] "" VCU
+
+BO_ 1746 MotorD_Frame2: 8 MCU_Motor_D
+ SG_ FD2_Motor_DriveTorqueMax : 0|12@1+ (0.1,0) [0|300] "Nm" VCU
+ SG_ FD2_Motor_BrakeTorqueMax : 12|12@1+ (0.1,-400) [-400|-300] "Nm" VCU
+ SG_ FD2_ControlerTemp : 24|8@1+ (1,-40) [-40|150] "deg" VCU
+ SG_ FD2_MotorTemp : 32|8@1+ (1,-40) [-40|150] "deg" VCU
+ SG_ FD2_MotorResolverAngle : 40|12@1+ (0.1,0) [0|360] "deg" VCU
+ SG_ FD2_RollingCounter : 52|8@1+ (1,0) [0|255] "" VCU
+
+BO_ 1747 MotorD_Frame3: 8 MCU_Motor_D
+ SG_ FD3_BusVoltage : 0|10@1+ (1,0) [0|1000] "V" VCU
+ SG_ FD3_IqCurrent : 10|12@1+ (0.1,-200) [-200|200] "A" VCU
+ SG_ FD3_IdCurrent : 22|12@1+ (0.1,-200) [-200|200] "A" VCU
+ SG_ FD3_PhaseCurrentIA : 34|12@1+ (0.1,-200) [-200|200] "A" VCU
+ SG_ FD3_PhaseCurrentIB : 46|12@1+ (0.1,-200) [-200|200] "A" VCU
+ SG_ FD3_RollingCounter : 58|6@1+ (1,0) [0|63] "" VCU
+
+BO_ 1748 MotorD_Frame4: 8 MCU_Motor_D
+ SG_ FD4_W_MotorFaultNum : 0|8@1+ (1,0) [0|254] "" VCU
+ SG_ FD4_W_ControlerOverheatW : 8|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_MotorOverheatW : 9|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_MotorControlerW : 10|2@1+ (1,0) [0|3] "" VCU
+ SG_ FD4_W_MotorW : 12|2@1+ (1,0) [0|3] "" VCU
+ SG_ FD4_W_PhaseOverCurrFault : 14|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_RotateTransformerFault : 15|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_St_PhaseCurrSensor : 16|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_MotorOverSpdFault : 17|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_DC_MainWireOverVoltFault : 18|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_Drv_MotorOverCoolFault : 19|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_TempSensorState : 20|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_MotorTempSensorState : 21|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_DC_VoltSensorState : 22|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_DC_LowVoltWarning : 23|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_MotorStallFault : 24|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_MotorResolverlFault : 25|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_MotorLackofPhaseFault : 26|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_HardwareFault : 27|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_SICDriveFault : 28|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_PhaseCurFault : 29|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_CanTimeoutFault : 30|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_BattUvFault : 31|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_BattUvWarning : 32|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_ActiveDisChgFault : 33|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_CanBusoffFault : 34|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_MgnFault : 35|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_IntDCFault : 36|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_BattOvFault : 37|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_IntComFault : 38|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_SoftFault : 39|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_InitFault : 40|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_MotorUndTempFault : 41|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_DeratingFault : 42|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_CommandOverrunFault : 43|1@1+ (1,0) [0|1] "" VCU
+ SG_ FD4_W_RollingCounter : 44|8@1+ (1,0) [0|1] "" VCU
+
+BO_ 1749 MotorD_Frame5: 8 VCU
+ SG_ FD5_C_MotorEnableReq : 0|1@1+ (1,0) [0|1] "" MCU_Motor_D
+ SG_ FD5_C_MotorWorkModeReq : 1|4@1+ (1,0) [1|10] "" MCU_Motor_D
+ SG_ FD5_C_MotorRotateSpeedReq : 5|16@1+ (1,-30000) [-30000|30000] "rpm" MCU_Motor_D
+ SG_ FD5_C_MotorTorqueReq : 21|11@1+ (0.5,-500) [-300|300] "Nm" MCU_Motor_D
+ SG_ FD5_C_MotorFaultClearReq : 32|1@1+ (1,0) [0|1] "" MCU_Motor_D
+ SG_ FD5_C_CheckSum : 33|8@1+ (1,0) [0|1] "" MCU_Motor_D
+ SG_ FD5_C_RollingCounter : 41|8@1+ (1,0) [0|1] "" MCU_Motor_D
+
+BO_ 1750 MotorD_Frame6: 8 MCU_Motor_D
+ SG_ FD6_Resolver_Angle : 0|16@1+ (1,0) [0|65535] "" VCU
+ SG_ FD6_Resolver_Speed : 16|16@1+ (1,0) [0|65535] "" VCU
+ SG_ FD6_Resolver_Fault_Register : 32|16@1+ (1,0) [0|65535] "" VCU
+ SG_ FD6_Reserved : 48|16@1+ (1,0) [0|65535] "" VCU
+
+BO_ 1751 MotorD_Frame7: 8 MCU_Motor_D
+ SG_ FD7_Posi_Algo_State : 0|8@1+ (1,0) [0|255] "" VCU
+ SG_ FD7_Pole_Pairs : 8|8@1+ (1,0) [0|255] "" VCU
+ SG_ FD7_Phase_Sequence : 16|8@1+ (1,0) [0|255] "" VCU
+ SG_ FD7_Angle_Offset : 24|32@1+ (1,0) [0|4294967295] "" VCU
+ SG_ FD7_Reserved : 56|8@1+ (1,0) [0|255] "" VCU
+
+
+
+
+CM_ SG_ 1697 FA1_Motor_speed "Motor Actual Rotate Speed";
+CM_ SG_ 1697 FA1_Motor_Torque "Motor Actual Torque";
+CM_ SG_ 1697 FA1_EvSpd_Validity "Motor Actual Rotate Speed Valid";
+CM_ SG_ 1697 FA1_Motor_Torque_Validity "Motor Actual Torque Valid";
+CM_ SG_ 1697 FA1_MotorMainState "State of Motor";
+CM_ SG_ 1697 FA1_RotatingDire "Motor Rotating Direction";
+CM_ SG_ 1697 FA1_MotorWorkMode "Motor Running Mode";
+CM_ SG_ 1697 FA1_CheckSum "Message CheckSum ";
+CM_ SG_ 1697 FA1_RollingCounter "Message Rolling Counter ";
+CM_ SG_ 1698 FA2_Motor_DriveTorqueMax "Maximum Limit of Motor Torque";
+CM_ SG_ 1698 FA2_Motor_BrakeTorqueMax "Maximum Limit of Motor Torque";
+CM_ SG_ 1698 FA2_ControlerTemp "Motor Controler Temperature";
+CM_ SG_ 1698 FA2_MotorTemp "Motor Temperature";
+CM_ SG_ 1698 FA2_MotorResolverAngle "Motor Resolver Angle";
+CM_ SG_ 1698 FA2_RollingCounter "MCU_Motor_2RollingCounter";
+CM_ SG_ 1699 FA3_BusVoltage "Bus Voltage";
+CM_ SG_ 1699 FA3_IqCurrent "IQ Current IQ";
+CM_ SG_ 1699 FA3_IdCurrent "ID Current ID";
+CM_ SG_ 1699 FA3_PhaseCurrentIA "MotorPhaseCurrentIAIA";
+CM_ SG_ 1699 FA3_PhaseCurrentIB "MotorPhaseCurrentIBIA";
+CM_ SG_ 1699 FA3_RollingCounter "MCU_Motor_3RollingCounter";
+CM_ SG_ 1700 FA4_W_MotorFaultNum "Total Number Motor Fault";
+CM_ SG_ 1700 FA4_W_ControlerOverheatW "Controler Over Heat Warning";
+CM_ SG_ 1700 FA4_W_MotorOverheatW "Motor Over Heat Warning";
+CM_ SG_ 1700 FA4_W_MotorControlerW "Motor System Fault";
+CM_ SG_ 1700 FA4_W_MotorW "Motor System Fault";
+CM_ SG_ 1700 FA4_W_PhaseOverCurrFault "Phase Current Warning";
+CM_ SG_ 1700 FA4_W_RotateTransformerFault "Motor Rotate Fault";
+CM_ SG_ 1700 FA4_W_St_PhaseCurrSensor "Phase Current Sensor State";
+CM_ SG_ 1700 FA4_W_MotorOverSpdFault "Motor Over Speed Fault";
+CM_ SG_ 1700 FA4_W_DC_MainWireOverVoltFault "Bus OverVotage Warning";
+CM_ SG_ 1700 FA4_W_Drv_MotorOverCoolFault "Motor Controller Over Cool Fault";
+CM_ SG_ 1700 FA4_W_TempSensorState "MCU_Motor_ Temperature Sensor StatusMCU_Motor_";
+CM_ SG_ 1700 FA4_W_MotorTempSensorState "Motor Temperature Sensor Status";
+CM_ SG_ 1700 FA4_W_DC_VoltSensorState "";
+CM_ SG_ 1700 FA4_W_DC_LowVoltWarning "";
+CM_ SG_ 1700 FA4_W_MotorStallFault "";
+CM_ SG_ 1700 FA4_W_MotorResolverlFault "Motor Resolverl Fault";
+CM_ SG_ 1700 FA4_W_MotorLackofPhaseFault "Motor Lack of Phase Fault";
+CM_ SG_ 1700 FA4_W_HardwareFault "MCU_Motor_ Hardware FaultMCU_Motor_";
+CM_ SG_ 1700 FA4_W_SICDriveFault "";
+CM_ SG_ 1700 FA4_W_PhaseCurFault "";
+CM_ SG_ 1700 FA4_W_CanTimeoutFault "CAN";
+CM_ SG_ 1700 FA4_W_BattUvFault "12V";
+CM_ SG_ 1700 FA4_W_BattUvWarning "12V";
+CM_ SG_ 1700 FA4_W_ActiveDisChgFault "";
+CM_ SG_ 1700 FA4_W_CanBusoffFault "CAN Busoff";
+CM_ SG_ 1700 FA4_W_MgnFault "";
+CM_ SG_ 1700 FA4_W_IntDCFault "";
+CM_ SG_ 1700 FA4_W_BattOvFault "";
+CM_ SG_ 1700 FA4_W_IntComFault "";
+CM_ SG_ 1700 FA4_W_SoftFault "";
+CM_ SG_ 1700 FA4_W_InitFault "";
+CM_ SG_ 1700 FA4_W_MotorUndTempFault "";
+CM_ SG_ 1700 FA4_W_DeratingFault "";
+CM_ SG_ 1700 FA4_W_CommandOverrunFault "";
+CM_ SG_ 1700 FA4_W_RollingCounter "MCU_Motor_3RollingCounter";
+CM_ SG_ 1701 FA5_C_MotorEnableReq "MotorEnableReq";
+CM_ SG_ 1701 FA5_C_MotorWorkModeReq "Motor Work Mode Request";
+CM_ SG_ 1701 FA5_C_MotorRotateSpeedReq "";
+CM_ SG_ 1701 FA5_C_MotorTorqueReq "";
+CM_ SG_ 1701 FA5_C_MotorFaultClearReq "";
+CM_ SG_ 1701 FA5_C_CheckSum "";
+CM_ SG_ 1701 FA5_C_RollingCounter "";
+CM_ SG_ 1702 FA6_Resolver_Angle "";
+CM_ SG_ 1702 FA6_Resolver_Speed "";
+CM_ SG_ 1702 FA6_Resolver_Fault_Register "";
+CM_ SG_ 1702 FA6_Reserved "";
+
+
+CM_ SG_ 1713 FB1_Motor_speed "Motor Actual Rotate Speed";
+CM_ SG_ 1713 FB1_Motor_Torque "Motor Actual Torque";
+CM_ SG_ 1713 FB1_EvSpd_Validity "Motor Actual Rotate Speed Valid";
+CM_ SG_ 1713 FB1_Motor_Torque_Validity "Motor Actual Torque Valid";
+CM_ SG_ 1713 FB1_MotorMainState "State of Motor";
+CM_ SG_ 1713 FB1_RotatingDire "Motor Rotating Direction";
+CM_ SG_ 1713 FB1_MotorWorkMode "Motor Running Mode";
+CM_ SG_ 1713 FB1_CheckSum "Message CheckSum ";
+CM_ SG_ 1713 FB1_RollingCounter "Message Rolling Counter ";
+CM_ SG_ 1714 FB2_Motor_DriveTorqueMax "Maximum Limit of Motor Torque";
+CM_ SG_ 1714 FB2_Motor_BrakeTorqueMax "Maximum Limit of Motor Torque";
+CM_ SG_ 1714 FB2_ControlerTemp "Motor Controler Temperature";
+CM_ SG_ 1714 FB2_MotorTemp "Motor Temperature";
+CM_ SG_ 1714 FB2_MotorResolverAngle "Motor Resolver Angle";
+CM_ SG_ 1714 FB2_RollingCounter "MCU_Motor_2RollingCounter";
+CM_ SG_ 1715 FB3_BusVoltage "Bus Voltage";
+CM_ SG_ 1715 FB3_IqCurrent "IQ Current IQ";
+CM_ SG_ 1715 FB3_IdCurrent "ID Current ID";
+CM_ SG_ 1715 FB3_PhaseCurrentIA "MotorPhaseCurrentIAIA";
+CM_ SG_ 1715 FB3_PhaseCurrentIB "MotorPhaseCurrentIBIA";
+CM_ SG_ 1715 FB3_RollingCounter "MCU_Motor_3RollingCounter";
+CM_ SG_ 1716 FB4_W_MotorFaultNum "Total Number Motor Fault";
+CM_ SG_ 1716 FB4_W_ControlerOverheatW "Controler Over Heat Warning";
+CM_ SG_ 1716 FB4_W_MotorOverheatW "Motor Over Heat Warning";
+CM_ SG_ 1716 FB4_W_MotorControlerW "Motor System Fault";
+CM_ SG_ 1716 FB4_W_MotorW "Motor System Fault";
+CM_ SG_ 1716 FB4_W_PhaseOverCurrFault "Phase Current Warning";
+CM_ SG_ 1716 FB4_W_RotateTransformerFault "Motor Rotate Fault";
+CM_ SG_ 1716 FB4_W_St_PhaseCurrSensor "Phase Current Sensor State";
+CM_ SG_ 1716 FB4_W_MotorOverSpdFault "Motor Over Speed Fault";
+CM_ SG_ 1716 FB4_W_DC_MainWireOverVoltFault "Bus OverVotage Warning";
+CM_ SG_ 1716 FB4_W_Drv_MotorOverCoolFault "Motor Controller Over Cool Fault";
+CM_ SG_ 1716 FB4_W_TempSensorState "MCU_Motor_ Temperature Sensor StatusMCU_Motor_";
+CM_ SG_ 1716 FB4_W_MotorTempSensorState "Motor Temperature Sensor Status";
+CM_ SG_ 1716 FB4_W_DC_VoltSensorState "";
+CM_ SG_ 1716 FB4_W_DC_LowVoltWarning "";
+CM_ SG_ 1716 FB4_W_MotorStallFault "";
+CM_ SG_ 1716 FB4_W_MotorResolverlFault "Motor Resolverl Fault";
+CM_ SG_ 1716 FB4_W_MotorLackofPhaseFault "Motor Lack of Phase Fault";
+CM_ SG_ 1716 FB4_W_HardwareFault "MCU_Motor_ Hardware FaultMCU_Motor_";
+CM_ SG_ 1716 FB4_W_SICDriveFault "";
+CM_ SG_ 1716 FB4_W_PhaseCurFault "";
+CM_ SG_ 1716 FB4_W_CanTimeoutFault "CAN";
+CM_ SG_ 1716 FB4_W_BattUvFault "12V";
+CM_ SG_ 1716 FB4_W_BattUvWarning "12V";
+CM_ SG_ 1716 FB4_W_ActiveDisChgFault "";
+CM_ SG_ 1716 FB4_W_CanBusoffFault "CAN Busoff";
+CM_ SG_ 1716 FB4_W_MgnFault "";
+CM_ SG_ 1716 FB4_W_IntDCFault "";
+CM_ SG_ 1716 FB4_W_BattOvFault "";
+CM_ SG_ 1716 FB4_W_IntComFault "";
+CM_ SG_ 1716 FB4_W_SoftFault "";
+CM_ SG_ 1716 FB4_W_InitFault "";
+CM_ SG_ 1716 FB4_W_MotorUndTempFault "";
+CM_ SG_ 1716 FB4_W_DeratingFault "";
+CM_ SG_ 1716 FB4_W_CommandOverrunFault "";
+CM_ SG_ 1716 FB4_W_RollingCounter "MCU_Motor_3RollingCounter";
+CM_ SG_ 1717 FB5_C_MotorEnableReq "MotorEnableReq";
+CM_ SG_ 1717 FB5_C_MotorWorkModeReq "Motor Work Mode Request";
+CM_ SG_ 1717 FB5_C_MotorRotateSpeedReq "";
+CM_ SG_ 1717 FB5_C_MotorTorqueReq "";
+CM_ SG_ 1717 FB5_C_MotorFaultClearReq "";
+CM_ SG_ 1717 FB5_C_CheckSum "";
+CM_ SG_ 1717 FB5_C_RollingCounter "";
+CM_ SG_ 1718 FB6_Resolver_Angle "";
+CM_ SG_ 1718 FB6_Resolver_Speed "";
+CM_ SG_ 1718 FB6_Resolver_Fault_Register "";
+CM_ SG_ 1718 FB6_Reserved "";
+
+
+CM_ SG_ 1729 FC1_Motor_speed "Motor Actual Rotate Speed";
+CM_ SG_ 1729 FC1_Motor_Torque "Motor Actual Torque";
+CM_ SG_ 1729 FC1_EvSpd_Validity "Motor Actual Rotate Speed Valid";
+CM_ SG_ 1729 FC1_Motor_Torque_Validity "Motor Actual Torque Valid";
+CM_ SG_ 1729 FC1_MotorMainState "State of Motor";
+CM_ SG_ 1729 FC1_RotatingDire "Motor Rotating Direction";
+CM_ SG_ 1729 FC1_MotorWorkMode "Motor Running Mode";
+CM_ SG_ 1729 FC1_CheckSum "Message CheckSum ";
+CM_ SG_ 1729 FC1_RollingCounter "Message Rolling Counter ";
+CM_ SG_ 1730 FC2_Motor_DriveTorqueMax "Maximum Limit of Motor Torque";
+CM_ SG_ 1730 FC2_Motor_BrakeTorqueMax "Maximum Limit of Motor Torque";
+CM_ SG_ 1730 FC2_ControlerTemp "Motor Controler Temperature";
+CM_ SG_ 1730 FC2_MotorTemp "Motor Temperature";
+CM_ SG_ 1730 FC2_MotorResolverAngle "Motor Resolver Angle";
+CM_ SG_ 1730 FC2_RollingCounter "MCU_Motor_2RollingCounter";
+CM_ SG_ 1731 FC3_BusVoltage "Bus Voltage";
+CM_ SG_ 1731 FC3_IqCurrent "IQ Current IQ";
+CM_ SG_ 1731 FC3_IdCurrent "ID Current ID";
+CM_ SG_ 1731 FC3_PhaseCurrentIA "MotorPhaseCurrentIAIA";
+CM_ SG_ 1731 FC3_PhaseCurrentIB "MotorPhaseCurrentIBIA";
+CM_ SG_ 1731 FC3_RollingCounter "MCU_Motor_3RollingCounter";
+CM_ SG_ 1732 FC4_W_MotorFaultNum "Total Number Motor Fault";
+CM_ SG_ 1732 FC4_W_ControlerOverheatW "Controler Over Heat Warning";
+CM_ SG_ 1732 FC4_W_MotorOverheatW "Motor Over Heat Warning";
+CM_ SG_ 1732 FC4_W_MotorControlerW "Motor System Fault";
+CM_ SG_ 1732 FC4_W_MotorW "Motor System Fault";
+CM_ SG_ 1732 FC4_W_PhaseOverCurrFault "Phase Current Warning";
+CM_ SG_ 1732 FC4_W_RotateTransformerFault "Motor Rotate Fault";
+CM_ SG_ 1732 FC4_W_St_PhaseCurrSensor "Phase Current Sensor State";
+CM_ SG_ 1732 FC4_W_MotorOverSpdFault "Motor Over Speed Fault";
+CM_ SG_ 1732 FC4_W_DC_MainWireOverVoltFault "Bus OverVotage Warning";
+CM_ SG_ 1732 FC4_W_Drv_MotorOverCoolFault "Motor Controller Over Cool Fault";
+CM_ SG_ 1732 FC4_W_TempSensorState "MCU_Motor_ Temperature Sensor StatusMCU_Motor_";
+CM_ SG_ 1732 FC4_W_MotorTempSensorState "Motor Temperature Sensor Status";
+CM_ SG_ 1732 FC4_W_DC_VoltSensorState "";
+CM_ SG_ 1732 FC4_W_DC_LowVoltWarning "";
+CM_ SG_ 1732 FC4_W_MotorStallFault "";
+CM_ SG_ 1732 FC4_W_MotorResolverlFault "Motor Resolverl Fault";
+CM_ SG_ 1732 FC4_W_MotorLackofPhaseFault "Motor Lack of Phase Fault";
+CM_ SG_ 1732 FC4_W_HardwareFault "MCU_Motor_ Hardware FaultMCU_Motor_";
+CM_ SG_ 1732 FC4_W_SICDriveFault "";
+CM_ SG_ 1732 FC4_W_PhaseCurFault "";
+CM_ SG_ 1732 FC4_W_CanTimeoutFault "CAN";
+CM_ SG_ 1732 FC4_W_BattUvFault "12V";
+CM_ SG_ 1732 FC4_W_BattUvWarning "12V";
+CM_ SG_ 1732 FC4_W_ActiveDisChgFault "";
+CM_ SG_ 1732 FC4_W_CanBusoffFault "CAN Busoff";
+CM_ SG_ 1732 FC4_W_MgnFault "";
+CM_ SG_ 1732 FC4_W_IntDCFault "";
+CM_ SG_ 1732 FC4_W_BattOvFault "";
+CM_ SG_ 1732 FC4_W_IntComFault "";
+CM_ SG_ 1732 FC4_W_SoftFault "";
+CM_ SG_ 1732 FC4_W_InitFault "";
+CM_ SG_ 1732 FC4_W_MotorUndTempFault "";
+CM_ SG_ 1732 FC4_W_DeratingFault "";
+CM_ SG_ 1732 FC4_W_CommandOverrunFault "";
+CM_ SG_ 1732 FC4_W_RollingCounter "MCU_Motor_3RollingCounter";
+CM_ SG_ 1733 FC5_C_MotorEnableReq "MotorEnableReq";
+CM_ SG_ 1733 FC5_C_MotorWorkModeReq "Motor Work Mode Request";
+CM_ SG_ 1733 FC5_C_MotorRotateSpeedReq "";
+CM_ SG_ 1733 FC5_C_MotorTorqueReq "";
+CM_ SG_ 1733 FC5_C_MotorFaultClearReq "";
+CM_ SG_ 1733 FC5_C_CheckSum "";
+CM_ SG_ 1733 FC5_C_RollingCounter "";
+CM_ SG_ 1734 FC6_Resolver_Angle "";
+CM_ SG_ 1734 FC6_Resolver_Speed "";
+CM_ SG_ 1734 FC6_Resolver_Fault_Register "";
+CM_ SG_ 1734 FC6_Reserved "";
+
+CM_ SG_ 1745 FD1_Motor_speed "Motor Actual Rotate Speed";
+CM_ SG_ 1745 FD1_Motor_Torque "Motor Actual Torque";
+CM_ SG_ 1745 FD1_EvSpd_Validity "Motor Actual Rotate Speed Valid";
+CM_ SG_ 1745 FD1_Motor_Torque_Validity "Motor Actual Torque Valid";
+CM_ SG_ 1745 FD1_MotorMainState "State of Motor";
+CM_ SG_ 1745 FD1_RotatingDire "Motor Rotating Direction";
+CM_ SG_ 1745 FD1_MotorWorkMode "Motor Running Mode";
+CM_ SG_ 1745 FD1_CheckSum "Message CheckSum ";
+CM_ SG_ 1745 FD1_RollingCounter "Message Rolling Counter ";
+CM_ SG_ 1746 FD2_Motor_DriveTorqueMax "Maximum Limit of Motor Torque";
+CM_ SG_ 1746 FD2_Motor_BrakeTorqueMax "Maximum Limit of Motor Torque";
+CM_ SG_ 1746 FD2_ControlerTemp "Motor Controler Temperature";
+CM_ SG_ 1746 FD2_MotorTemp "Motor Temperature";
+CM_ SG_ 1746 FD2_MotorResolverAngle "Motor Resolver Angle";
+CM_ SG_ 1746 FD2_RollingCounter "MCU_Motor_2RollingCounter";
+CM_ SG_ 1747 FD3_BusVoltage "Bus Voltage";
+CM_ SG_ 1747 FD3_IqCurrent "IQ Current IQ";
+CM_ SG_ 1747 FD3_IdCurrent "ID Current ID";
+CM_ SG_ 1747 FD3_PhaseCurrentIA "MotorPhaseCurrentIAIA";
+CM_ SG_ 1747 FD3_PhaseCurrentIB "MotorPhaseCurrentIBIA";
+CM_ SG_ 1747 FD3_RollingCounter "MCU_Motor_3RollingCounter";
+CM_ SG_ 1748 FD4_W_MotorFaultNum "Total Number Motor Fault";
+CM_ SG_ 1748 FD4_W_ControlerOverheatW "Controler Over Heat Warning";
+CM_ SG_ 1748 FD4_W_MotorOverheatW "Motor Over Heat Warning";
+CM_ SG_ 1748 FD4_W_MotorControlerW "Motor System Fault";
+CM_ SG_ 1748 FD4_W_MotorW "Motor System Fault";
+CM_ SG_ 1748 FD4_W_PhaseOverCurrFault "Phase Current Warning";
+CM_ SG_ 1748 FD4_W_RotateTransformerFault "Motor Rotate Fault";
+CM_ SG_ 1748 FD4_W_St_PhaseCurrSensor "Phase Current Sensor State";
+CM_ SG_ 1748 FD4_W_MotorOverSpdFault "Motor Over Speed Fault";
+CM_ SG_ 1748 FD4_W_DC_MainWireOverVoltFault "Bus OverVotage Warning";
+CM_ SG_ 1748 FD4_W_Drv_MotorOverCoolFault "Motor Controller Over Cool Fault";
+CM_ SG_ 1748 FD4_W_TempSensorState "MCU_Motor_ Temperature Sensor StatusMCU_Motor_";
+CM_ SG_ 1748 FD4_W_MotorTempSensorState "Motor Temperature Sensor Status";
+CM_ SG_ 1748 FD4_W_DC_VoltSensorState "";
+CM_ SG_ 1748 FD4_W_DC_LowVoltWarning "";
+CM_ SG_ 1748 FD4_W_MotorStallFault "";
+CM_ SG_ 1748 FD4_W_MotorResolverlFault "Motor Resolverl Fault";
+CM_ SG_ 1748 FD4_W_MotorLackofPhaseFault "Motor Lack of Phase Fault";
+CM_ SG_ 1748 FD4_W_HardwareFault "MCU_Motor_ Hardware FaultMCU_Motor_";
+CM_ SG_ 1748 FD4_W_SICDriveFault "";
+CM_ SG_ 1748 FD4_W_PhaseCurFault "";
+CM_ SG_ 1748 FD4_W_CanTimeoutFault "CAN";
+CM_ SG_ 1748 FD4_W_BattUvFault "12V";
+CM_ SG_ 1748 FD4_W_BattUvWarning "12V";
+CM_ SG_ 1748 FD4_W_ActiveDisChgFault "";
+CM_ SG_ 1748 FD4_W_CanBusoffFault "CAN Busoff";
+CM_ SG_ 1748 FD4_W_MgnFault "";
+CM_ SG_ 1748 FD4_W_IntDCFault "";
+CM_ SG_ 1748 FD4_W_BattOvFault "";
+CM_ SG_ 1748 FD4_W_IntComFault "";
+CM_ SG_ 1748 FD4_W_SoftFault "";
+CM_ SG_ 1748 FD4_W_InitFault "";
+CM_ SG_ 1748 FD4_W_MotorUndTempFault "";
+CM_ SG_ 1748 FD4_W_DeratingFault "";
+CM_ SG_ 1748 FD4_W_CommandOverrunFault "";
+CM_ SG_ 1748 FD4_W_RollingCounter "MCU_Motor_3RollingCounter";
+CM_ SG_ 1749 FD5_C_MotorEnableReq "MotorEnableReq";
+CM_ SG_ 1749 FD5_C_MotorWorkModeReq "Motor Work Mode Request";
+CM_ SG_ 1749 FD5_C_MotorRotateSpeedReq "";
+CM_ SG_ 1749 FD5_C_MotorTorqueReq "";
+CM_ SG_ 1749 FD5_C_MotorFaultClearReq "";
+CM_ SG_ 1749 FD5_C_CheckSum "";
+CM_ SG_ 1749 FD5_C_RollingCounter "";
+CM_ SG_ 1750 FD6_Resolver_Angle "";
+CM_ SG_ 1750 FD6_Resolver_Speed "";
+CM_ SG_ 1750 FD6_Resolver_Fault_Register "";
+CM_ SG_ 1750 FD6_Reserved "";
+
+
+BA_DEF_ BO_ "GenMsgCycleTime" INT 0 65535;
+BA_DEF_ BO_ "GenMsgCycleTimeActive" INT 0 65535;
+BA_DEF_ BO_ "GenMsgDelayTime" INT 0 65535;
+BA_DEF_ BO_ "GenMsgNrOfRepetitions" INT 0 65535;
+BA_DEF_ BO_ "GenMsgSendType" ENUM;
+BA_DEF_ SG_ "GenSigSNA" STRING;
+BA_DEF_ SG_ "GenSigStartValue" FLOAT 0 100000000000;
+
+
+BA_ "GenMsgCycleTime" BO_ 1697 10;
+BA_ "GenMsgCycleTime" BO_ 1698 10;
+BA_ "GenMsgCycleTime" BO_ 1699 10;
+BA_ "GenMsgCycleTime" BO_ 1700 50;
+BA_ "GenMsgCycleTime" BO_ 1701 10;
+BA_ "GenMsgCycleTime" BO_ 1702 10;
+
+BA_ "GenMsgCycleTime" BO_ 1713 10;
+BA_ "GenMsgCycleTime" BO_ 1714 10;
+BA_ "GenMsgCycleTime" BO_ 1715 10;
+BA_ "GenMsgCycleTime" BO_ 1716 50;
+BA_ "GenMsgCycleTime" BO_ 1717 10;
+BA_ "GenMsgCycleTime" BO_ 1718 10;
+
+BA_ "GenMsgCycleTime" BO_ 1729 10;
+BA_ "GenMsgCycleTime" BO_ 1730 10;
+BA_ "GenMsgCycleTime" BO_ 1731 10;
+BA_ "GenMsgCycleTime" BO_ 1732 50;
+BA_ "GenMsgCycleTime" BO_ 1733 10;
+BA_ "GenMsgCycleTime" BO_ 1734 10;
+
+BA_ "GenMsgCycleTime" BO_ 1745 10;
+BA_ "GenMsgCycleTime" BO_ 1746 10;
+BA_ "GenMsgCycleTime" BO_ 1747 10;
+BA_ "GenMsgCycleTime" BO_ 1748 50;
+BA_ "GenMsgCycleTime" BO_ 1749 10;
+BA_ "GenMsgCycleTime" BO_ 1750 10;
+
+VAL_ 1697 FA1_EvSpd_Validity 0 "Invalid" 1 "Valid";
+VAL_ 1697 FA1_Motor_Torque_Validity 0 "Invalid" 1 "Valid";
+VAL_ 1697 FA1_MotorMainState 0 "Off" 1 "StandBy" 2 "Motor" 3 "Generator" 4 "Failure" 5 "Invalid" 6 "Reserved" 7 "Reserved";
+VAL_ 1697 FA1_RotatingDire 0 "Inversion " 1 "Corotation" 2 "Reserved" 3 "Reserved";
+VAL_ 1697 FA1_MotorWorkMode 1 "Ualpha_test_mode" 2 "id_test_mode" 3 "id_loop_mode" 4 "iq_loop_mode" 5 "speed_loop_mode" 6 "if_starttest_mode" 7 "auto_positioning_mode" 8 "pwm_rectifier_mode" 9 "pwm_rectifier_if_mode" 10 "reserved_mode";
+VAL_ 1700 FA4_W_MotorControlerW 0 "Normal" 1 "Level1" 2 "Level2" 3 "Level3";
+VAL_ 1700 FA4_W_MotorW 0 "Normal" 1 "Level1" 2 "Level2" 3 "Level3";
+VAL_ 1701 FA5_C_MotorWorkModeReq 1 "Ualpha_test_mode" 2 "id_test_mode" 3 "id_loop_mode" 4 "iq_loop_mode" 5 "speed_loop_mode" 6 "if_starttest_mode" 7 "auto_positioning_mode" 8 "pwm_rectifier_mode" 9 "pwm_rectifier_if_mode" 10 "reserved_mode";
+
+
+VAL_ 1713 FB1_EvSpd_Validity 0 "Invalid" 1 "Valid";
+VAL_ 1713 FB1_Motor_Torque_Validity 0 "Invalid" 1 "Valid";
+VAL_ 1713 FB1_MotorMainState 0 "Off" 1 "StandBy" 2 "Motor" 3 "Generator" 4 "Failure" 5 "Invalid" 6 "Reserved" 7 "Reserved";
+VAL_ 1713 FB1_RotatingDire 0 "Inversion " 1 "Corotation" 2 "Reserved" 3 "Reserved";
+VAL_ 1713 FB1_MotorWorkMode 1 "Ualpha_test_mode" 2 "id_test_mode" 3 "id_loop_mode" 4 "iq_loop_mode" 5 "speed_loop_mode" 6 "if_starttest_mode" 7 "auto_positioning_mode" 8 "pwm_rectifier_mode" 9 "pwm_rectifier_if_mode" 10 "reserved_mode";
+VAL_ 1716 FB4_W_MotorControlerW 0 "Normal" 1 "Level1" 2 "Level2" 3 "Level3";
+VAL_ 1716 FB4_W_MotorW 0 "Normal" 1 "Level1" 2 "Level2" 3 "Level3";
+VAL_ 1717 FB5_C_MotorWorkModeReq 1 "Ualpha_test_mode" 2 "id_test_mode" 3 "id_loop_mode" 4 "iq_loop_mode" 5 "speed_loop_mode" 6 "if_starttest_mode" 7 "auto_positioning_mode" 8 "pwm_rectifier_mode" 9 "pwm_rectifier_if_mode" 10 "reserved_mode";
+
+
+VAL_ 1729 FC1_EvSpd_Validity 0 "Invalid" 1 "Valid";
+VAL_ 1729 FC1_Motor_Torque_Validity 0 "Invalid" 1 "Valid";
+VAL_ 1729 FC1_MotorMainState 0 "Off" 1 "StandBy" 2 "Motor" 3 "Generator" 4 "Failure" 5 "Invalid" 6 "Reserved" 7 "Reserved";
+VAL_ 1729 FC1_RotatingDire 0 "Inversion " 1 "Corotation" 2 "Reserved" 3 "Reserved";
+VAL_ 1729 FC1_MotorWorkMode 1 "Ualpha_test_mode" 2 "id_test_mode" 3 "id_loop_mode" 4 "iq_loop_mode" 5 "speed_loop_mode" 6 "if_starttest_mode" 7 "auto_positioning_mode" 8 "pwm_rectifier_mode" 9 "pwm_rectifier_if_mode" 10 "reserved_mode";
+VAL_ 1732 FC4_W_MotorControlerW 0 "Normal" 1 "Level1" 2 "Level2" 3 "Level3";
+VAL_ 1732 FC4_W_MotorW 0 "Normal" 1 "Level1" 2 "Level2" 3 "Level3";
+VAL_ 1733 FC5_C_MotorWorkModeReq 1 "Ualpha_test_mode" 2 "id_test_mode" 3 "id_loop_mode" 4 "iq_loop_mode" 5 "speed_loop_mode" 6 "if_starttest_mode" 7 "auto_positioning_mode" 8 "pwm_rectifier_mode" 9 "pwm_rectifier_if_mode" 10 "reserved_mode";
+
+
+VAL_ 1745 FD1_EvSpd_Validity 0 "Invalid" 1 "Valid";
+VAL_ 1745 FD1_Motor_Torque_Validity 0 "Invalid" 1 "Valid";
+VAL_ 1745 FD1_MotorMainState 0 "Off" 1 "StandBy" 2 "Motor" 3 "Generator" 4 "Failure" 5 "Invalid" 6 "Reserved" 7 "Reserved";
+VAL_ 1745 FD1_RotatingDire 0 "Inversion " 1 "Corotation" 2 "Reserved" 3 "Reserved";
+VAL_ 1745 FD1_MotorWorkMode 1 "Ualpha_test_mode" 2 "id_test_mode" 3 "id_loop_mode" 4 "iq_loop_mode" 5 "speed_loop_mode" 6 "if_starttest_mode" 7 "auto_positioning_mode" 8 "pwm_rectifier_mode" 9 "pwm_rectifier_if_mode" 10 "reserved_mode";
+VAL_ 1748 FD4_W_MotorControlerW 0 "Normal" 1 "Level1" 2 "Level2" 3 "Level3";
+VAL_ 1748 FD4_W_MotorW 0 "Normal" 1 "Level1" 2 "Level2" 3 "Level3";
+VAL_ 1749 FD5_C_MotorWorkModeReq 1 "Ualpha_test_mode" 2 "id_test_mode" 3 "id_loop_mode" 4 "iq_loop_mode" 5 "speed_loop_mode" 6 "if_starttest_mode" 7 "auto_positioning_mode" 8 "pwm_rectifier_mode" 9 "pwm_rectifier_if_mode" 10 "reserved_mode";
+

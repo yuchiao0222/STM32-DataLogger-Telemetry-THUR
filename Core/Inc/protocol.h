@@ -63,6 +63,7 @@ extern "C" {
 #define TAG_BAT_VOLTAGE     0x0DU   /* uint16, 0.1 V, DBC BatVoltage           */
 #define TAG_BUS_VOLTAGE     0x0EU   /* uint16, V, DBC FA3_BusVoltage           */
 #define TAG_MOTOR_SPEED     0x0FU   /* int16, rpm, DBC FA1_Motor_speed         */
+#define TAG_VEH_SPEED       0x30U   /* uint8, km/h, DBC VehSpd_kph             */
 #define TAG_TEST            0x20U   /* uint8, test counter, increments each pkt */
 #define TAG_CAN_RX_COUNT    0x21U   /* uint32, total CAN frames received (debug) */
 #define TAG_CAN_TEST        0x22U   /* uint8, CAN loopback test result bitfield  */

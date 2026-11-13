@@ -1,0 +1,1509 @@
+VERSION ""
+
+NS_ :
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_ :
+
+BU_ : EMS BMS BMS BCMU BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS BMS 
+VAL_TABLE_ Err 0 "正常" 1 "故障" ;
+VAL_TABLE_ Ems_PowerOnOffCmd 0 "下高压" 1 "上高压" ;
+VAL_TABLE_ Ems_ChargeAllowState 0 "不允许" 1 "允许" ;
+VAL_TABLE_ FaultGrade 0 "无故障" 1 "1级故障" 2 "2级故障" 3 "3级故障" 4 "4级故障" ;
+VAL_TABLE_ BmsWorkState 0 "上电" 1 "就绪" 2 "运行" 3 "错误" 4 "关机" 5 "快充" 6 "慢充" 7 "充电完成" ;
+VAL_TABLE_ DIState 0 "无效" 1 "有效" ;
+VAL_TABLE_ RelayState 0 "断开" 1 "闭合" ;
+VAL_TABLE_ RelayState1 0 "断开" 1 "闭合" 2 "错误" ;
+VAL_TABLE_ ChgRelayRequest 0 "请求断开" 1 "请求闭合" ;
+VAL_TABLE_ CoolingCtl 0 "停止冷却" 1 "启动冷却" ;
+VAL_TABLE_ HeatingCtl 0 "停止加热" 1 "启动加热" ;
+VAL_TABLE_ ChgONCC 0 "未连接" 1 "220Ω" 2 "680Ω" 3 "100Ω" 4 "1.5KΩ" 5 "其它" ;
+VAL_TABLE_ ChgOFFCC2 0 "未连接" 1 "已连接" ;
+VAL_TABLE_ ChgComm 0 "充电机不在线" 1 "充电机在线" ;
+VAL_TABLE_ AccWakeState 0 "无ACC" 1 "有ACC" ;
+VAL_TABLE_ ChgWakeState 0 "无A+信号" 1 "有A+信号" ;
+VAL_TABLE_ ChgState 0 "未开始" 1 "加热" 2 "充电" 3 "退出" 4 "充电完成" ;
+VAL_TABLE_ BmsRunStatus 0 "停机" 1 "初始化" 2 "自检" 3 "待机" 4 "预充" 5 "运行" 6 "准备下电" 7 "故障" 8 "休眠关机" 9 "充电" 10 "充电结束" 11 "准备充电" ;
+VAL_TABLE_ TmsHighVoltReq 0 "上高压" 1 "下高压" ;
+VAL_TABLE_ BmsChgState 0 "非充电模式" 1 "充电模式" ;
+VAL_TABLE_ BmsHighVoltRelayState 0 "断开" 1 "闭合" ;
+VAL_TABLE_ TmsWorkMode 0 "关机模式" 1 "制冷模式" 2 "制热模式" 3 "自循环模式" ;
+VAL_TABLE_ TmsHighVoltRelayState 0 "断开" 1 "闭合" 2 "无效" 3 "无效" ;
+VAL_TABLE_ TmsFaultCode 0 "无故障" 1 "PTC高级故障" 2 "PTC故障" 3 "面板空调故障" 19 "压缩机通讯故障" 21 "风扇故障" 22 "高压传感器故障" 23 "低压传感器故障" 24 "机组进水温度传感器故障" 25 "机组出水温度传感器故障" 26 "压缩机2通讯故障" 27 "水泵故障" 28 "ATS水泵故障" 30 "水位低报警" 31 "PTC通讯故障" 32 "高压预充故障" 33 "K2继电器故障" 34 "DCDC故障" 35 "从机组1一级故障" 36 "从机组1二级故障" 38 "从机组1丢失" 39 "从机组2一级故障" 40 "从机组2二级故障" 42 "从机组2丢失" 47 "DCDC供电故障" 48 "CAN通讯异常" 49 "高压总回路接触器故障" 50 "排气温度传感器故障" 51 "母线欠压" 55 "压缩机故障" 56 "压缩机2故障" 57 "压缩机失速" ;
+VAL_TABLE_ TmsFaultClass 0 "无故障" 1 "1级故障" 2 "2级故障" 3 "3级故障" ;
+
+
+BO_ 2550263872 EMS_HvCmd: 8 EMS
+ SG_ Ems_PowerOnOffCmd : 0|8@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Ems_ChargeAllowState : 8|8@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 2556444912 BMS_SYS_IFO: 8 BMS
+ SG_ SysVoltage : 0|16@1+ (0.1,0) [0|2000] "V" Vector__XXX
+ SG_ SysCurrent : 16|16@1+ (0.1,-3200) [-3200|3200] "A" Vector__XXX
+ SG_ SOC : 32|8@1+ (1,0) [0|100] "%" Vector__XXX
+ SG_ SOH : 40|8@1+ (1,0) [0|100] "%" Vector__XXX
+ SG_ FaultGrade : 48|4@1+ (1,0) [0|4] "" Vector__XXX
+ SG_ BmsWorkState : 52|4@1+ (1,0) [0|7] "" Vector__XXX
+ SG_ Life_186040F0 : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 2556510448 BMS_MoCellU: 8 BMS
+ SG_ MaxCellVolt : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ MinCellVolt : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ MaxCellVoltBsuNum : 32|8@1+ (1,0) [1|255] "" Vector__XXX
+ SG_ MaxCellVoltCellNum : 40|8@1+ (1,0) [1|255] "" Vector__XXX
+ SG_ MinCellVoltBsuNum : 48|8@1+ (1,0) [1|255] "" Vector__XXX
+ SG_ MinCellVoltCellNum : 56|8@1+ (1,0) [1|255] "" Vector__XXX
+
+BO_ 2556575984 BMS_MoBattTemp: 8 BCMU
+ SG_ MaxCellTemp : 0|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ MinCellTemp : 8|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ MaxCellTempBsuNum : 16|8@1+ (1,0) [1|255] "" Vector__XXX
+ SG_ MaxCellTempCellNum : 24|8@1+ (1,0) [1|255] "" Vector__XXX
+ SG_ MinCellTempBsuNum : 32|8@1+ (1,0) [1|255] "" Vector__XXX
+ SG_ MinCellTempCellNum : 40|8@1+ (1,0) [1|255] "" Vector__XXX
+ SG_ DI1State : 48|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ DI2State : 49|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ DI3State : 50|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ DI4State : 51|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ DI5State : 52|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ DI6State : 53|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ DI7State : 54|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ DI8State : 55|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Relay1State : 56|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Relay2State : 57|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Relay3State : 58|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Relay4State : 59|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Relay5State : 60|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Relay6State : 61|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Relay7State : 62|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Relay8State : 63|1@1+ (1,0) [0|1] "" Vector__XXX
+
+BO_ 2556641520 BMS_Relay_Iso: 8 BMS
+ SG_ PosRelayState : 0|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ NegRelayState : 2|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ PreRelayState : 4|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ HeatRelayState : 6|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ ChgRelayRequest : 8|2@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ CoolingCtl : 10|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ HeatingCtl : 11|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ChgONCC : 16|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ ChgOFFCC2 : 20|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ChgComm : 21|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ AccWakeState : 22|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ChgWakeState : 23|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ ChgState : 24|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ BmsRunStatus : 28|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ PosReg : 32|16@1+ (0.1,0) [0|3000] "Kohm" Vector__XXX
+ SG_ NegReg : 48|16@1+ (0.1,0) [0|3000] "Kohm" Vector__XXX
+
+BO_ 2556707056 BMS_MaxPowerCurr: 8 BMS
+ SG_ MaxChgCurrent : 0|16@1+ (0.1,0) [0|6000] "A" Vector__XXX
+ SG_ MaxDisChgCurrent : 16|16@1+ (0.1,0) [0|6000] "A" Vector__XXX
+ SG_ MaxChgPower : 32|16@1+ (0.1,0) [0|6000] "KW" Vector__XXX
+ SG_ MaxDisChgPower : 48|16@1+ (0.1,0) [0|6000] "KW" Vector__XXX
+
+BO_ 2556772592 BMS_Alarm: 8 BMS
+ SG_ Cell_OV : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Cell_UV : 4|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Cell_OT : 8|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Cell_UT : 12|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Sys_OV : 16|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Sys_UV : 20|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Chg_OC : 24|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ DisChg_OC : 28|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Bsu_OffLine : 32|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Leak_OC : 36|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Cell_Volt_Diff : 40|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Cell_Temp_Diff : 44|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ High_Volt_Abnormal : 48|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ Hall_Break : 50|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ Batt_Err_Protect : 52|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ Cell_Volt_Break : 54|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ Cell_Temp_Break : 56|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ PreCharge_Fail : 58|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ Relay_Err : 60|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ Bsu_Bal_Err : 62|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 2556838128 BMS_Energy1: 8 BMS
+ SG_ Total_DisChg_Energy : 0|32@1+ (0.1,0) [0|1000000] "KWH" Vector__XXX
+ SG_ Total_Chg_Energy : 32|32@1+ (0.1,0) [0|1000000] "KWH" Vector__XXX
+
+BO_ 2556903664 BMS_Energy2: 8 BMS
+ SG_ Once_Chg_Energy : 0|16@1+ (0.1,0) [0|6553.5] "KWH" Vector__XXX
+ SG_ Once_DisChg_Energy : 16|16@1+ (0.1,0) [0|6553.5] "KWH" Vector__XXX
+ SG_ Rest_Chg_Energy : 32|16@1+ (0.1,0) [0|6553.5] "KWH" Vector__XXX
+ SG_ Rest_DisChg_Energy : 48|16@1+ (0.1,0) [0|6553.5] "KWH" Vector__XXX
+
+BO_ 2556969200 BMS_ChgTemp_1_4: 8 BMS
+ SG_ Chg_Connect_Temp1 : 0|16@1+ (0.1,0) [-40|125] "℃" Vector__XXX
+ SG_ Chg_Connect_Temp2 : 16|16@1+ (0.1,0) [-40|125] "℃" Vector__XXX
+ SG_ Chg_Connect_Temp3 : 32|16@1+ (0.1,0) [-40|125] "℃" Vector__XXX
+ SG_ Chg_Connect_Temp4 : 48|16@1+ (0.1,0) [-40|125] "℃" Vector__XXX
+
+BO_ 2557100272 BMS_Volt: 8 BMS
+ SG_ PreVoltage : 0|16@1+ (0.1,0) [0|2000] "V" Vector__XXX
+ SG_ FastChgVoltage : 16|16@1+ (0.1,0) [0|2000] "V" Vector__XXX
+ SG_ SlowChgVoltage : 32|16@1+ (0.1,0) [0|2000] "V" Vector__XXX
+ SG_ BusVoltage : 48|16@1+ (0.1,0) [0|2000] "V" Vector__XXX
+
+BO_ 2550153456 MoCellVolt1: 8 BMS
+ SG_ CellVolt_001 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_002 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_003 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_004 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2550218992 MoCellVolt2: 8 BMS
+ SG_ CellVolt_005 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_006 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_007 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_008 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2550284528 MoCellVolt3: 8 BMS
+ SG_ CellVolt_009 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_010 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_011 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_012 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2550350064 MoCellVolt4: 8 BMS
+ SG_ CellVolt_013 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_014 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_015 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_016 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2550415600 MoCellVolt5: 8 BMS
+ SG_ CellVolt_017 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_018 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_019 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_020 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2550481136 MoCellVolt6: 8 BMS
+ SG_ CellVolt_021 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_022 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_023 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_024 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2550546672 MoCellVolt7: 8 BMS
+ SG_ CellVolt_025 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_026 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_027 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_028 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2550612208 MoCellVolt8: 8 BMS
+ SG_ CellVolt_029 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_030 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_031 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_032 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2550677744 MoCellVolt9: 8 BMS
+ SG_ CellVolt_033 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_034 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_035 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_036 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2550743280 MoCellVolt10: 8 BMS
+ SG_ CellVolt_037 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_038 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_039 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_040 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2550808816 MoCellVolt11: 8 BMS
+ SG_ CellVolt_041 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_042 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_043 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_044 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2550874352 MoCellVolt12: 8 BMS
+ SG_ CellVolt_045 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_046 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_047 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_048 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2550939888 MoCellVolt13: 8 BMS
+ SG_ CellVolt_049 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_050 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_051 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_052 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2551005424 MoCellVolt14: 8 BMS
+ SG_ CellVolt_053 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_054 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_055 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_056 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2551070960 MoCellVolt15: 8 BMS
+ SG_ CellVolt_057 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_058 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_059 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_060 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2551136496 MoCellVolt16: 8 BMS
+ SG_ CellVolt_061 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_062 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_063 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_064 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2551202032 MoCellVolt17: 8 BMS
+ SG_ CellVolt_065 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_066 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_067 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_068 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2551267568 MoCellVolt18: 8 BMS
+ SG_ CellVolt_069 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_070 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_071 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_072 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2551333104 MoCellVolt19: 8 BMS
+ SG_ CellVolt_073 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_074 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_075 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_076 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2551398640 MoCellVolt20: 8 BMS
+ SG_ CellVolt_077 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_078 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_079 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_080 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2551464176 MoCellVolt21: 8 BMS
+ SG_ CellVolt_081 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_082 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_083 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_084 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2551529712 MoCellVolt22: 8 BMS
+ SG_ CellVolt_085 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_086 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_087 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_088 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2551595248 MoCellVolt23: 8 BMS
+ SG_ CellVolt_089 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_090 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_091 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_092 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2551660784 MoCellVolt24: 8 BMS
+ SG_ CellVolt_093 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_094 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_095 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_096 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2551726320 MoCellVolt25: 8 BMS
+ SG_ CellVolt_097 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_098 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_099 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_100 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2551791856 MoCellVolt26: 8 BMS
+ SG_ CellVolt_101 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_102 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_103 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_104 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2551857392 MoCellVolt27: 8 BMS
+ SG_ CellVolt_105 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_106 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_107 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_108 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2551922928 MoCellVolt28: 8 BMS
+ SG_ CellVolt_109 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_110 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_111 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_112 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2551988464 MoCellVolt29: 8 BMS
+ SG_ CellVolt_113 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_114 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_115 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_116 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2552054000 MoCellVolt30: 8 BMS
+ SG_ CellVolt_117 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_118 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_119 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_120 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2552119536 MoCellVolt31: 8 BMS
+ SG_ CellVolt_121 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_122 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_123 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_124 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2552185072 MoCellVolt32: 8 BMS
+ SG_ CellVolt_125 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_126 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_127 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_128 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2552250608 MoCellVolt33: 8 BMS
+ SG_ CellVolt_129 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_130 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_131 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_132 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2552316144 MoCellVolt34: 8 BMS
+ SG_ CellVolt_133 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_134 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_135 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_136 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2552381680 MoCellVolt35: 8 BMS
+ SG_ CellVolt_137 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_138 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_139 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_140 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2552447216 MoCellVolt36: 8 BMS
+ SG_ CellVolt_141 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_142 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_143 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_144 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2552512752 MoCellVolt37: 8 BMS
+ SG_ CellVolt_145 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_146 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_147 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_148 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2552578288 MoCellVolt38: 8 BMS
+ SG_ CellVolt_149 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_150 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_151 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_152 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2552643824 MoCellVolt39: 8 BMS
+ SG_ CellVolt_153 : 0|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_154 : 16|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_155 : 32|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+ SG_ CellVolt_156 : 48|16@1+ (1,0) [0|5000] "mv" Vector__XXX
+
+BO_ 2554347760 MoCellTemp1: 8 BMS
+ SG_ CellTemp_001 : 0|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_002 : 8|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_003 : 16|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_004 : 24|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_005 : 32|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_006 : 40|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_007 : 48|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_008 : 56|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+
+BO_ 2554413296 MoCellTemp2: 8 BMS
+ SG_ CellTemp_009 : 0|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_010 : 8|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_011 : 16|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_012 : 24|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_013 : 32|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_014 : 40|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_015 : 48|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_016 : 56|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+
+BO_ 2554478832 MoCellTemp3: 8 BMS
+ SG_ CellTemp_017 : 0|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_018 : 8|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_019 : 16|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_020 : 24|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_021 : 32|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_022 : 40|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_023 : 48|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_024 : 56|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+
+BO_ 2554544368 MoCellTemp4: 8 BMS
+ SG_ CellTemp_025 : 0|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_026 : 8|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_027 : 16|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_028 : 24|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_029 : 32|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_030 : 40|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_031 : 48|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_032 : 56|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+
+BO_ 2554609904 MoCellTemp5: 8 BMS
+ SG_ CellTemp_033 : 0|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_034 : 8|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_035 : 16|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_036 : 24|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_037 : 32|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_038 : 40|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_039 : 48|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_040 : 56|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+
+BO_ 2554675440 MoCellTemp6: 8 BMS
+ SG_ CellTemp_041 : 0|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_042 : 8|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_043 : 16|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_044 : 24|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_045 : 32|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_046 : 40|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_047 : 48|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_048 : 56|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+
+BO_ 2554740976 MoCellTemp7: 8 BMS
+ SG_ CellTemp_049 : 0|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_050 : 8|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_051 : 16|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_052 : 24|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_053 : 32|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_054 : 40|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_055 : 48|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_056 : 56|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+
+BO_ 2554806512 MoCellTemp8: 8 BMS
+ SG_ CellTemp_057 : 0|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_058 : 8|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_059 : 16|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_060 : 24|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_061 : 32|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_062 : 40|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_063 : 48|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_064 : 56|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+
+BO_ 2554872048 MoCellTemp9: 8 BMS
+ SG_ CellTemp_065 : 0|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_066 : 8|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_067 : 16|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_068 : 24|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_069 : 32|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_070 : 40|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_071 : 48|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_072 : 56|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+
+BO_ 2554937584 MoCellTemp10: 8 BMS
+ SG_ CellTemp_073 : 0|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_074 : 8|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_075 : 16|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_076 : 24|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_077 : 32|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_078 : 40|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_079 : 48|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_080 : 56|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+
+BO_ 2555003120 MoCellTemp11: 8 BMS
+ SG_ CellTemp_081 : 0|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_082 : 8|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_083 : 16|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_084 : 24|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_085 : 32|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_086 : 40|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_087 : 48|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+ SG_ CellTemp_088 : 56|8@1+ (1,-40) [-40|120] "℃" Vector__XXX
+
+CM_ BO_ 2550263872 "CAN2";
+CM_ SG_ 2550263872 Ems_PowerOnOffCmd "EMS请求高压指令";
+CM_ SG_ 2550263872 Ems_ChargeAllowState "EMS允许充电状态";
+CM_ BO_ 2556444912 "CAN2";
+CM_ SG_ 2556444912 SysVoltage "系统累加电压";
+CM_ SG_ 2556444912 SysCurrent "系统电流";
+CM_ SG_ 2556444912 SOC "SOC";
+CM_ SG_ 2556444912 SOH "SOH";
+CM_ SG_ 2556444912 FaultGrade "BMS故障等级";
+CM_ SG_ 2556444912 BmsWorkState "BMS工作状态";
+CM_ SG_ 2556444912 Life_186040F0 "生命帧[0-255]";
+CM_ BO_ 2556510448 "CAN2";
+CM_ SG_ 2556510448 MaxCellVolt "最高单体电压";
+CM_ SG_ 2556510448 MinCellVolt "最低单体电压";
+CM_ SG_ 2556510448 MaxCellVoltBsuNum "最高单体电压所在从控编号";
+CM_ SG_ 2556510448 MaxCellVoltCellNum "最高单体电压所在从控内的编号";
+CM_ SG_ 2556510448 MinCellVoltBsuNum "最低单体电压所在从控编号";
+CM_ SG_ 2556510448 MinCellVoltCellNum "最低单体电压所在从控内的编号";
+CM_ BO_ 2556575984 "CAN2";
+CM_ SG_ 2556575984 MaxCellTemp "最高单体温度";
+CM_ SG_ 2556575984 MinCellTemp "最低单体温度";
+CM_ SG_ 2556575984 MaxCellTempBsuNum "最高单体温度所在从控编号";
+CM_ SG_ 2556575984 MaxCellTempCellNum "最高单体温度所在从控内的编号";
+CM_ SG_ 2556575984 MinCellTempBsuNum "最低单体温度所在从控编号";
+CM_ SG_ 2556575984 MinCellTempCellNum "最低单体温度所在从控内的编号";
+CM_ SG_ 2556575984 DI1State "DI1状态";
+CM_ SG_ 2556575984 DI2State "DI2状态";
+CM_ SG_ 2556575984 DI3State "DI3状态";
+CM_ SG_ 2556575984 DI4State "DI4状态";
+CM_ SG_ 2556575984 DI5State "DI5状态";
+CM_ SG_ 2556575984 DI6State "DI6状态";
+CM_ SG_ 2556575984 DI7State "DI7状态";
+CM_ SG_ 2556575984 DI8State "DI8状态";
+CM_ SG_ 2556575984 Relay1State "继电器1状态";
+CM_ SG_ 2556575984 Relay2State "继电器2状态";
+CM_ SG_ 2556575984 Relay3State "继电器3状态";
+CM_ SG_ 2556575984 Relay4State "继电器4状态";
+CM_ SG_ 2556575984 Relay5State "继电器5状态";
+CM_ SG_ 2556575984 Relay6State "继电器6状态";
+CM_ SG_ 2556575984 Relay7State "继电器7状态";
+CM_ SG_ 2556575984 Relay8State "继电器8状态";
+CM_ BO_ 2556641520 "CAN2";
+CM_ SG_ 2556641520 PosRelayState "总正继电器状态";
+CM_ SG_ 2556641520 NegRelayState "总负继电器状态";
+CM_ SG_ 2556641520 PreRelayState "预充继电器状态";
+CM_ SG_ 2556641520 HeatRelayState "加热继电器状态";
+CM_ SG_ 2556641520 ChgRelayRequest "请求EMS闭合充电继电器指令";
+CM_ SG_ 2556641520 CoolingCtl "冷却控制";
+CM_ SG_ 2556641520 HeatingCtl "加热控制";
+CM_ SG_ 2556641520 ChgONCC "车载充电机连接确认";
+CM_ SG_ 2556641520 ChgOFFCC2 "非车载充电机连接确认";
+CM_ SG_ 2556641520 ChgComm "充电机是否在线";
+CM_ SG_ 2556641520 AccWakeState "ACC信号";
+CM_ SG_ 2556641520 ChgWakeState "A+信号";
+CM_ SG_ 2556641520 ChgState "充电状态";
+CM_ SG_ 2556641520 BmsRunStatus "BMS运行状态";
+CM_ SG_ 2556641520 PosReg "正母线电阻";
+CM_ SG_ 2556641520 NegReg "负母线电阻";
+CM_ BO_ 2556707056 "CAN2";
+CM_ SG_ 2556707056 MaxChgCurrent "最大允许充电电流";
+CM_ SG_ 2556707056 MaxDisChgCurrent "最大允许放电电流";
+CM_ SG_ 2556707056 MaxChgPower "最大允许充电功率";
+CM_ SG_ 2556707056 MaxDisChgPower "最大允许放电功率";
+CM_ BO_ 2556772592 "CAN2";
+CM_ SG_ 2556772592 Cell_OV "单体过压";
+CM_ SG_ 2556772592 Cell_UV "单体欠压";
+CM_ SG_ 2556772592 Cell_OT "电池过温";
+CM_ SG_ 2556772592 Cell_UT "电池低温";
+CM_ SG_ 2556772592 Sys_OV "系统过压";
+CM_ SG_ 2556772592 Sys_UV "系统欠压";
+CM_ SG_ 2556772592 Chg_OC "充电过流";
+CM_ SG_ 2556772592 DisChg_OC "放电过流";
+CM_ SG_ 2556772592 Bsu_OffLine "BSU离线";
+CM_ SG_ 2556772592 Leak_OC "漏电流超限";
+CM_ SG_ 2556772592 Cell_Volt_Diff "压差过大";
+CM_ SG_ 2556772592 Cell_Temp_Diff "温差过大";
+CM_ SG_ 2556772592 High_Volt_Abnormal "高压异常";
+CM_ SG_ 2556772592 Hall_Break "霍尔断线";
+CM_ SG_ 2556772592 Batt_Err_Protect "电池异常保护";
+CM_ SG_ 2556772592 Cell_Volt_Break "电压断线";
+CM_ SG_ 2556772592 Cell_Temp_Break "温度断线";
+CM_ SG_ 2556772592 PreCharge_Fail "预充失败";
+CM_ SG_ 2556772592 Relay_Err "继电器故障";
+CM_ SG_ 2556772592 Bsu_Bal_Err "BSU均衡故障";
+CM_ BO_ 2556838128 "CAN2";
+CM_ SG_ 2556838128 Total_DisChg_Energy "累计放电电量";
+CM_ SG_ 2556838128 Total_Chg_Energy "累计充电电量";
+CM_ BO_ 2556903664 "CAN2";
+CM_ SG_ 2556903664 Once_Chg_Energy "本次充电电量";
+CM_ SG_ 2556903664 Once_DisChg_Energy "本次放电电量";
+CM_ SG_ 2556903664 Rest_Chg_Energy "系统可充电量";
+CM_ SG_ 2556903664 Rest_DisChg_Energy "系统可放电量";
+CM_ BO_ 2556969200 "CAN2";
+CM_ SG_ 2556969200 Chg_Connect_Temp1 "充电插座温度1";
+CM_ SG_ 2556969200 Chg_Connect_Temp2 "充电插座温度2";
+CM_ SG_ 2556969200 Chg_Connect_Temp3 "充电插座温度3";
+CM_ SG_ 2556969200 Chg_Connect_Temp4 "充电插座温度4";
+CM_ BO_ 2557100272 "CAN2";
+CM_ SG_ 2557100272 PreVoltage "预充电压";
+CM_ SG_ 2557100272 FastChgVoltage "快充电压";
+CM_ SG_ 2557100272 SlowChgVoltage "慢充电压";
+CM_ SG_ 2557100272 BusVoltage "母线电压";
+CM_ BO_ 2550153456 "CAN2";
+CM_ SG_ 2550153456 CellVolt_001 "单体电压1";
+CM_ SG_ 2550153456 CellVolt_002 "单体电压2";
+CM_ SG_ 2550153456 CellVolt_003 "单体电压3";
+CM_ SG_ 2550153456 CellVolt_004 "单体电压4";
+CM_ BO_ 2550218992 "CAN2";
+CM_ SG_ 2550218992 CellVolt_005 "单体电压5";
+CM_ SG_ 2550218992 CellVolt_006 "单体电压6";
+CM_ SG_ 2550218992 CellVolt_007 "单体电压7";
+CM_ SG_ 2550218992 CellVolt_008 "单体电压8";
+CM_ BO_ 2550284528 "CAN2";
+CM_ SG_ 2550284528 CellVolt_009 "单体电压9";
+CM_ SG_ 2550284528 CellVolt_010 "单体电压10";
+CM_ SG_ 2550284528 CellVolt_011 "单体电压11";
+CM_ SG_ 2550284528 CellVolt_012 "单体电压12";
+CM_ BO_ 2550350064 "CAN2";
+CM_ SG_ 2550350064 CellVolt_013 "单体电压13";
+CM_ SG_ 2550350064 CellVolt_014 "单体电压14";
+CM_ SG_ 2550350064 CellVolt_015 "单体电压15";
+CM_ SG_ 2550350064 CellVolt_016 "单体电压16";
+CM_ BO_ 2550415600 "CAN2";
+CM_ SG_ 2550415600 CellVolt_017 "单体电压17";
+CM_ SG_ 2550415600 CellVolt_018 "单体电压18";
+CM_ SG_ 2550415600 CellVolt_019 "单体电压19";
+CM_ SG_ 2550415600 CellVolt_020 "单体电压20";
+CM_ BO_ 2550481136 "CAN2";
+CM_ SG_ 2550481136 CellVolt_021 "单体电压21";
+CM_ SG_ 2550481136 CellVolt_022 "单体电压22";
+CM_ SG_ 2550481136 CellVolt_023 "单体电压23";
+CM_ SG_ 2550481136 CellVolt_024 "单体电压24";
+CM_ BO_ 2550546672 "CAN2";
+CM_ SG_ 2550546672 CellVolt_025 "单体电压25";
+CM_ SG_ 2550546672 CellVolt_026 "单体电压26";
+CM_ SG_ 2550546672 CellVolt_027 "单体电压27";
+CM_ SG_ 2550546672 CellVolt_028 "单体电压28";
+CM_ BO_ 2550612208 "CAN2";
+CM_ SG_ 2550612208 CellVolt_029 "单体电压29";
+CM_ SG_ 2550612208 CellVolt_030 "单体电压30";
+CM_ SG_ 2550612208 CellVolt_031 "单体电压31";
+CM_ SG_ 2550612208 CellVolt_032 "单体电压32";
+CM_ BO_ 2550677744 "CAN2";
+CM_ SG_ 2550677744 CellVolt_033 "单体电压33";
+CM_ SG_ 2550677744 CellVolt_034 "单体电压34";
+CM_ SG_ 2550677744 CellVolt_035 "单体电压35";
+CM_ SG_ 2550677744 CellVolt_036 "单体电压36";
+CM_ BO_ 2550743280 "CAN2";
+CM_ SG_ 2550743280 CellVolt_037 "单体电压37";
+CM_ SG_ 2550743280 CellVolt_038 "单体电压38";
+CM_ SG_ 2550743280 CellVolt_039 "单体电压39";
+CM_ SG_ 2550743280 CellVolt_040 "单体电压40";
+CM_ BO_ 2550808816 "CAN2";
+CM_ SG_ 2550808816 CellVolt_041 "单体电压41";
+CM_ SG_ 2550808816 CellVolt_042 "单体电压42";
+CM_ SG_ 2550808816 CellVolt_043 "单体电压43";
+CM_ SG_ 2550808816 CellVolt_044 "单体电压44";
+CM_ BO_ 2550874352 "CAN2";
+CM_ SG_ 2550874352 CellVolt_045 "单体电压45";
+CM_ SG_ 2550874352 CellVolt_046 "单体电压46";
+CM_ SG_ 2550874352 CellVolt_047 "单体电压47";
+CM_ SG_ 2550874352 CellVolt_048 "单体电压48";
+CM_ BO_ 2550939888 "CAN2";
+CM_ SG_ 2550939888 CellVolt_049 "单体电压49";
+CM_ SG_ 2550939888 CellVolt_050 "单体电压50";
+CM_ SG_ 2550939888 CellVolt_051 "单体电压51";
+CM_ SG_ 2550939888 CellVolt_052 "单体电压52";
+CM_ BO_ 2551005424 "CAN2";
+CM_ SG_ 2551005424 CellVolt_053 "单体电压53";
+CM_ SG_ 2551005424 CellVolt_054 "单体电压54";
+CM_ SG_ 2551005424 CellVolt_055 "单体电压55";
+CM_ SG_ 2551005424 CellVolt_056 "单体电压56";
+CM_ BO_ 2551070960 "CAN2";
+CM_ SG_ 2551070960 CellVolt_057 "单体电压57";
+CM_ SG_ 2551070960 CellVolt_058 "单体电压58";
+CM_ SG_ 2551070960 CellVolt_059 "单体电压59";
+CM_ SG_ 2551070960 CellVolt_060 "单体电压60";
+CM_ BO_ 2551136496 "CAN2";
+CM_ SG_ 2551136496 CellVolt_061 "单体电压61";
+CM_ SG_ 2551136496 CellVolt_062 "单体电压62";
+CM_ SG_ 2551136496 CellVolt_063 "单体电压63";
+CM_ SG_ 2551136496 CellVolt_064 "单体电压64";
+CM_ BO_ 2551202032 "CAN2";
+CM_ SG_ 2551202032 CellVolt_065 "单体电压65";
+CM_ SG_ 2551202032 CellVolt_066 "单体电压66";
+CM_ SG_ 2551202032 CellVolt_067 "单体电压67";
+CM_ SG_ 2551202032 CellVolt_068 "单体电压68";
+CM_ BO_ 2551267568 "CAN2";
+CM_ SG_ 2551267568 CellVolt_069 "单体电压69";
+CM_ SG_ 2551267568 CellVolt_070 "单体电压70";
+CM_ SG_ 2551267568 CellVolt_071 "单体电压71";
+CM_ SG_ 2551267568 CellVolt_072 "单体电压72";
+CM_ BO_ 2551333104 "CAN2";
+CM_ SG_ 2551333104 CellVolt_073 "单体电压73";
+CM_ SG_ 2551333104 CellVolt_074 "单体电压74";
+CM_ SG_ 2551333104 CellVolt_075 "单体电压75";
+CM_ SG_ 2551333104 CellVolt_076 "单体电压76";
+CM_ BO_ 2551398640 "CAN2";
+CM_ SG_ 2551398640 CellVolt_077 "单体电压77";
+CM_ SG_ 2551398640 CellVolt_078 "单体电压78";
+CM_ SG_ 2551398640 CellVolt_079 "单体电压79";
+CM_ SG_ 2551398640 CellVolt_080 "单体电压80";
+CM_ BO_ 2551464176 "CAN2";
+CM_ SG_ 2551464176 CellVolt_081 "单体电压81";
+CM_ SG_ 2551464176 CellVolt_082 "单体电压82";
+CM_ SG_ 2551464176 CellVolt_083 "单体电压83";
+CM_ SG_ 2551464176 CellVolt_084 "单体电压84";
+CM_ BO_ 2551529712 "CAN2";
+CM_ SG_ 2551529712 CellVolt_085 "单体电压85";
+CM_ SG_ 2551529712 CellVolt_086 "单体电压86";
+CM_ SG_ 2551529712 CellVolt_087 "单体电压87";
+CM_ SG_ 2551529712 CellVolt_088 "单体电压88";
+CM_ BO_ 2551595248 "CAN2";
+CM_ SG_ 2551595248 CellVolt_089 "单体电压89";
+CM_ SG_ 2551595248 CellVolt_090 "单体电压90";
+CM_ SG_ 2551595248 CellVolt_091 "单体电压91";
+CM_ SG_ 2551595248 CellVolt_092 "单体电压92";
+CM_ BO_ 2551660784 "CAN2";
+CM_ SG_ 2551660784 CellVolt_093 "单体电压93";
+CM_ SG_ 2551660784 CellVolt_094 "单体电压94";
+CM_ SG_ 2551660784 CellVolt_095 "单体电压95";
+CM_ SG_ 2551660784 CellVolt_096 "单体电压96";
+CM_ BO_ 2551726320 "CAN2";
+CM_ SG_ 2551726320 CellVolt_097 "单体电压97";
+CM_ SG_ 2551726320 CellVolt_098 "单体电压98";
+CM_ SG_ 2551726320 CellVolt_099 "单体电压99";
+CM_ SG_ 2551726320 CellVolt_100 "单体电压100";
+CM_ BO_ 2551791856 "CAN2";
+CM_ SG_ 2551791856 CellVolt_101 "单体电压101";
+CM_ SG_ 2551791856 CellVolt_102 "单体电压102";
+CM_ SG_ 2551791856 CellVolt_103 "单体电压103";
+CM_ SG_ 2551791856 CellVolt_104 "单体电压104";
+CM_ BO_ 2551857392 "CAN2";
+CM_ SG_ 2551857392 CellVolt_105 "单体电压105";
+CM_ SG_ 2551857392 CellVolt_106 "单体电压106";
+CM_ SG_ 2551857392 CellVolt_107 "单体电压107";
+CM_ SG_ 2551857392 CellVolt_108 "单体电压108";
+CM_ BO_ 2551922928 "CAN2";
+CM_ SG_ 2551922928 CellVolt_109 "单体电压109";
+CM_ SG_ 2551922928 CellVolt_110 "单体电压110";
+CM_ SG_ 2551922928 CellVolt_111 "单体电压111";
+CM_ SG_ 2551922928 CellVolt_112 "单体电压112";
+CM_ BO_ 2551988464 "CAN2";
+CM_ SG_ 2551988464 CellVolt_113 "单体电压113";
+CM_ SG_ 2551988464 CellVolt_114 "单体电压114";
+CM_ SG_ 2551988464 CellVolt_115 "单体电压115";
+CM_ SG_ 2551988464 CellVolt_116 "单体电压116";
+CM_ BO_ 2552054000 "CAN2";
+CM_ SG_ 2552054000 CellVolt_117 "单体电压117";
+CM_ SG_ 2552054000 CellVolt_118 "单体电压118";
+CM_ SG_ 2552054000 CellVolt_119 "单体电压119";
+CM_ SG_ 2552054000 CellVolt_120 "单体电压120";
+CM_ BO_ 2552119536 "CAN2";
+CM_ SG_ 2552119536 CellVolt_121 "单体电压121";
+CM_ SG_ 2552119536 CellVolt_122 "单体电压122";
+CM_ SG_ 2552119536 CellVolt_123 "单体电压123";
+CM_ SG_ 2552119536 CellVolt_124 "单体电压124";
+CM_ BO_ 2552185072 "CAN2";
+CM_ SG_ 2552185072 CellVolt_125 "单体电压125";
+CM_ SG_ 2552185072 CellVolt_126 "单体电压126";
+CM_ SG_ 2552185072 CellVolt_127 "单体电压127";
+CM_ SG_ 2552185072 CellVolt_128 "单体电压128";
+CM_ BO_ 2552250608 "CAN2";
+CM_ SG_ 2552250608 CellVolt_129 "单体电压129";
+CM_ SG_ 2552250608 CellVolt_130 "单体电压130";
+CM_ SG_ 2552250608 CellVolt_131 "单体电压131";
+CM_ SG_ 2552250608 CellVolt_132 "单体电压132";
+CM_ BO_ 2552316144 "CAN2";
+CM_ SG_ 2552316144 CellVolt_133 "单体电压133";
+CM_ SG_ 2552316144 CellVolt_134 "单体电压134";
+CM_ SG_ 2552316144 CellVolt_135 "单体电压135";
+CM_ SG_ 2552316144 CellVolt_136 "单体电压136";
+CM_ BO_ 2552381680 "CAN2";
+CM_ SG_ 2552381680 CellVolt_137 "单体电压137";
+CM_ SG_ 2552381680 CellVolt_138 "单体电压138";
+CM_ SG_ 2552381680 CellVolt_139 "单体电压139";
+CM_ SG_ 2552381680 CellVolt_140 "单体电压140";
+CM_ BO_ 2552447216 "CAN2";
+CM_ SG_ 2552447216 CellVolt_141 "单体电压141";
+CM_ SG_ 2552447216 CellVolt_142 "单体电压142";
+CM_ SG_ 2552447216 CellVolt_143 "单体电压143";
+CM_ SG_ 2552447216 CellVolt_144 "单体电压144";
+CM_ BO_ 2552512752 "CAN2";
+CM_ SG_ 2552512752 CellVolt_145 "单体电压145";
+CM_ SG_ 2552512752 CellVolt_146 "单体电压146";
+CM_ SG_ 2552512752 CellVolt_147 "单体电压147";
+CM_ SG_ 2552512752 CellVolt_148 "单体电压148";
+CM_ BO_ 2552578288 "CAN2";
+CM_ SG_ 2552578288 CellVolt_149 "单体电压149";
+CM_ SG_ 2552578288 CellVolt_150 "单体电压150";
+CM_ SG_ 2552578288 CellVolt_151 "单体电压151";
+CM_ SG_ 2552578288 CellVolt_152 "单体电压152";
+CM_ BO_ 2552643824 "CAN2";
+CM_ SG_ 2552643824 CellVolt_153 "单体电压153";
+CM_ SG_ 2552643824 CellVolt_154 "单体电压154";
+CM_ SG_ 2552643824 CellVolt_155 "单体电压155";
+CM_ SG_ 2552643824 CellVolt_156 "单体电压156";
+CM_ BO_ 2554347760 "CAN2";
+CM_ SG_ 2554347760 CellTemp_001 "单体温度1";
+CM_ SG_ 2554347760 CellTemp_002 "单体温度2";
+CM_ SG_ 2554347760 CellTemp_003 "单体温度3";
+CM_ SG_ 2554347760 CellTemp_004 "单体温度4";
+CM_ SG_ 2554347760 CellTemp_005 "单体温度5";
+CM_ SG_ 2554347760 CellTemp_006 "单体温度6";
+CM_ SG_ 2554347760 CellTemp_007 "单体温度7";
+CM_ SG_ 2554347760 CellTemp_008 "单体温度8";
+CM_ BO_ 2554413296 "CAN2";
+CM_ SG_ 2554413296 CellTemp_009 "单体温度9";
+CM_ SG_ 2554413296 CellTemp_010 "单体温度10";
+CM_ SG_ 2554413296 CellTemp_011 "单体温度11";
+CM_ SG_ 2554413296 CellTemp_012 "单体温度12";
+CM_ SG_ 2554413296 CellTemp_013 "单体温度13";
+CM_ SG_ 2554413296 CellTemp_014 "单体温度14";
+CM_ SG_ 2554413296 CellTemp_015 "单体温度15";
+CM_ SG_ 2554413296 CellTemp_016 "单体温度16";
+CM_ BO_ 2554478832 "CAN2";
+CM_ SG_ 2554478832 CellTemp_017 "单体温度17";
+CM_ SG_ 2554478832 CellTemp_018 "单体温度18";
+CM_ SG_ 2554478832 CellTemp_019 "单体温度19";
+CM_ SG_ 2554478832 CellTemp_020 "单体温度20";
+CM_ SG_ 2554478832 CellTemp_021 "单体温度21";
+CM_ SG_ 2554478832 CellTemp_022 "单体温度22";
+CM_ SG_ 2554478832 CellTemp_023 "单体温度23";
+CM_ SG_ 2554478832 CellTemp_024 "单体温度24";
+CM_ BO_ 2554544368 "CAN2";
+CM_ SG_ 2554544368 CellTemp_025 "单体温度25";
+CM_ SG_ 2554544368 CellTemp_026 "单体温度26";
+CM_ SG_ 2554544368 CellTemp_027 "单体温度27";
+CM_ SG_ 2554544368 CellTemp_028 "单体温度28";
+CM_ SG_ 2554544368 CellTemp_029 "单体温度29";
+CM_ SG_ 2554544368 CellTemp_030 "单体温度30";
+CM_ SG_ 2554544368 CellTemp_031 "单体温度31";
+CM_ SG_ 2554544368 CellTemp_032 "单体温度32";
+CM_ BO_ 2554609904 "CAN2";
+CM_ SG_ 2554609904 CellTemp_033 "单体温度33";
+CM_ SG_ 2554609904 CellTemp_034 "单体温度34";
+CM_ SG_ 2554609904 CellTemp_035 "单体温度35";
+CM_ SG_ 2554609904 CellTemp_036 "单体温度36";
+CM_ SG_ 2554609904 CellTemp_037 "单体温度37";
+CM_ SG_ 2554609904 CellTemp_038 "单体温度38";
+CM_ SG_ 2554609904 CellTemp_039 "单体温度39";
+CM_ SG_ 2554609904 CellTemp_040 "单体温度40";
+CM_ BO_ 2554675440 "CAN2";
+CM_ SG_ 2554675440 CellTemp_041 "单体温度41";
+CM_ SG_ 2554675440 CellTemp_042 "单体温度42";
+CM_ SG_ 2554675440 CellTemp_043 "单体温度43";
+CM_ SG_ 2554675440 CellTemp_044 "单体温度44";
+CM_ SG_ 2554675440 CellTemp_045 "单体温度45";
+CM_ SG_ 2554675440 CellTemp_046 "单体温度46";
+CM_ SG_ 2554675440 CellTemp_047 "单体温度47";
+CM_ SG_ 2554675440 CellTemp_048 "单体温度48";
+CM_ BO_ 2554740976 "CAN2";
+CM_ SG_ 2554740976 CellTemp_049 "单体温度49";
+CM_ SG_ 2554740976 CellTemp_050 "单体温度50";
+CM_ SG_ 2554740976 CellTemp_051 "单体温度51";
+CM_ SG_ 2554740976 CellTemp_052 "单体温度52";
+CM_ SG_ 2554740976 CellTemp_053 "单体温度53";
+CM_ SG_ 2554740976 CellTemp_054 "单体温度54";
+CM_ SG_ 2554740976 CellTemp_055 "单体温度55";
+CM_ SG_ 2554740976 CellTemp_056 "单体温度56";
+CM_ BO_ 2554806512 "CAN2";
+CM_ SG_ 2554806512 CellTemp_057 "单体温度57";
+CM_ SG_ 2554806512 CellTemp_058 "单体温度58";
+CM_ SG_ 2554806512 CellTemp_059 "单体温度59";
+CM_ SG_ 2554806512 CellTemp_060 "单体温度60";
+CM_ SG_ 2554806512 CellTemp_061 "单体温度61";
+CM_ SG_ 2554806512 CellTemp_062 "单体温度62";
+CM_ SG_ 2554806512 CellTemp_063 "单体温度63";
+CM_ SG_ 2554806512 CellTemp_064 "单体温度64";
+CM_ BO_ 2554872048 "CAN2";
+CM_ SG_ 2554872048 CellTemp_065 "单体温度65";
+CM_ SG_ 2554872048 CellTemp_066 "单体温度66";
+CM_ SG_ 2554872048 CellTemp_067 "单体温度67";
+CM_ SG_ 2554872048 CellTemp_068 "单体温度68";
+CM_ SG_ 2554872048 CellTemp_069 "单体温度69";
+CM_ SG_ 2554872048 CellTemp_070 "单体温度70";
+CM_ SG_ 2554872048 CellTemp_071 "单体温度71";
+CM_ SG_ 2554872048 CellTemp_072 "单体温度72";
+CM_ BO_ 2554937584 "CAN2";
+CM_ SG_ 2554937584 CellTemp_073 "单体温度73";
+CM_ SG_ 2554937584 CellTemp_074 "单体温度74";
+CM_ SG_ 2554937584 CellTemp_075 "单体温度75";
+CM_ SG_ 2554937584 CellTemp_076 "单体温度76";
+CM_ SG_ 2554937584 CellTemp_077 "单体温度77";
+CM_ SG_ 2554937584 CellTemp_078 "单体温度78";
+CM_ SG_ 2554937584 CellTemp_079 "单体温度79";
+CM_ SG_ 2554937584 CellTemp_080 "单体温度80";
+CM_ BO_ 2555003120 "CAN2";
+CM_ SG_ 2555003120 CellTemp_081 "单体温度81";
+CM_ SG_ 2555003120 CellTemp_082 "单体温度82";
+CM_ SG_ 2555003120 CellTemp_083 "单体温度83";
+CM_ SG_ 2555003120 CellTemp_084 "单体温度84";
+CM_ SG_ 2555003120 CellTemp_085 "单体温度85";
+CM_ SG_ 2555003120 CellTemp_086 "单体温度86";
+CM_ SG_ 2555003120 CellTemp_087 "单体温度87";
+CM_ SG_ 2555003120 CellTemp_088 "单体温度88";
+BA_DEF_ "DBName" STRING;
+BA_DEF_ "BusType" STRING;
+BA_DEF_ BO_ "NmMessage" ENUM  "No","Yes";
+BA_DEF_ BO_ "DiagState" ENUM  "No","Yes";
+BA_DEF_ BO_ "DiagRequest" ENUM  "No","Yes";
+BA_DEF_ BO_ "DiagResponse" ENUM  "No","Yes";
+BA_DEF_ BO_ "VFrameFormat" ENUM "StandardCAN","ExtendedCAN","reserved","J1939PG","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","StandardCAN_FD","ExtendedCAN_FD";
+BA_DEF_ BO_ "GenMsgSendType" ENUM "Cyclic","Event","CyclicIfActive","SpontanWithDelay","CyclicAndSpontan","CyclicAndSpontanWithDelay";
+BA_DEF_ BO_ "GenMsgCycleTime" INT 0 0;
+BA_DEF_ BO_ "GenMsgDelayTime" INT 0 0;
+BA_DEF_ SG_ "GenSigStartValue" FLOAT 0 0;
+BA_DEF_DEF_ "DBName" "Cluster";
+BA_DEF_DEF_ "BusType" "CAN";
+BA_DEF_DEF_ "NmMessage" "No";
+BA_DEF_DEF_ "DiagState" "No";
+BA_DEF_DEF_ "DiagRequest" "No";
+BA_DEF_DEF_ "DiagResponse" "No";
+BA_DEF_DEF_ "VFrameFormat" "StandardCAN";
+BA_DEF_DEF_ "GenMsgSendType" "Cyclic";
+BA_DEF_DEF_ "GenMsgCycleTime" 0;
+BA_DEF_DEF_ "GenMsgDelayTime" 0;
+BA_DEF_DEF_ "GenSigStartValue" 0;
+BA_ "VFrameFormat" BO_ 2550263872 1;
+BA_ "GenMsgSendType" BO_ 2550263872 0;
+BA_ "GenMsgCycleTime" BO_ 2550263872 100;
+BA_ "VFrameFormat" BO_ 2556444912 1;
+BA_ "GenMsgSendType" BO_ 2556444912 0;
+BA_ "GenMsgCycleTime" BO_ 2556444912 100;
+BA_ "VFrameFormat" BO_ 2556510448 1;
+BA_ "GenMsgSendType" BO_ 2556510448 0;
+BA_ "GenMsgCycleTime" BO_ 2556510448 200;
+BA_ "VFrameFormat" BO_ 2556575984 1;
+BA_ "GenMsgSendType" BO_ 2556575984 0;
+BA_ "GenMsgCycleTime" BO_ 2556575984 500;
+BA_ "VFrameFormat" BO_ 2556641520 1;
+BA_ "GenMsgSendType" BO_ 2556641520 0;
+BA_ "GenMsgCycleTime" BO_ 2556641520 50;
+BA_ "VFrameFormat" BO_ 2556707056 1;
+BA_ "GenMsgSendType" BO_ 2556707056 0;
+BA_ "GenMsgCycleTime" BO_ 2556707056 200;
+BA_ "VFrameFormat" BO_ 2556772592 1;
+BA_ "GenMsgSendType" BO_ 2556772592 0;
+BA_ "GenMsgCycleTime" BO_ 2556772592 200;
+BA_ "VFrameFormat" BO_ 2556838128 1;
+BA_ "GenMsgSendType" BO_ 2556838128 0;
+BA_ "GenMsgCycleTime" BO_ 2556838128 1000;
+BA_ "VFrameFormat" BO_ 2556903664 1;
+BA_ "GenMsgSendType" BO_ 2556903664 0;
+BA_ "GenMsgCycleTime" BO_ 2556903664 1000;
+BA_ "VFrameFormat" BO_ 2556969200 1;
+BA_ "GenMsgSendType" BO_ 2556969200 0;
+BA_ "GenMsgCycleTime" BO_ 2556969200 250;
+BA_ "VFrameFormat" BO_ 2557100272 1;
+BA_ "GenMsgSendType" BO_ 2557100272 0;
+BA_ "GenMsgCycleTime" BO_ 2557100272 200;
+BA_ "VFrameFormat" BO_ 2550153456 1;
+BA_ "GenMsgSendType" BO_ 2550153456 0;
+BA_ "GenMsgCycleTime" BO_ 2550153456 500;
+BA_ "VFrameFormat" BO_ 2550218992 1;
+BA_ "GenMsgSendType" BO_ 2550218992 0;
+BA_ "GenMsgCycleTime" BO_ 2550218992 500;
+BA_ "VFrameFormat" BO_ 2550284528 1;
+BA_ "GenMsgSendType" BO_ 2550284528 0;
+BA_ "GenMsgCycleTime" BO_ 2550284528 500;
+BA_ "VFrameFormat" BO_ 2550350064 1;
+BA_ "GenMsgSendType" BO_ 2550350064 0;
+BA_ "GenMsgCycleTime" BO_ 2550350064 500;
+BA_ "VFrameFormat" BO_ 2550415600 1;
+BA_ "GenMsgSendType" BO_ 2550415600 0;
+BA_ "GenMsgCycleTime" BO_ 2550415600 500;
+BA_ "VFrameFormat" BO_ 2550481136 1;
+BA_ "GenMsgSendType" BO_ 2550481136 0;
+BA_ "GenMsgCycleTime" BO_ 2550481136 500;
+BA_ "VFrameFormat" BO_ 2550546672 1;
+BA_ "GenMsgSendType" BO_ 2550546672 0;
+BA_ "GenMsgCycleTime" BO_ 2550546672 500;
+BA_ "VFrameFormat" BO_ 2550612208 1;
+BA_ "GenMsgSendType" BO_ 2550612208 0;
+BA_ "GenMsgCycleTime" BO_ 2550612208 500;
+BA_ "VFrameFormat" BO_ 2550677744 1;
+BA_ "GenMsgSendType" BO_ 2550677744 0;
+BA_ "GenMsgCycleTime" BO_ 2550677744 500;
+BA_ "VFrameFormat" BO_ 2550743280 1;
+BA_ "GenMsgSendType" BO_ 2550743280 0;
+BA_ "GenMsgCycleTime" BO_ 2550743280 500;
+BA_ "VFrameFormat" BO_ 2550808816 1;
+BA_ "GenMsgSendType" BO_ 2550808816 0;
+BA_ "GenMsgCycleTime" BO_ 2550808816 500;
+BA_ "VFrameFormat" BO_ 2550874352 1;
+BA_ "GenMsgSendType" BO_ 2550874352 0;
+BA_ "GenMsgCycleTime" BO_ 2550874352 500;
+BA_ "VFrameFormat" BO_ 2550939888 1;
+BA_ "GenMsgSendType" BO_ 2550939888 0;
+BA_ "GenMsgCycleTime" BO_ 2550939888 500;
+BA_ "VFrameFormat" BO_ 2551005424 1;
+BA_ "GenMsgSendType" BO_ 2551005424 0;
+BA_ "GenMsgCycleTime" BO_ 2551005424 500;
+BA_ "VFrameFormat" BO_ 2551070960 1;
+BA_ "GenMsgSendType" BO_ 2551070960 0;
+BA_ "GenMsgCycleTime" BO_ 2551070960 500;
+BA_ "VFrameFormat" BO_ 2551136496 1;
+BA_ "GenMsgSendType" BO_ 2551136496 0;
+BA_ "GenMsgCycleTime" BO_ 2551136496 500;
+BA_ "VFrameFormat" BO_ 2551202032 1;
+BA_ "GenMsgSendType" BO_ 2551202032 0;
+BA_ "GenMsgCycleTime" BO_ 2551202032 500;
+BA_ "VFrameFormat" BO_ 2551267568 1;
+BA_ "GenMsgSendType" BO_ 2551267568 0;
+BA_ "GenMsgCycleTime" BO_ 2551267568 500;
+BA_ "VFrameFormat" BO_ 2551333104 1;
+BA_ "GenMsgSendType" BO_ 2551333104 0;
+BA_ "GenMsgCycleTime" BO_ 2551333104 500;
+BA_ "VFrameFormat" BO_ 2551398640 1;
+BA_ "GenMsgSendType" BO_ 2551398640 0;
+BA_ "GenMsgCycleTime" BO_ 2551398640 500;
+BA_ "VFrameFormat" BO_ 2551464176 1;
+BA_ "GenMsgSendType" BO_ 2551464176 0;
+BA_ "GenMsgCycleTime" BO_ 2551464176 500;
+BA_ "VFrameFormat" BO_ 2551529712 1;
+BA_ "GenMsgSendType" BO_ 2551529712 0;
+BA_ "GenMsgCycleTime" BO_ 2551529712 500;
+BA_ "VFrameFormat" BO_ 2551595248 1;
+BA_ "GenMsgSendType" BO_ 2551595248 0;
+BA_ "GenMsgCycleTime" BO_ 2551595248 500;
+BA_ "VFrameFormat" BO_ 2551660784 1;
+BA_ "GenMsgSendType" BO_ 2551660784 0;
+BA_ "GenMsgCycleTime" BO_ 2551660784 500;
+BA_ "VFrameFormat" BO_ 2551726320 1;
+BA_ "GenMsgSendType" BO_ 2551726320 0;
+BA_ "GenMsgCycleTime" BO_ 2551726320 500;
+BA_ "VFrameFormat" BO_ 2551791856 1;
+BA_ "GenMsgSendType" BO_ 2551791856 0;
+BA_ "GenMsgCycleTime" BO_ 2551791856 500;
+BA_ "VFrameFormat" BO_ 2551857392 1;
+BA_ "GenMsgSendType" BO_ 2551857392 0;
+BA_ "GenMsgCycleTime" BO_ 2551857392 500;
+BA_ "VFrameFormat" BO_ 2551922928 1;
+BA_ "GenMsgSendType" BO_ 2551922928 0;
+BA_ "GenMsgCycleTime" BO_ 2551922928 500;
+BA_ "VFrameFormat" BO_ 2551988464 1;
+BA_ "GenMsgSendType" BO_ 2551988464 0;
+BA_ "GenMsgCycleTime" BO_ 2551988464 500;
+BA_ "VFrameFormat" BO_ 2552054000 1;
+BA_ "GenMsgSendType" BO_ 2552054000 0;
+BA_ "GenMsgCycleTime" BO_ 2552054000 500;
+BA_ "VFrameFormat" BO_ 2552119536 1;
+BA_ "GenMsgSendType" BO_ 2552119536 0;
+BA_ "GenMsgCycleTime" BO_ 2552119536 500;
+BA_ "VFrameFormat" BO_ 2552185072 1;
+BA_ "GenMsgSendType" BO_ 2552185072 0;
+BA_ "GenMsgCycleTime" BO_ 2552185072 500;
+BA_ "VFrameFormat" BO_ 2552250608 1;
+BA_ "GenMsgSendType" BO_ 2552250608 0;
+BA_ "GenMsgCycleTime" BO_ 2552250608 500;
+BA_ "VFrameFormat" BO_ 2552316144 1;
+BA_ "GenMsgSendType" BO_ 2552316144 0;
+BA_ "GenMsgCycleTime" BO_ 2552316144 500;
+BA_ "VFrameFormat" BO_ 2552381680 1;
+BA_ "GenMsgSendType" BO_ 2552381680 0;
+BA_ "GenMsgCycleTime" BO_ 2552381680 500;
+BA_ "VFrameFormat" BO_ 2552447216 1;
+BA_ "GenMsgSendType" BO_ 2552447216 0;
+BA_ "GenMsgCycleTime" BO_ 2552447216 500;
+BA_ "VFrameFormat" BO_ 2552512752 1;
+BA_ "GenMsgSendType" BO_ 2552512752 0;
+BA_ "GenMsgCycleTime" BO_ 2552512752 500;
+BA_ "VFrameFormat" BO_ 2552578288 1;
+BA_ "GenMsgSendType" BO_ 2552578288 0;
+BA_ "GenMsgCycleTime" BO_ 2552578288 500;
+BA_ "VFrameFormat" BO_ 2552643824 1;
+BA_ "GenMsgSendType" BO_ 2552643824 0;
+BA_ "GenMsgCycleTime" BO_ 2552643824 500;
+BA_ "VFrameFormat" BO_ 2554347760 1;
+BA_ "GenMsgSendType" BO_ 2554347760 0;
+BA_ "GenMsgCycleTime" BO_ 2554347760 500;
+BA_ "VFrameFormat" BO_ 2554413296 1;
+BA_ "GenMsgSendType" BO_ 2554413296 0;
+BA_ "GenMsgCycleTime" BO_ 2554413296 500;
+BA_ "VFrameFormat" BO_ 2554478832 1;
+BA_ "GenMsgSendType" BO_ 2554478832 0;
+BA_ "GenMsgCycleTime" BO_ 2554478832 500;
+BA_ "VFrameFormat" BO_ 2554544368 1;
+BA_ "GenMsgSendType" BO_ 2554544368 0;
+BA_ "GenMsgCycleTime" BO_ 2554544368 500;
+BA_ "VFrameFormat" BO_ 2554609904 1;
+BA_ "GenMsgSendType" BO_ 2554609904 0;
+BA_ "GenMsgCycleTime" BO_ 2554609904 500;
+BA_ "VFrameFormat" BO_ 2554675440 1;
+BA_ "GenMsgSendType" BO_ 2554675440 0;
+BA_ "GenMsgCycleTime" BO_ 2554675440 500;
+BA_ "VFrameFormat" BO_ 2554740976 1;
+BA_ "GenMsgSendType" BO_ 2554740976 0;
+BA_ "GenMsgCycleTime" BO_ 2554740976 500;
+BA_ "VFrameFormat" BO_ 2554806512 1;
+BA_ "GenMsgSendType" BO_ 2554806512 0;
+BA_ "GenMsgCycleTime" BO_ 2554806512 500;
+BA_ "VFrameFormat" BO_ 2554872048 1;
+BA_ "GenMsgSendType" BO_ 2554872048 0;
+BA_ "GenMsgCycleTime" BO_ 2554872048 500;
+BA_ "VFrameFormat" BO_ 2554937584 1;
+BA_ "GenMsgSendType" BO_ 2554937584 0;
+BA_ "GenMsgCycleTime" BO_ 2554937584 500;
+BA_ "VFrameFormat" BO_ 2555003120 1;
+BA_ "GenMsgSendType" BO_ 2555003120 0;
+BA_ "GenMsgCycleTime" BO_ 2555003120 500;
+BA_ "GenSigStartValue" SG_ 2550263872 Ems_PowerOnOffCmd 0;
+BA_ "GenSigStartValue" SG_ 2550263872 Ems_ChargeAllowState 0;
+BA_ "GenSigStartValue" SG_ 2556444912 SysVoltage 0;
+BA_ "GenSigStartValue" SG_ 2556444912 SysCurrent 32000;
+BA_ "GenSigStartValue" SG_ 2556444912 SOC 0;
+BA_ "GenSigStartValue" SG_ 2556444912 SOH 0;
+BA_ "GenSigStartValue" SG_ 2556444912 FaultGrade 0;
+BA_ "GenSigStartValue" SG_ 2556444912 BmsWorkState 0;
+BA_ "GenSigStartValue" SG_ 2556444912 Life_186040F0 0;
+BA_ "GenSigStartValue" SG_ 2556510448 MaxCellVolt 0;
+BA_ "GenSigStartValue" SG_ 2556510448 MinCellVolt 0;
+BA_ "GenSigStartValue" SG_ 2556510448 MaxCellVoltBsuNum 0;
+BA_ "GenSigStartValue" SG_ 2556510448 MaxCellVoltCellNum 0;
+BA_ "GenSigStartValue" SG_ 2556510448 MinCellVoltBsuNum 0;
+BA_ "GenSigStartValue" SG_ 2556510448 MinCellVoltCellNum 0;
+BA_ "GenSigStartValue" SG_ 2556575984 MaxCellTemp 40;
+BA_ "GenSigStartValue" SG_ 2556575984 MinCellTemp 40;
+BA_ "GenSigStartValue" SG_ 2556575984 MaxCellTempBsuNum 0;
+BA_ "GenSigStartValue" SG_ 2556575984 MaxCellTempCellNum 0;
+BA_ "GenSigStartValue" SG_ 2556575984 MinCellTempBsuNum 0;
+BA_ "GenSigStartValue" SG_ 2556575984 MinCellTempCellNum 0;
+BA_ "GenSigStartValue" SG_ 2556575984 DI1State 0;
+BA_ "GenSigStartValue" SG_ 2556575984 DI2State 0;
+BA_ "GenSigStartValue" SG_ 2556575984 DI3State 0;
+BA_ "GenSigStartValue" SG_ 2556575984 DI4State 0;
+BA_ "GenSigStartValue" SG_ 2556575984 DI5State 0;
+BA_ "GenSigStartValue" SG_ 2556575984 DI6State 0;
+BA_ "GenSigStartValue" SG_ 2556575984 DI7State 0;
+BA_ "GenSigStartValue" SG_ 2556575984 DI8State 0;
+BA_ "GenSigStartValue" SG_ 2556575984 Relay1State 0;
+BA_ "GenSigStartValue" SG_ 2556575984 Relay2State 0;
+BA_ "GenSigStartValue" SG_ 2556575984 Relay3State 0;
+BA_ "GenSigStartValue" SG_ 2556575984 Relay4State 0;
+BA_ "GenSigStartValue" SG_ 2556575984 Relay5State 0;
+BA_ "GenSigStartValue" SG_ 2556575984 Relay6State 0;
+BA_ "GenSigStartValue" SG_ 2556575984 Relay7State 0;
+BA_ "GenSigStartValue" SG_ 2556575984 Relay8State 0;
+BA_ "GenSigStartValue" SG_ 2556641520 PosRelayState 0;
+BA_ "GenSigStartValue" SG_ 2556641520 NegRelayState 0;
+BA_ "GenSigStartValue" SG_ 2556641520 PreRelayState 0;
+BA_ "GenSigStartValue" SG_ 2556641520 HeatRelayState 0;
+BA_ "GenSigStartValue" SG_ 2556641520 ChgRelayRequest 0;
+BA_ "GenSigStartValue" SG_ 2556641520 CoolingCtl 0;
+BA_ "GenSigStartValue" SG_ 2556641520 HeatingCtl 0;
+BA_ "GenSigStartValue" SG_ 2556641520 ChgONCC 0;
+BA_ "GenSigStartValue" SG_ 2556641520 ChgOFFCC2 0;
+BA_ "GenSigStartValue" SG_ 2556641520 ChgComm 0;
+BA_ "GenSigStartValue" SG_ 2556641520 AccWakeState 0;
+BA_ "GenSigStartValue" SG_ 2556641520 ChgWakeState 0;
+BA_ "GenSigStartValue" SG_ 2556641520 ChgState 0;
+BA_ "GenSigStartValue" SG_ 2556641520 BmsRunStatus 0;
+BA_ "GenSigStartValue" SG_ 2556641520 PosReg 0;
+BA_ "GenSigStartValue" SG_ 2556641520 NegReg 0;
+BA_ "GenSigStartValue" SG_ 2556707056 MaxChgCurrent 0;
+BA_ "GenSigStartValue" SG_ 2556707056 MaxDisChgCurrent 0;
+BA_ "GenSigStartValue" SG_ 2556707056 MaxChgPower 0;
+BA_ "GenSigStartValue" SG_ 2556707056 MaxDisChgPower 0;
+BA_ "GenSigStartValue" SG_ 2556772592 Cell_OV 0;
+BA_ "GenSigStartValue" SG_ 2556772592 Cell_UV 0;
+BA_ "GenSigStartValue" SG_ 2556772592 Cell_OT 0;
+BA_ "GenSigStartValue" SG_ 2556772592 Cell_UT 0;
+BA_ "GenSigStartValue" SG_ 2556772592 Sys_OV 0;
+BA_ "GenSigStartValue" SG_ 2556772592 Sys_UV 0;
+BA_ "GenSigStartValue" SG_ 2556772592 Chg_OC 0;
+BA_ "GenSigStartValue" SG_ 2556772592 DisChg_OC 0;
+BA_ "GenSigStartValue" SG_ 2556772592 Bsu_OffLine 0;
+BA_ "GenSigStartValue" SG_ 2556772592 Leak_OC 0;
+BA_ "GenSigStartValue" SG_ 2556772592 Cell_Volt_Diff 0;
+BA_ "GenSigStartValue" SG_ 2556772592 Cell_Temp_Diff 0;
+BA_ "GenSigStartValue" SG_ 2556772592 High_Volt_Abnormal 0;
+BA_ "GenSigStartValue" SG_ 2556772592 Hall_Break 0;
+BA_ "GenSigStartValue" SG_ 2556772592 Batt_Err_Protect 0;
+BA_ "GenSigStartValue" SG_ 2556772592 Cell_Volt_Break 0;
+BA_ "GenSigStartValue" SG_ 2556772592 Cell_Temp_Break 0;
+BA_ "GenSigStartValue" SG_ 2556772592 PreCharge_Fail 0;
+BA_ "GenSigStartValue" SG_ 2556772592 Relay_Err 0;
+BA_ "GenSigStartValue" SG_ 2556772592 Bsu_Bal_Err 0;
+BA_ "GenSigStartValue" SG_ 2556838128 Total_DisChg_Energy 0;
+BA_ "GenSigStartValue" SG_ 2556838128 Total_Chg_Energy 0;
+BA_ "GenSigStartValue" SG_ 2556903664 Once_Chg_Energy 0;
+BA_ "GenSigStartValue" SG_ 2556903664 Once_DisChg_Energy 0;
+BA_ "GenSigStartValue" SG_ 2556903664 Rest_Chg_Energy 0;
+BA_ "GenSigStartValue" SG_ 2556903664 Rest_DisChg_Energy 0;
+BA_ "GenSigStartValue" SG_ 2556969200 Chg_Connect_Temp1 0;
+BA_ "GenSigStartValue" SG_ 2556969200 Chg_Connect_Temp2 0;
+BA_ "GenSigStartValue" SG_ 2556969200 Chg_Connect_Temp3 0;
+BA_ "GenSigStartValue" SG_ 2556969200 Chg_Connect_Temp4 0;
+BA_ "GenSigStartValue" SG_ 2557100272 PreVoltage 0;
+BA_ "GenSigStartValue" SG_ 2557100272 FastChgVoltage 0;
+BA_ "GenSigStartValue" SG_ 2557100272 SlowChgVoltage 0;
+BA_ "GenSigStartValue" SG_ 2557100272 BusVoltage 0;
+BA_ "GenSigStartValue" SG_ 2550153456 CellVolt_001 0;
+BA_ "GenSigStartValue" SG_ 2550153456 CellVolt_002 0;
+BA_ "GenSigStartValue" SG_ 2550153456 CellVolt_003 0;
+BA_ "GenSigStartValue" SG_ 2550153456 CellVolt_004 0;
+BA_ "GenSigStartValue" SG_ 2550218992 CellVolt_005 0;
+BA_ "GenSigStartValue" SG_ 2550218992 CellVolt_006 0;
+BA_ "GenSigStartValue" SG_ 2550218992 CellVolt_007 0;
+BA_ "GenSigStartValue" SG_ 2550218992 CellVolt_008 0;
+BA_ "GenSigStartValue" SG_ 2550284528 CellVolt_009 0;
+BA_ "GenSigStartValue" SG_ 2550284528 CellVolt_010 0;
+BA_ "GenSigStartValue" SG_ 2550284528 CellVolt_011 0;
+BA_ "GenSigStartValue" SG_ 2550284528 CellVolt_012 0;
+BA_ "GenSigStartValue" SG_ 2550350064 CellVolt_013 0;
+BA_ "GenSigStartValue" SG_ 2550350064 CellVolt_014 0;
+BA_ "GenSigStartValue" SG_ 2550350064 CellVolt_015 0;
+BA_ "GenSigStartValue" SG_ 2550350064 CellVolt_016 0;
+BA_ "GenSigStartValue" SG_ 2550415600 CellVolt_017 0;
+BA_ "GenSigStartValue" SG_ 2550415600 CellVolt_018 0;
+BA_ "GenSigStartValue" SG_ 2550415600 CellVolt_019 0;
+BA_ "GenSigStartValue" SG_ 2550415600 CellVolt_020 0;
+BA_ "GenSigStartValue" SG_ 2550481136 CellVolt_021 0;
+BA_ "GenSigStartValue" SG_ 2550481136 CellVolt_022 0;
+BA_ "GenSigStartValue" SG_ 2550481136 CellVolt_023 0;
+BA_ "GenSigStartValue" SG_ 2550481136 CellVolt_024 0;
+BA_ "GenSigStartValue" SG_ 2550546672 CellVolt_025 0;
+BA_ "GenSigStartValue" SG_ 2550546672 CellVolt_026 0;
+BA_ "GenSigStartValue" SG_ 2550546672 CellVolt_027 0;
+BA_ "GenSigStartValue" SG_ 2550546672 CellVolt_028 0;
+BA_ "GenSigStartValue" SG_ 2550612208 CellVolt_029 0;
+BA_ "GenSigStartValue" SG_ 2550612208 CellVolt_030 0;
+BA_ "GenSigStartValue" SG_ 2550612208 CellVolt_031 0;
+BA_ "GenSigStartValue" SG_ 2550612208 CellVolt_032 0;
+BA_ "GenSigStartValue" SG_ 2550677744 CellVolt_033 0;
+BA_ "GenSigStartValue" SG_ 2550677744 CellVolt_034 0;
+BA_ "GenSigStartValue" SG_ 2550677744 CellVolt_035 0;
+BA_ "GenSigStartValue" SG_ 2550677744 CellVolt_036 0;
+BA_ "GenSigStartValue" SG_ 2550743280 CellVolt_037 0;
+BA_ "GenSigStartValue" SG_ 2550743280 CellVolt_038 0;
+BA_ "GenSigStartValue" SG_ 2550743280 CellVolt_039 0;
+BA_ "GenSigStartValue" SG_ 2550743280 CellVolt_040 0;
+BA_ "GenSigStartValue" SG_ 2550808816 CellVolt_041 0;
+BA_ "GenSigStartValue" SG_ 2550808816 CellVolt_042 0;
+BA_ "GenSigStartValue" SG_ 2550808816 CellVolt_043 0;
+BA_ "GenSigStartValue" SG_ 2550808816 CellVolt_044 0;
+BA_ "GenSigStartValue" SG_ 2550874352 CellVolt_045 0;
+BA_ "GenSigStartValue" SG_ 2550874352 CellVolt_046 0;
+BA_ "GenSigStartValue" SG_ 2550874352 CellVolt_047 0;
+BA_ "GenSigStartValue" SG_ 2550874352 CellVolt_048 0;
+BA_ "GenSigStartValue" SG_ 2550939888 CellVolt_049 0;
+BA_ "GenSigStartValue" SG_ 2550939888 CellVolt_050 0;
+BA_ "GenSigStartValue" SG_ 2550939888 CellVolt_051 0;
+BA_ "GenSigStartValue" SG_ 2550939888 CellVolt_052 0;
+BA_ "GenSigStartValue" SG_ 2551005424 CellVolt_053 0;
+BA_ "GenSigStartValue" SG_ 2551005424 CellVolt_054 0;
+BA_ "GenSigStartValue" SG_ 2551005424 CellVolt_055 0;
+BA_ "GenSigStartValue" SG_ 2551005424 CellVolt_056 0;
+BA_ "GenSigStartValue" SG_ 2551070960 CellVolt_057 0;
+BA_ "GenSigStartValue" SG_ 2551070960 CellVolt_058 0;
+BA_ "GenSigStartValue" SG_ 2551070960 CellVolt_059 0;
+BA_ "GenSigStartValue" SG_ 2551070960 CellVolt_060 0;
+BA_ "GenSigStartValue" SG_ 2551136496 CellVolt_061 0;
+BA_ "GenSigStartValue" SG_ 2551136496 CellVolt_062 0;
+BA_ "GenSigStartValue" SG_ 2551136496 CellVolt_063 0;
+BA_ "GenSigStartValue" SG_ 2551136496 CellVolt_064 0;
+BA_ "GenSigStartValue" SG_ 2551202032 CellVolt_065 0;
+BA_ "GenSigStartValue" SG_ 2551202032 CellVolt_066 0;
+BA_ "GenSigStartValue" SG_ 2551202032 CellVolt_067 0;
+BA_ "GenSigStartValue" SG_ 2551202032 CellVolt_068 0;
+BA_ "GenSigStartValue" SG_ 2551267568 CellVolt_069 0;
+BA_ "GenSigStartValue" SG_ 2551267568 CellVolt_070 0;
+BA_ "GenSigStartValue" SG_ 2551267568 CellVolt_071 0;
+BA_ "GenSigStartValue" SG_ 2551267568 CellVolt_072 0;
+BA_ "GenSigStartValue" SG_ 2551333104 CellVolt_073 0;
+BA_ "GenSigStartValue" SG_ 2551333104 CellVolt_074 0;
+BA_ "GenSigStartValue" SG_ 2551333104 CellVolt_075 0;
+BA_ "GenSigStartValue" SG_ 2551333104 CellVolt_076 0;
+BA_ "GenSigStartValue" SG_ 2551398640 CellVolt_077 0;
+BA_ "GenSigStartValue" SG_ 2551398640 CellVolt_078 0;
+BA_ "GenSigStartValue" SG_ 2551398640 CellVolt_079 0;
+BA_ "GenSigStartValue" SG_ 2551398640 CellVolt_080 0;
+BA_ "GenSigStartValue" SG_ 2551464176 CellVolt_081 0;
+BA_ "GenSigStartValue" SG_ 2551464176 CellVolt_082 0;
+BA_ "GenSigStartValue" SG_ 2551464176 CellVolt_083 0;
+BA_ "GenSigStartValue" SG_ 2551464176 CellVolt_084 0;
+BA_ "GenSigStartValue" SG_ 2551529712 CellVolt_085 0;
+BA_ "GenSigStartValue" SG_ 2551529712 CellVolt_086 0;
+BA_ "GenSigStartValue" SG_ 2551529712 CellVolt_087 0;
+BA_ "GenSigStartValue" SG_ 2551529712 CellVolt_088 0;
+BA_ "GenSigStartValue" SG_ 2551595248 CellVolt_089 0;
+BA_ "GenSigStartValue" SG_ 2551595248 CellVolt_090 0;
+BA_ "GenSigStartValue" SG_ 2551595248 CellVolt_091 0;
+BA_ "GenSigStartValue" SG_ 2551595248 CellVolt_092 0;
+BA_ "GenSigStartValue" SG_ 2551660784 CellVolt_093 0;
+BA_ "GenSigStartValue" SG_ 2551660784 CellVolt_094 0;
+BA_ "GenSigStartValue" SG_ 2551660784 CellVolt_095 0;
+BA_ "GenSigStartValue" SG_ 2551660784 CellVolt_096 0;
+BA_ "GenSigStartValue" SG_ 2551726320 CellVolt_097 0;
+BA_ "GenSigStartValue" SG_ 2551726320 CellVolt_098 0;
+BA_ "GenSigStartValue" SG_ 2551726320 CellVolt_099 0;
+BA_ "GenSigStartValue" SG_ 2551726320 CellVolt_100 0;
+BA_ "GenSigStartValue" SG_ 2551791856 CellVolt_101 0;
+BA_ "GenSigStartValue" SG_ 2551791856 CellVolt_102 0;
+BA_ "GenSigStartValue" SG_ 2551791856 CellVolt_103 0;
+BA_ "GenSigStartValue" SG_ 2551791856 CellVolt_104 0;
+BA_ "GenSigStartValue" SG_ 2551857392 CellVolt_105 0;
+BA_ "GenSigStartValue" SG_ 2551857392 CellVolt_106 0;
+BA_ "GenSigStartValue" SG_ 2551857392 CellVolt_107 0;
+BA_ "GenSigStartValue" SG_ 2551857392 CellVolt_108 0;
+BA_ "GenSigStartValue" SG_ 2551922928 CellVolt_109 0;
+BA_ "GenSigStartValue" SG_ 2551922928 CellVolt_110 0;
+BA_ "GenSigStartValue" SG_ 2551922928 CellVolt_111 0;
+BA_ "GenSigStartValue" SG_ 2551922928 CellVolt_112 0;
+BA_ "GenSigStartValue" SG_ 2551988464 CellVolt_113 0;
+BA_ "GenSigStartValue" SG_ 2551988464 CellVolt_114 0;
+BA_ "GenSigStartValue" SG_ 2551988464 CellVolt_115 0;
+BA_ "GenSigStartValue" SG_ 2551988464 CellVolt_116 0;
+BA_ "GenSigStartValue" SG_ 2552054000 CellVolt_117 0;
+BA_ "GenSigStartValue" SG_ 2552054000 CellVolt_118 0;
+BA_ "GenSigStartValue" SG_ 2552054000 CellVolt_119 0;
+BA_ "GenSigStartValue" SG_ 2552054000 CellVolt_120 0;
+BA_ "GenSigStartValue" SG_ 2552119536 CellVolt_121 0;
+BA_ "GenSigStartValue" SG_ 2552119536 CellVolt_122 0;
+BA_ "GenSigStartValue" SG_ 2552119536 CellVolt_123 0;
+BA_ "GenSigStartValue" SG_ 2552119536 CellVolt_124 0;
+BA_ "GenSigStartValue" SG_ 2552185072 CellVolt_125 0;
+BA_ "GenSigStartValue" SG_ 2552185072 CellVolt_126 0;
+BA_ "GenSigStartValue" SG_ 2552185072 CellVolt_127 0;
+BA_ "GenSigStartValue" SG_ 2552185072 CellVolt_128 0;
+BA_ "GenSigStartValue" SG_ 2552250608 CellVolt_129 0;
+BA_ "GenSigStartValue" SG_ 2552250608 CellVolt_130 0;
+BA_ "GenSigStartValue" SG_ 2552250608 CellVolt_131 0;
+BA_ "GenSigStartValue" SG_ 2552250608 CellVolt_132 0;
+BA_ "GenSigStartValue" SG_ 2552316144 CellVolt_133 0;
+BA_ "GenSigStartValue" SG_ 2552316144 CellVolt_134 0;
+BA_ "GenSigStartValue" SG_ 2552316144 CellVolt_135 0;
+BA_ "GenSigStartValue" SG_ 2552316144 CellVolt_136 0;
+BA_ "GenSigStartValue" SG_ 2552381680 CellVolt_137 0;
+BA_ "GenSigStartValue" SG_ 2552381680 CellVolt_138 0;
+BA_ "GenSigStartValue" SG_ 2552381680 CellVolt_139 0;
+BA_ "GenSigStartValue" SG_ 2552381680 CellVolt_140 0;
+BA_ "GenSigStartValue" SG_ 2552447216 CellVolt_141 0;
+BA_ "GenSigStartValue" SG_ 2552447216 CellVolt_142 0;
+BA_ "GenSigStartValue" SG_ 2552447216 CellVolt_143 0;
+BA_ "GenSigStartValue" SG_ 2552447216 CellVolt_144 0;
+BA_ "GenSigStartValue" SG_ 2552512752 CellVolt_145 0;
+BA_ "GenSigStartValue" SG_ 2552512752 CellVolt_146 0;
+BA_ "GenSigStartValue" SG_ 2552512752 CellVolt_147 0;
+BA_ "GenSigStartValue" SG_ 2552512752 CellVolt_148 0;
+BA_ "GenSigStartValue" SG_ 2552578288 CellVolt_149 0;
+BA_ "GenSigStartValue" SG_ 2552578288 CellVolt_150 0;
+BA_ "GenSigStartValue" SG_ 2552578288 CellVolt_151 0;
+BA_ "GenSigStartValue" SG_ 2552578288 CellVolt_152 0;
+BA_ "GenSigStartValue" SG_ 2552643824 CellVolt_153 0;
+BA_ "GenSigStartValue" SG_ 2552643824 CellVolt_154 0;
+BA_ "GenSigStartValue" SG_ 2552643824 CellVolt_155 0;
+BA_ "GenSigStartValue" SG_ 2552643824 CellVolt_156 0;
+BA_ "GenSigStartValue" SG_ 2554347760 CellTemp_001 40;
+BA_ "GenSigStartValue" SG_ 2554347760 CellTemp_002 40;
+BA_ "GenSigStartValue" SG_ 2554347760 CellTemp_003 40;
+BA_ "GenSigStartValue" SG_ 2554347760 CellTemp_004 40;
+BA_ "GenSigStartValue" SG_ 2554347760 CellTemp_005 40;
+BA_ "GenSigStartValue" SG_ 2554347760 CellTemp_006 40;
+BA_ "GenSigStartValue" SG_ 2554347760 CellTemp_007 40;
+BA_ "GenSigStartValue" SG_ 2554347760 CellTemp_008 40;
+BA_ "GenSigStartValue" SG_ 2554413296 CellTemp_009 40;
+BA_ "GenSigStartValue" SG_ 2554413296 CellTemp_010 40;
+BA_ "GenSigStartValue" SG_ 2554413296 CellTemp_011 40;
+BA_ "GenSigStartValue" SG_ 2554413296 CellTemp_012 40;
+BA_ "GenSigStartValue" SG_ 2554413296 CellTemp_013 40;
+BA_ "GenSigStartValue" SG_ 2554413296 CellTemp_014 40;
+BA_ "GenSigStartValue" SG_ 2554413296 CellTemp_015 40;
+BA_ "GenSigStartValue" SG_ 2554413296 CellTemp_016 40;
+BA_ "GenSigStartValue" SG_ 2554478832 CellTemp_017 40;
+BA_ "GenSigStartValue" SG_ 2554478832 CellTemp_018 40;
+BA_ "GenSigStartValue" SG_ 2554478832 CellTemp_019 40;
+BA_ "GenSigStartValue" SG_ 2554478832 CellTemp_020 40;
+BA_ "GenSigStartValue" SG_ 2554478832 CellTemp_021 40;
+BA_ "GenSigStartValue" SG_ 2554478832 CellTemp_022 40;
+BA_ "GenSigStartValue" SG_ 2554478832 CellTemp_023 40;
+BA_ "GenSigStartValue" SG_ 2554478832 CellTemp_024 40;
+BA_ "GenSigStartValue" SG_ 2554544368 CellTemp_025 40;
+BA_ "GenSigStartValue" SG_ 2554544368 CellTemp_026 40;
+BA_ "GenSigStartValue" SG_ 2554544368 CellTemp_027 40;
+BA_ "GenSigStartValue" SG_ 2554544368 CellTemp_028 40;
+BA_ "GenSigStartValue" SG_ 2554544368 CellTemp_029 40;
+BA_ "GenSigStartValue" SG_ 2554544368 CellTemp_030 40;
+BA_ "GenSigStartValue" SG_ 2554544368 CellTemp_031 40;
+BA_ "GenSigStartValue" SG_ 2554544368 CellTemp_032 40;
+BA_ "GenSigStartValue" SG_ 2554609904 CellTemp_033 40;
+BA_ "GenSigStartValue" SG_ 2554609904 CellTemp_034 40;
+BA_ "GenSigStartValue" SG_ 2554609904 CellTemp_035 40;
+BA_ "GenSigStartValue" SG_ 2554609904 CellTemp_036 40;
+BA_ "GenSigStartValue" SG_ 2554609904 CellTemp_037 40;
+BA_ "GenSigStartValue" SG_ 2554609904 CellTemp_038 40;
+BA_ "GenSigStartValue" SG_ 2554609904 CellTemp_039 40;
+BA_ "GenSigStartValue" SG_ 2554609904 CellTemp_040 40;
+BA_ "GenSigStartValue" SG_ 2554675440 CellTemp_041 40;
+BA_ "GenSigStartValue" SG_ 2554675440 CellTemp_042 40;
+BA_ "GenSigStartValue" SG_ 2554675440 CellTemp_043 40;
+BA_ "GenSigStartValue" SG_ 2554675440 CellTemp_044 40;
+BA_ "GenSigStartValue" SG_ 2554675440 CellTemp_045 40;
+BA_ "GenSigStartValue" SG_ 2554675440 CellTemp_046 40;
+BA_ "GenSigStartValue" SG_ 2554675440 CellTemp_047 40;
+BA_ "GenSigStartValue" SG_ 2554675440 CellTemp_048 40;
+BA_ "GenSigStartValue" SG_ 2554740976 CellTemp_049 40;
+BA_ "GenSigStartValue" SG_ 2554740976 CellTemp_050 40;
+BA_ "GenSigStartValue" SG_ 2554740976 CellTemp_051 40;
+BA_ "GenSigStartValue" SG_ 2554740976 CellTemp_052 40;
+BA_ "GenSigStartValue" SG_ 2554740976 CellTemp_053 40;
+BA_ "GenSigStartValue" SG_ 2554740976 CellTemp_054 40;
+BA_ "GenSigStartValue" SG_ 2554740976 CellTemp_055 40;
+BA_ "GenSigStartValue" SG_ 2554740976 CellTemp_056 40;
+BA_ "GenSigStartValue" SG_ 2554806512 CellTemp_057 40;
+BA_ "GenSigStartValue" SG_ 2554806512 CellTemp_058 40;
+BA_ "GenSigStartValue" SG_ 2554806512 CellTemp_059 40;
+BA_ "GenSigStartValue" SG_ 2554806512 CellTemp_060 40;
+BA_ "GenSigStartValue" SG_ 2554806512 CellTemp_061 40;
+BA_ "GenSigStartValue" SG_ 2554806512 CellTemp_062 40;
+BA_ "GenSigStartValue" SG_ 2554806512 CellTemp_063 40;
+BA_ "GenSigStartValue" SG_ 2554806512 CellTemp_064 40;
+BA_ "GenSigStartValue" SG_ 2554872048 CellTemp_065 40;
+BA_ "GenSigStartValue" SG_ 2554872048 CellTemp_066 40;
+BA_ "GenSigStartValue" SG_ 2554872048 CellTemp_067 40;
+BA_ "GenSigStartValue" SG_ 2554872048 CellTemp_068 40;
+BA_ "GenSigStartValue" SG_ 2554872048 CellTemp_069 40;
+BA_ "GenSigStartValue" SG_ 2554872048 CellTemp_070 40;
+BA_ "GenSigStartValue" SG_ 2554872048 CellTemp_071 40;
+BA_ "GenSigStartValue" SG_ 2554872048 CellTemp_072 40;
+BA_ "GenSigStartValue" SG_ 2554937584 CellTemp_073 40;
+BA_ "GenSigStartValue" SG_ 2554937584 CellTemp_074 40;
+BA_ "GenSigStartValue" SG_ 2554937584 CellTemp_075 40;
+BA_ "GenSigStartValue" SG_ 2554937584 CellTemp_076 40;
+BA_ "GenSigStartValue" SG_ 2554937584 CellTemp_077 40;
+BA_ "GenSigStartValue" SG_ 2554937584 CellTemp_078 40;
+BA_ "GenSigStartValue" SG_ 2554937584 CellTemp_079 40;
+BA_ "GenSigStartValue" SG_ 2554937584 CellTemp_080 40;
+BA_ "GenSigStartValue" SG_ 2555003120 CellTemp_081 40;
+BA_ "GenSigStartValue" SG_ 2555003120 CellTemp_082 40;
+BA_ "GenSigStartValue" SG_ 2555003120 CellTemp_083 40;
+BA_ "GenSigStartValue" SG_ 2555003120 CellTemp_084 40;
+BA_ "GenSigStartValue" SG_ 2555003120 CellTemp_085 40;
+BA_ "GenSigStartValue" SG_ 2555003120 CellTemp_086 40;
+BA_ "GenSigStartValue" SG_ 2555003120 CellTemp_087 40;
+BA_ "GenSigStartValue" SG_ 2555003120 CellTemp_088 40;
+VAL_ 2550263872 Ems_PowerOnOffCmd 0 "下高压" 1 "上高压" ;
+VAL_ 2550263872 Ems_ChargeAllowState 0 "不允许" 1 "允许" ;
+VAL_ 2556444912 FaultGrade 0 "无故障" 1 "1级故障" 2 "2级故障" 3 "3级故障" 4 "4级故障" ;
+VAL_ 2556444912 BmsWorkState 0 "上电" 1 "就绪" 2 "运行" 3 "错误" 4 "关机" 5 "快充" 6 "慢充" 7 "充电完成" ;
+VAL_ 2556575984 DI1State 0 "无效" 1 "有效" ;
+VAL_ 2556575984 DI2State 0 "无效" 1 "有效" ;
+VAL_ 2556575984 DI3State 0 "无效" 1 "有效" ;
+VAL_ 2556575984 DI4State 0 "无效" 1 "有效" ;
+VAL_ 2556575984 DI5State 0 "无效" 1 "有效" ;
+VAL_ 2556575984 DI6State 0 "无效" 1 "有效" ;
+VAL_ 2556575984 DI7State 0 "无效" 1 "有效" ;
+VAL_ 2556575984 DI8State 0 "无效" 1 "有效" ;
+VAL_ 2556575984 Relay1State 0 "断开" 1 "闭合" ;
+VAL_ 2556575984 Relay2State 0 "断开" 1 "闭合" ;
+VAL_ 2556575984 Relay3State 0 "断开" 1 "闭合" ;
+VAL_ 2556575984 Relay4State 0 "断开" 1 "闭合" ;
+VAL_ 2556575984 Relay5State 0 "断开" 1 "闭合" ;
+VAL_ 2556575984 Relay6State 0 "断开" 1 "闭合" ;
+VAL_ 2556575984 Relay7State 0 "断开" 1 "闭合" ;
+VAL_ 2556575984 Relay8State 0 "断开" 1 "闭合" ;
+VAL_ 2556641520 PosRelayState 0 "断开" 1 "闭合" 2 "错误" ;
+VAL_ 2556641520 NegRelayState 0 "断开" 1 "闭合" 2 "错误" ;
+VAL_ 2556641520 PreRelayState 0 "断开" 1 "闭合" 2 "错误" ;
+VAL_ 2556641520 HeatRelayState 0 "断开" 1 "闭合" 2 "错误" ;
+VAL_ 2556641520 ChgRelayRequest 0 "请求断开" 1 "请求闭合" ;
+VAL_ 2556641520 CoolingCtl 0 "停止冷却" 1 "启动冷却" ;
+VAL_ 2556641520 HeatingCtl 0 "停止加热" 1 "启动加热" ;
+VAL_ 2556641520 ChgONCC 0 "未连接" 1 "220Ω" 2 "680Ω" 3 "100Ω" 4 "1.5KΩ" 5 "其它" ;
+VAL_ 2556641520 ChgOFFCC2 0 "未连接" 1 "已连接" ;
+VAL_ 2556641520 ChgComm 0 "充电机不在线" 1 "充电机在线" ;
+VAL_ 2556641520 AccWakeState 0 "无ACC" 1 "有ACC" ;
+VAL_ 2556641520 ChgWakeState 0 "无A+信号" 1 "有A+信号" ;
+VAL_ 2556641520 ChgState 0 "未开始" 1 "加热" 2 "充电" 3 "退出" 4 "充电完成" ;
+VAL_ 2556641520 BmsRunStatus 0 "停机" 1 "初始化" 2 "自检" 3 "待机" 4 "预充" 5 "运行" 6 "准备下电" 7 "故障" 8 "休眠关机" 9 "充电" 10 "充电结束" 11 "准备充电" ;
+VAL_ 2556772592 Cell_OV 0 "无故障" 1 "1级故障" 2 "2级故障" 3 "3级故障" 4 "4级故障" ;
+VAL_ 2556772592 Cell_UV 0 "无故障" 1 "1级故障" 2 "2级故障" 3 "3级故障" 4 "4级故障" ;
+VAL_ 2556772592 Cell_OT 0 "无故障" 1 "1级故障" 2 "2级故障" 3 "3级故障" 4 "4级故障" ;
+VAL_ 2556772592 Cell_UT 0 "无故障" 1 "1级故障" 2 "2级故障" 3 "3级故障" 4 "4级故障" ;
+VAL_ 2556772592 Sys_OV 0 "无故障" 1 "1级故障" 2 "2级故障" 3 "3级故障" 4 "4级故障" ;
+VAL_ 2556772592 Sys_UV 0 "无故障" 1 "1级故障" 2 "2级故障" 3 "3级故障" 4 "4级故障" ;
+VAL_ 2556772592 Chg_OC 0 "无故障" 1 "1级故障" 2 "2级故障" 3 "3级故障" 4 "4级故障" ;
+VAL_ 2556772592 DisChg_OC 0 "无故障" 1 "1级故障" 2 "2级故障" 3 "3级故障" 4 "4级故障" ;
+VAL_ 2556772592 Bsu_OffLine 0 "无故障" 1 "1级故障" 2 "2级故障" 3 "3级故障" 4 "4级故障" ;
+VAL_ 2556772592 Leak_OC 0 "无故障" 1 "1级故障" 2 "2级故障" 3 "3级故障" 4 "4级故障" ;
+VAL_ 2556772592 Cell_Volt_Diff 0 "无故障" 1 "1级故障" 2 "2级故障" 3 "3级故障" 4 "4级故障" ;
+VAL_ 2556772592 Cell_Temp_Diff 0 "无故障" 1 "1级故障" 2 "2级故障" 3 "3级故障" 4 "4级故障" ;
+VAL_ 2556772592 High_Volt_Abnormal 0 "正常" 1 "故障" ;
+VAL_ 2556772592 Hall_Break 0 "正常" 1 "故障" ;
+VAL_ 2556772592 Batt_Err_Protect 0 "正常" 1 "故障" ;
+VAL_ 2556772592 Cell_Volt_Break 0 "正常" 1 "故障" ;
+VAL_ 2556772592 Cell_Temp_Break 0 "正常" 1 "故障" ;
+VAL_ 2556772592 PreCharge_Fail 0 "正常" 1 "故障" ;
+VAL_ 2556772592 Relay_Err 0 "正常" 1 "故障" ;
+VAL_ 2556772592 Bsu_Bal_Err 0 "正常" 1 "故障" ;

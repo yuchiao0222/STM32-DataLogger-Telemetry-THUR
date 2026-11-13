@@ -1,0 +1,1769 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: VCU MCU_Motor_A MCU_Motor_B MCU_Motor_C MCU_Motor_D CH110 BMS HCU
+
+
+BO_ 1697 MotorA_Frame1: 8 MCU_Motor_A
+ SG_ FA1_Motor_speed : 0|16@1+ (1,-30000) [-30000|30000] "rpm"  VCU
+ SG_ FA1_Motor_Torque : 16|14@1+ (0.05,-30) [-30|30] "Nm"  VCU
+ SG_ FA1_EvSpd_Validity : 30|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA1_Motor_Torque_Validity : 31|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA1_MotorMainState : 32|3@1+ (1,0) [0|7] ""  VCU
+ SG_ FA1_RotatingDire : 35|2@1+ (1,0) [0|3] ""  VCU
+ SG_ FA1_MotorWorkMode : 37|4@1+ (1,0) [1|7] ""  VCU
+ SG_ FA1_CheckSum : 41|8@1+ (1,0) [0|255] ""  VCU
+ SG_ FA1_RollingCounter : 49|8@1+ (1,0) [0|255] ""  VCU
+
+BO_ 1698 MotorA_Frame2: 8 MCU_Motor_A
+ SG_ FA2_Motor_DriveTorqueMax : 0|12@1+ (0.1,0) [0|300] "Nm"  VCU
+ SG_ FA2_Motor_BrakeTorqueMax : 12|12@1+ (0.1,-400) [-400|-300] "Nm"  VCU
+ SG_ FA2_ControlerTemp : 24|8@1+ (1,-40) [-40|150] "deg"  VCU
+ SG_ FA2_MotorTemp : 32|8@1+ (1,-40) [-40|150] "deg"  VCU
+ SG_ FA2_MotorResolverAngle : 40|12@1+ (0.1,0) [0|360] "deg"  VCU
+ SG_ FA2_RollingCounter : 52|8@1+ (1,0) [0|255] ""  VCU
+
+BO_ 1699 MotorA_Frame3: 8 MCU_Motor_A
+ SG_ FA3_BusVoltage : 0|10@1+ (1,0) [0|1000] "V"  VCU
+ SG_ FA3_IqCurrent : 10|12@1+ (0.1,-200) [-200|200] "A"  VCU
+ SG_ FA3_IdCurrent : 22|12@1+ (0.1,-200) [-200|200] "A"  VCU
+ SG_ FA3_PhaseCurrentIA : 34|12@1+ (0.1,-200) [-200|200] "A"  VCU
+ SG_ FA3_PhaseCurrentIB : 46|12@1+ (0.1,-200) [-200|200] "A"  VCU
+ SG_ FA3_RollingCounter : 58|6@1+ (1,0) [0|63] ""  VCU
+
+BO_ 1700 MotorA_Frame4: 8 MCU_Motor_A
+ SG_ FA4_W_MotorFaultNum : 0|8@1+ (1,0) [0|254] ""  VCU
+ SG_ FA4_W_ControlerOverheatW : 8|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_MotorOverheatW : 9|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_MotorControlerW : 10|2@1+ (1,0) [0|3] ""  VCU
+ SG_ FA4_W_MotorW : 12|2@1+ (1,0) [0|3] ""  VCU
+ SG_ FA4_W_PhaseOverCurrFault : 14|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_RotateTransformerFault : 15|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_St_PhaseCurrSensor : 16|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_MotorOverSpdFault : 17|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_DC_MainWireOverVoltFault : 18|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_Drv_MotorOverCoolFault : 19|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_TempSensorState : 20|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_MotorTempSensorState : 21|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_DC_VoltSensorState : 22|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_DC_LowVoltWarning : 23|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_MotorStallFault : 24|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_MotorResolverlFault : 25|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_MotorLackofPhaseFault : 26|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_HardwareFault : 27|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_SICDriveFault : 28|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_PhaseCurFault : 29|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_CanTimeoutFault : 30|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_BattUvFault : 31|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_BattUvWarning : 32|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_ActiveDisChgFault : 33|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_CanBusoffFault : 34|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_MgnFault : 35|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_IntDCFault : 36|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_BattOvFault : 37|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_IntComFault : 38|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_SoftFault : 39|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_InitFault : 40|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_MotorUndTempFault : 41|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_DeratingFault : 42|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_CommandOverrunFault : 43|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FA4_W_RollingCounter : 44|8@1+ (1,0) [0|1] ""  VCU
+
+BO_ 1701 MotorA_Frame5: 8 VCU
+ SG_ FA5_C_MotorEnableReq : 0|1@1+ (1,0) [0|1] ""  MCU_Motor_A
+ SG_ FA5_C_MotorWorkModeReq : 1|4@1+ (1,0) [1|7] ""  MCU_Motor_A
+ SG_ FA5_C_MotorRotateSpeedReq : 5|16@1+ (1,-30000) [-30000|30000] "rpm"  MCU_Motor_A
+ SG_ FA5_C_MotorTorqueReq : 21|11@1+ (0.05,-50) [-50|50] "Nm"  MCU_Motor_A
+ SG_ FA5_C_MotorFaultClearReq : 32|1@1+ (1,0) [0|1] ""  MCU_Motor_A
+ SG_ FA5_C_CheckSum : 33|8@1+ (1,0) [0|1] ""  MCU_Motor_A
+ SG_ FA5_C_RollingCounter : 41|8@1+ (1,0) [0|1] ""  MCU_Motor_A
+
+BO_ 1702 MotorA_Frame6: 8 MCU_Motor_A
+ SG_ FA6_Resolver_Angle : 0|16@1+ (1,0) [0|65535] ""  VCU
+ SG_ FA6_Resolver_Speed : 16|16@1+ (1,0) [0|65535] ""  VCU
+ SG_ FA6_Resolver_Fault_Register : 32|16@1+ (1,0) [0|65535] ""  VCU
+ SG_ FA6_Reserved : 48|16@1+ (1,0) [0|65535] ""  VCU
+
+BO_ 1713 MotorB_Frame1: 8 MCU_Motor_B
+ SG_ FB1_Motor_speed : 0|16@1+ (1,-30000) [-30000|30000] "rpm"  VCU
+ SG_ FB1_Motor_Torque : 16|14@1+ (0.05,-30) [-30|30] "Nm"  VCU
+ SG_ FB1_EvSpd_Validity : 30|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB1_Motor_Torque_Validity : 31|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB1_MotorMainState : 32|3@1+ (1,0) [0|7] ""  VCU
+ SG_ FB1_RotatingDire : 35|2@1+ (1,0) [0|3] ""  VCU
+ SG_ FB1_MotorWorkMode : 37|4@1+ (1,0) [1|7] ""  VCU
+ SG_ FB1_CheckSum : 41|8@1+ (1,0) [0|255] ""  VCU
+ SG_ FB1_RollingCounter : 49|8@1+ (1,0) [0|255] ""  VCU
+
+BO_ 1714 MotorB_Frame2: 8 MCU_Motor_B
+ SG_ FB2_Motor_DriveTorqueMax : 0|12@1+ (0.1,0) [0|300] "Nm"  VCU
+ SG_ FB2_Motor_BrakeTorqueMax : 12|12@1+ (0.1,-400) [-400|-300] "Nm"  VCU
+ SG_ FB2_ControlerTemp : 24|8@1+ (1,-40) [-40|150] "deg"  VCU
+ SG_ FB2_MotorTemp : 32|8@1+ (1,-40) [-40|150] "deg"  VCU
+ SG_ FB2_MotorResolverAngle : 40|12@1+ (0.1,0) [0|360] "deg"  VCU
+ SG_ FB2_RollingCounter : 52|8@1+ (1,0) [0|255] ""  VCU
+
+BO_ 1715 MotorB_Frame3: 8 MCU_Motor_B
+ SG_ FB3_BusVoltage : 0|10@1+ (1,0) [0|1000] "V"  VCU
+ SG_ FB3_IqCurrent : 10|12@1+ (0.1,-200) [-200|200] "A"  VCU
+ SG_ FB3_IdCurrent : 22|12@1+ (0.1,-200) [-200|200] "A"  VCU
+ SG_ FB3_PhaseCurrentIA : 34|12@1+ (0.1,-200) [-200|200] "A"  VCU
+ SG_ FB3_PhaseCurrentIB : 46|12@1+ (0.1,-200) [-200|200] "A"  VCU
+ SG_ FB3_RollingCounter : 58|6@1+ (1,0) [0|63] ""  VCU
+
+BO_ 1716 MotorB_Frame4: 8 MCU_Motor_B
+ SG_ FB4_W_MotorFaultNum : 0|8@1+ (1,0) [0|254] ""  VCU
+ SG_ FB4_W_ControlerOverheatW : 8|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_MotorOverheatW : 9|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_MotorControlerW : 10|2@1+ (1,0) [0|3] ""  VCU
+ SG_ FB4_W_MotorW : 12|2@1+ (1,0) [0|3] ""  VCU
+ SG_ FB4_W_PhaseOverCurrFault : 14|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_RotateTransformerFault : 15|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_St_PhaseCurrSensor : 16|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_MotorOverSpdFault : 17|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_DC_MainWireOverVoltFault : 18|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_Drv_MotorOverCoolFault : 19|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_TempSensorState : 20|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_MotorTempSensorState : 21|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_DC_VoltSensorState : 22|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_DC_LowVoltWarning : 23|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_MotorStallFault : 24|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_MotorResolverlFault : 25|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_MotorLackofPhaseFault : 26|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_HardwareFault : 27|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_SICDriveFault : 28|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_PhaseCurFault : 29|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_CanTimeoutFault : 30|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_BattUvFault : 31|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_BattUvWarning : 32|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_ActiveDisChgFault : 33|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_CanBusoffFault : 34|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_MgnFault : 35|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_IntDCFault : 36|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_BattOvFault : 37|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_IntComFault : 38|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_SoftFault : 39|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_InitFault : 40|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_MotorUndTempFault : 41|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_DeratingFault : 42|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_CommandOverrunFault : 43|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FB4_W_RollingCounter : 44|8@1+ (1,0) [0|1] ""  VCU
+
+BO_ 1717 MotorB_Frame5: 8 VCU
+ SG_ FB5_C_MotorEnableReq : 0|1@1+ (1,0) [0|1] ""  MCU_Motor_B
+ SG_ FB5_C_MotorWorkModeReq : 1|4@1+ (1,0) [1|7] ""  MCU_Motor_B
+ SG_ FB5_C_MotorRotateSpeedReq : 5|16@1+ (1,-30000) [-30000|30000] "rpm"  MCU_Motor_B
+ SG_ FB5_C_MotorTorqueReq : 21|11@1+ (0.05,-50) [-50|50] "Nm"  MCU_Motor_B
+ SG_ FB5_C_MotorFaultClearReq : 32|1@1+ (1,0) [0|1] ""  MCU_Motor_B
+ SG_ FB5_C_CheckSum : 33|8@1+ (1,0) [0|1] ""  MCU_Motor_B
+ SG_ FB5_C_RollingCounter : 41|8@1+ (1,0) [0|1] ""  MCU_Motor_B
+
+BO_ 1718 MotorB_Frame6: 8 MCU_Motor_B
+ SG_ FB6_Resolver_Angle : 0|16@1+ (1,0) [0|65535] ""  VCU
+ SG_ FB6_Resolver_Speed : 16|16@1+ (1,0) [0|65535] ""  VCU
+ SG_ FB6_Resolver_Fault_Register : 32|16@1+ (1,0) [0|65535] ""  VCU
+ SG_ FB6_Reserved : 48|16@1+ (1,0) [0|65535] ""  VCU
+
+BO_ 1729 MotorC_Frame1: 8 MCU_Motor_C
+ SG_ FC1_Motor_speed : 0|16@1+ (1,-30000) [-30000|30000] "rpm"  VCU
+ SG_ FC1_Motor_Torque : 16|14@1+ (0.05,-30) [-30|30] "Nm"  VCU
+ SG_ FC1_EvSpd_Validity : 30|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC1_Motor_Torque_Validity : 31|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC1_MotorMainState : 32|3@1+ (1,0) [0|7] ""  VCU
+ SG_ FC1_RotatingDire : 35|2@1+ (1,0) [0|3] ""  VCU
+ SG_ FC1_MotorWorkMode : 37|4@1+ (1,0) [1|7] ""  VCU
+ SG_ FC1_CheckSum : 41|8@1+ (1,0) [0|255] ""  VCU
+ SG_ FC1_RollingCounter : 49|8@1+ (1,0) [0|255] ""  VCU
+
+BO_ 1730 MotorC_Frame2: 8 MCU_Motor_C
+ SG_ FC2_Motor_DriveTorqueMax : 0|12@1+ (0.1,0) [0|300] "Nm"  VCU
+ SG_ FC2_Motor_BrakeTorqueMax : 12|12@1+ (0.1,-400) [-400|-300] "Nm"  VCU
+ SG_ FC2_ControlerTemp : 24|8@1+ (1,-40) [-40|150] "deg"  VCU
+ SG_ FC2_MotorTemp : 32|8@1+ (1,-40) [-40|150] "deg"  VCU
+ SG_ FC2_MotorResolverAngle : 40|12@1+ (0.1,0) [0|360] "deg"  VCU
+ SG_ FC2_RollingCounter : 52|8@1+ (1,0) [0|255] ""  VCU
+
+BO_ 1731 MotorC_Frame3: 8 MCU_Motor_C
+ SG_ FC3_BusVoltage : 0|10@1+ (1,0) [0|1000] "V"  VCU
+ SG_ FC3_IqCurrent : 10|12@1+ (0.1,-200) [-200|200] "A"  VCU
+ SG_ FC3_IdCurrent : 22|12@1+ (0.1,-200) [-200|200] "A"  VCU
+ SG_ FC3_PhaseCurrentIA : 34|12@1+ (0.1,-200) [-200|200] "A"  VCU
+ SG_ FC3_PhaseCurrentIB : 46|12@1+ (0.1,-200) [-200|200] "A"  VCU
+ SG_ FC3_RollingCounter : 58|6@1+ (1,0) [0|63] ""  VCU
+
+BO_ 1732 MotorC_Frame4: 8 MCU_Motor_C
+ SG_ FC4_W_MotorFaultNum : 0|8@1+ (1,0) [0|254] ""  VCU
+ SG_ FC4_W_ControlerOverheatW : 8|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_MotorOverheatW : 9|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_MotorControlerW : 10|2@1+ (1,0) [0|3] ""  VCU
+ SG_ FC4_W_MotorW : 12|2@1+ (1,0) [0|3] ""  VCU
+ SG_ FC4_W_PhaseOverCurrFault : 14|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_RotateTransformerFault : 15|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_St_PhaseCurrSensor : 16|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_MotorOverSpdFault : 17|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_DC_MainWireOverVoltFault : 18|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_Drv_MotorOverCoolFault : 19|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_TempSensorState : 20|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_MotorTempSensorState : 21|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_DC_VoltSensorState : 22|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_DC_LowVoltWarning : 23|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_MotorStallFault : 24|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_MotorResolverlFault : 25|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_MotorLackofPhaseFault : 26|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_HardwareFault : 27|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_SICDriveFault : 28|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_PhaseCurFault : 29|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_CanTimeoutFault : 30|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_BattUvFault : 31|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_BattUvWarning : 32|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_ActiveDisChgFault : 33|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_CanBusoffFault : 34|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_MgnFault : 35|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_IntDCFault : 36|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_BattOvFault : 37|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_IntComFault : 38|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_SoftFault : 39|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_InitFault : 40|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_MotorUndTempFault : 41|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_DeratingFault : 42|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_CommandOverrunFault : 43|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FC4_W_RollingCounter : 44|8@1+ (1,0) [0|1] ""  VCU
+
+BO_ 1733 MotorC_Frame5: 8 VCU
+ SG_ FC5_C_MotorEnableReq : 0|1@1+ (1,0) [0|1] ""  MCU_Motor_C
+ SG_ FC5_C_MotorWorkModeReq : 1|4@1+ (1,0) [1|7] ""  MCU_Motor_C
+ SG_ FC5_C_MotorRotateSpeedReq : 5|16@1+ (1,-30000) [-30000|30000] "rpm"  MCU_Motor_C
+ SG_ FC5_C_MotorTorqueReq : 21|11@1+ (0.05,-50) [-50|50] "Nm"  MCU_Motor_C
+ SG_ FC5_C_MotorFaultClearReq : 32|1@1+ (1,0) [0|1] ""  MCU_Motor_C
+ SG_ FC5_C_CheckSum : 33|8@1+ (1,0) [0|1] ""  MCU_Motor_C
+ SG_ FC5_C_RollingCounter : 41|8@1+ (1,0) [0|1] ""  MCU_Motor_C
+
+BO_ 1734 MotorC_Frame6: 8 MCU_Motor_C
+ SG_ FC6_Resolver_Angle : 0|16@1+ (1,0) [0|65535] ""  VCU
+ SG_ FC6_Resolver_Speed : 16|16@1+ (1,0) [0|65535] ""  VCU
+ SG_ FC6_Resolver_Fault_Register : 32|16@1+ (1,0) [0|65535] ""  VCU
+ SG_ FC6_Reserved : 48|16@1+ (1,0) [0|65535] ""  VCU
+
+BO_ 1745 MotorD_Frame1: 8 MCU_Motor_D
+ SG_ FD1_Motor_speed : 0|16@1+ (1,-30000) [-30000|30000] "rpm"  VCU
+ SG_ FD1_Motor_Torque : 16|14@1+ (0.05,-30) [-30|30] "Nm"  VCU
+ SG_ FD1_EvSpd_Validity : 30|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD1_Motor_Torque_Validity : 31|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD1_MotorMainState : 32|3@1+ (1,0) [0|7] ""  VCU
+ SG_ FD1_RotatingDire : 35|2@1+ (1,0) [0|3] ""  VCU
+ SG_ FD1_MotorWorkMode : 37|4@1+ (1,0) [1|7] ""  VCU
+ SG_ FD1_CheckSum : 41|8@1+ (1,0) [0|255] ""  VCU
+ SG_ FD1_RollingCounter : 49|8@1+ (1,0) [0|255] ""  VCU
+
+BO_ 1746 MotorD_Frame2: 8 MCU_Motor_D
+ SG_ FD2_Motor_DriveTorqueMax : 0|12@1+ (0.1,0) [0|300] "Nm"  VCU
+ SG_ FD2_Motor_BrakeTorqueMax : 12|12@1+ (0.1,-400) [-400|-300] "Nm"  VCU
+ SG_ FD2_ControlerTemp : 24|8@1+ (1,-40) [-40|150] "deg"  VCU
+ SG_ FD2_MotorTemp : 32|8@1+ (1,-40) [-40|150] "deg"  VCU
+ SG_ FD2_MotorResolverAngle : 40|12@1+ (0.1,0) [0|360] "deg"  VCU
+ SG_ FD2_RollingCounter : 52|8@1+ (1,0) [0|255] ""  VCU
+
+BO_ 1747 MotorD_Frame3: 8 MCU_Motor_D
+ SG_ FD3_BusVoltage : 0|10@1+ (1,0) [0|1000] "V"  VCU
+ SG_ FD3_IqCurrent : 10|12@1+ (0.1,-200) [-200|200] "A"  VCU
+ SG_ FD3_IdCurrent : 22|12@1+ (0.1,-200) [-200|200] "A"  VCU
+ SG_ FD3_PhaseCurrentIA : 34|12@1+ (0.1,-200) [-200|200] "A"  VCU
+ SG_ FD3_PhaseCurrentIB : 46|12@1+ (0.1,-200) [-200|200] "A"  VCU
+ SG_ FD3_RollingCounter : 58|6@1+ (1,0) [0|63] ""  VCU
+
+BO_ 1748 MotorD_Frame4: 8 MCU_Motor_D
+ SG_ FD4_W_MotorFaultNum : 0|8@1+ (1,0) [0|254] ""  VCU
+ SG_ FD4_W_ControlerOverheatW : 8|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_MotorOverheatW : 9|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_MotorControlerW : 10|2@1+ (1,0) [0|3] ""  VCU
+ SG_ FD4_W_MotorW : 12|2@1+ (1,0) [0|3] ""  VCU
+ SG_ FD4_W_PhaseOverCurrFault : 14|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_RotateTransformerFault : 15|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_St_PhaseCurrSensor : 16|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_MotorOverSpdFault : 17|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_DC_MainWireOverVoltFault : 18|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_Drv_MotorOverCoolFault : 19|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_TempSensorState : 20|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_MotorTempSensorState : 21|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_DC_VoltSensorState : 22|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_DC_LowVoltWarning : 23|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_MotorStallFault : 24|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_MotorResolverlFault : 25|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_MotorLackofPhaseFault : 26|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_HardwareFault : 27|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_SICDriveFault : 28|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_PhaseCurFault : 29|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_CanTimeoutFault : 30|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_BattUvFault : 31|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_BattUvWarning : 32|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_ActiveDisChgFault : 33|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_CanBusoffFault : 34|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_MgnFault : 35|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_IntDCFault : 36|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_BattOvFault : 37|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_IntComFault : 38|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_SoftFault : 39|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_InitFault : 40|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_MotorUndTempFault : 41|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_DeratingFault : 42|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_CommandOverrunFault : 43|1@1+ (1,0) [0|1] ""  VCU
+ SG_ FD4_W_RollingCounter : 44|8@1+ (1,0) [0|1] ""  VCU
+
+BO_ 1749 MotorD_Frame5: 8 VCU
+ SG_ FD5_C_MotorEnableReq : 0|1@1+ (1,0) [0|1] ""  MCU_Motor_D
+ SG_ FD5_C_MotorWorkModeReq : 1|4@1+ (1,0) [1|7] ""  MCU_Motor_D
+ SG_ FD5_C_MotorRotateSpeedReq : 5|16@1+ (1,-30000) [-30000|30000] "rpm"  MCU_Motor_D
+ SG_ FD5_C_MotorTorqueReq : 21|11@1+ (0.05,-50) [-50|50] "Nm"  MCU_Motor_D
+ SG_ FD5_C_MotorFaultClearReq : 32|1@1+ (1,0) [0|1] ""  MCU_Motor_D
+ SG_ FD5_C_CheckSum : 33|8@1+ (1,0) [0|1] ""  MCU_Motor_D
+ SG_ FD5_C_RollingCounter : 41|8@1+ (1,0) [0|1] ""  MCU_Motor_D
+
+BO_ 1750 MotorD_Frame6: 8 MCU_Motor_D
+ SG_ FD6_Resolver_Angle : 0|16@1+ (1,0) [0|65535] ""  VCU
+ SG_ FD6_Resolver_Speed : 16|16@1+ (1,0) [0|65535] ""  VCU
+ SG_ FD6_Resolver_Fault_Register : 32|16@1+ (1,0) [0|65535] ""  VCU
+ SG_ FD6_Reserved : 48|16@1+ (1,0) [0|65535] ""  VCU
+
+BO_ 392 CH110_TPDO1: 6 CH110
+ SG_ Acc_X : 0|16@1- (0.001,0) [-8|8] "g" Vector__XXX
+ SG_ Acc_Y : 16|16@1- (0.001,0) [-8|8] "g" Vector__XXX
+ SG_ Acc_Z : 32|16@1- (0.001,0) [-8|8] "g" Vector__XXX
+
+BO_ 2556575987 BMS_HCU_MAXT: 8 BMS
+ SG_ MaxTemp : 7|8@0+ (1,-40) [-40|120] "degC"  HCU
+ SG_ MinTemp : 15|8@0+ (1,-40) [-40|120] "degC"  HCU
+ SG_ MaxTempNo : 23|8@0+ (1,0) [0|255] ""  HCU
+ SG_ MinTempNo : 31|8@0+ (1,0) [0|255] ""  HCU
+ SG_ CoolingCtl : 39|8@0+ (1,0) [0|1] ""  HCU
+ SG_ HeatingCtl : 47|8@0+ (1,0) [0|1] ""  HCU
+
+BO_ 2556641523 BMS_HCU_RELAY: 8 BMS
+ SG_ PosRlyStr : 7|2@0+ (1,0) [0|3] ""  HCU
+ SG_ NegRlyStr : 5|2@0+ (1,0) [0|3] ""  HCU
+ SG_ PreRlyStr : 3|2@0+ (1,0) [0|3] ""  HCU
+ SG_ OnChrRlyStr : 1|2@0+ (1,0) [0|3] ""  HCU
+ SG_ OffChrRlyStr : 15|2@0+ (1,0) [0|3] ""  HCU
+ SG_ ChrState : 23|4@0+ (1,0) [0|4] ""  HCU
+ SG_ ChrCommunication : 19|1@0+ (1,0) [0|1] ""  HCU
+ SG_ ChrOFFCC2 : 18|1@0+ (1,0) [0|1] ""  HCU
+ SG_ ChrONCC : 17|2@0+ (1,0) [0|3] ""  HCU
+ SG_ ChrReqVolt : 39|16@0+ (1,0) [0|900] "V"  HCU
+ SG_ ChrReqCurr : 55|16@0+ (1,0) [0|600] "A"  HCU
+
+BO_ 2556707059 BMS_HCU_POWER: 8 BMS
+ SG_ MaxChrCurlLimit : 7|16@0+ (1,0) [0|1000] "A"  HCU
+ SG_ MaxDisCurlLimi : 23|16@0+ (1,0) [0|1000] "A"  HCU
+ SG_ MaxChrPowerLimit : 39|16@0+ (0.1,0) [0|300] "kW"  HCU
+ SG_ MaxDisPowerLimit : 55|16@0+ (0.1,0) [0|300] "kW"  HCU
+
+BO_ 2555400435 BMS_HCU_CELLT_01: 8 BMS
+ SG_ CellTempN_1 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_2 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_3 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_4 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_5 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_6 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_7 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_8 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2555465971 BMS_HCU_CELLT_02: 8 BMS
+ SG_ CellTempN_9 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_10 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_11 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_12 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_13 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_14 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_15 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_16 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2555531507 BMS_HCU_CELLT_03: 8 BMS
+ SG_ CellTempN_17 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_18 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_19 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_20 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_21 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_22 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_23 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_24 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2555597043 BMS_HCU_CELLT_04: 8 BMS
+ SG_ CellTempN_25 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_26 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_27 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_28 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_29 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_30 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_31 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_32 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2555662579 BMS_HCU_CELLT_05: 8 BMS
+ SG_ CellTempN_33 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_34 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_35 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_36 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_37 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_38 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_39 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_40 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2555728115 BMS_HCU_CELLT_06: 8 BMS
+ SG_ CellTempN_41 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_42 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_43 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_44 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_45 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_46 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_47 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_48 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2555793651 BMS_HCU_CELLT_07: 8 BMS
+ SG_ CellTempN_49 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_50 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_51 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_52 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_53 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_54 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_55 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_56 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2555859187 BMS_HCU_CELLT_08: 8 BMS
+ SG_ CellTempN_57 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_58 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_59 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_60 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_61 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_62 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_63 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_64 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2555924723 BMS_HCU_CELLT_09: 8 BMS
+ SG_ CellTempN_65 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_66 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_67 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_68 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_69 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_70 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_71 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_72 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2555990259 BMS_HCU_CELLT_10: 8 BMS
+ SG_ CellTempN_73 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_74 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_75 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_76 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_77 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_78 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_79 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_80 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2556055795 BMS_HCU_CELLT_11: 8 BMS
+ SG_ CellTempN_81 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_82 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_83 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_84 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_85 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_86 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_87 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_88 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2556121331 BMS_HCU_CELLT_12: 8 BMS
+ SG_ CellTempN_89 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_90 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_91 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_92 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_93 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_94 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_95 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_96 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2556186867 BMS_HCU_CELLT_13: 8 BMS
+ SG_ CellTempN_97 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_98 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_99 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_100 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_101 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_102 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_103 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_104 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2556252403 BMS_HCU_CELLT_14: 8 BMS
+ SG_ CellTempN_105 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_106 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_107 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_108 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_109 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_110 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_111 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_112 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2556317939 BMS_HCU_CELLT_15: 8 BMS
+ SG_ CellTempN_113 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_114 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_115 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_116 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_117 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_118 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_119 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_120 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2556383475 BMS_HCU_CELLT_16: 8 BMS
+ SG_ CellTempN_121 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_122 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_123 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_124 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_125 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_126 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_127 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_128 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2556449011 BMS_HCU_CELLT_17: 8 BMS
+ SG_ CellTempN_129 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_130 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_131 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_132 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_133 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_134 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_135 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_136 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2556514547 BMS_HCU_CELLT_18: 8 BMS
+ SG_ CellTempN_137 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_138 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_139 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_140 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_141 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_142 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_143 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_144 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2556580083 BMS_HCU_CELLT_19: 8 BMS
+ SG_ CellTempN_145 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_146 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_147 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_148 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_149 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_150 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_151 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_152 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2556645619 BMS_HCU_CELLT_20: 8 BMS
+ SG_ CellTempN_153 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_154 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_155 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_156 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_157 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_158 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_159 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_160 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2556711155 BMS_HCU_CELLT_21: 8 BMS
+ SG_ CellTempN_161 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_162 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_163 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_164 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_165 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_166 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_167 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_168 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2556776691 BMS_HCU_CELLT_22: 8 BMS
+ SG_ CellTempN_169 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_170 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_171 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_172 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_173 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_174 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_175 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_176 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2556842227 BMS_HCU_CELLT_23: 8 BMS
+ SG_ CellTempN_177 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_178 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_179 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_180 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_181 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_182 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_183 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_184 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2556907763 BMS_HCU_CELLT_24: 8 BMS
+ SG_ CellTempN_185 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_186 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_187 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_188 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_189 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_190 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_191 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_192 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2556973299 BMS_HCU_CELLT_25: 8 BMS
+ SG_ CellTempN_193 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_194 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_195 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_196 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_197 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_198 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_199 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_200 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2557038835 BMS_HCU_CELLT_26: 8 BMS
+ SG_ CellTempN_201 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_202 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_203 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_204 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_205 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_206 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_207 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_208 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2557104371 BMS_HCU_CELLT_27: 8 BMS
+ SG_ CellTempN_209 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_210 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_211 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_212 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_213 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_214 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_215 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_216 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2557169907 BMS_HCU_CELLT_28: 8 BMS
+ SG_ CellTempN_217 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_218 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_219 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_220 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_221 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_222 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_223 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_224 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2557235443 BMS_HCU_CELLT_29: 8 BMS
+ SG_ CellTempN_225 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_226 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_227 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_228 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_229 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_230 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_231 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_232 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2557300979 BMS_HCU_CELLT_30: 8 BMS
+ SG_ CellTempN_233 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_234 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_235 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_236 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_237 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_238 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_239 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_240 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2557366515 BMS_HCU_CELLT_31: 8 BMS
+ SG_ CellTempN_241 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_242 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_243 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_244 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_245 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_246 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_247 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_248 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2557432051 BMS_HCU_CELLT_32: 8 BMS
+ SG_ CellTempN_249 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_250 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_251 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_252 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_253 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_254 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_255 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_256 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2557497587 BMS_HCU_CELLT_33: 8 BMS
+ SG_ CellTempN_257 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_258 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_259 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_260 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_261 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_262 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_263 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_264 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2557563123 BMS_HCU_CELLT_34: 8 BMS
+ SG_ CellTempN_265 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_266 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_267 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_268 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_269 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_270 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_271 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_272 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2557628659 BMS_HCU_CELLT_35: 8 BMS
+ SG_ CellTempN_273 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_274 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_275 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_276 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_277 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_278 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_279 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_280 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2557694195 BMS_HCU_CELLT_36: 8 BMS
+ SG_ CellTempN_281 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_282 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_283 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_284 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_285 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_286 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_287 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_288 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2557759731 BMS_HCU_CELLT_37: 8 BMS
+ SG_ CellTempN_289 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_290 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_291 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_292 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_293 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_294 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_295 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_296 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2557825267 BMS_HCU_CELLT_38: 8 BMS
+ SG_ CellTempN_297 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_298 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_299 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_300 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_301 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_302 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_303 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_304 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2557890803 BMS_HCU_CELLT_39: 8 BMS
+ SG_ CellTempN_305 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_306 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_307 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_308 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_309 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_310 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_311 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_312 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2557956339 BMS_HCU_CELLT_40: 8 BMS
+ SG_ CellTempN_313 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_314 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_315 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_316 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_317 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_318 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_319 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_320 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2558021875 BMS_HCU_CELLT_41: 8 BMS
+ SG_ CellTempN_321 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_322 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_323 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_324 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_325 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_326 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_327 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_328 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2558087411 BMS_HCU_CELLT_42: 8 BMS
+ SG_ CellTempN_329 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_330 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_331 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_332 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_333 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_334 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_335 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_336 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2558152947 BMS_HCU_CELLT_43: 8 BMS
+ SG_ CellTempN_337 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_338 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_339 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_340 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_341 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_342 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_343 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_344 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2558218483 BMS_HCU_CELLT_44: 8 BMS
+ SG_ CellTempN_345 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_346 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_347 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_348 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_349 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_350 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_351 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_352 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2558284019 BMS_HCU_CELLT_45: 8 BMS
+ SG_ CellTempN_353 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_354 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_355 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_356 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_357 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_358 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_359 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_360 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2558349555 BMS_HCU_CELLT_46: 8 BMS
+ SG_ CellTempN_361 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_362 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_363 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_364 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_365 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_366 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_367 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_368 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2558415091 BMS_HCU_CELLT_47: 8 BMS
+ SG_ CellTempN_369 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_370 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_371 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_372 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_373 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_374 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_375 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_376 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2558480627 BMS_HCU_CELLT_48: 8 BMS
+ SG_ CellTempN_377 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_378 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_379 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_380 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_381 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_382 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_383 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_384 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2558546163 BMS_HCU_CELLT_49: 8 BMS
+ SG_ CellTempN_385 : 7|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_386 : 15|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_387 : 23|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_388 : 31|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_389 : 39|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_390 : 47|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_391 : 55|8@0+ (1,-40) [-40|120] "°C"  HCU
+ SG_ CellTempN_392 : 63|8@0+ (1,-40) [-40|120] "°C"  HCU
+
+BO_ 2556772595 BMS_HCU_ALARM: 8 BMS
+ SG_ ALM_CELL_OV : 7|2@0+ (1,0) [0|3] ""  HCU
+ SG_ ALM_CELL_UV : 5|2@0+ (1,0) [0|3] ""  HCU
+ SG_ ALM_CELL_OT : 3|2@0+ (1,0) [0|3] ""  HCU
+ SG_ ALM_CELL_UT : 1|2@0+ (1,0) [0|3] ""  HCU
+ SG_ ALM_CELL_LBK : 15|1@0+ (1,0) [0|3] ""  HCU
+ SG_ ALM_CELL_TBK : 14|1@0+ (1,0) [0|3] ""  HCU
+ SG_ ALM_BATT_DV : 13|2@0+ (1,0) [0|3] ""  HCU
+ SG_ ALM_BATT_DT : 11|2@0+ (1,0) [0|3] ""  HCU
+ SG_ ALM_BATT_OV : 9|2@0+ (1,0) [0|3] ""  HCU
+ SG_ ALM_BATT_UV : 23|2@0+ (1,0) [0|3] ""  HCU
+ SG_ ALM_BATT_OC : 21|2@0+ (1,0) [0|3] ""  HCU
+ SG_ ALM_BATT_UC : 19|2@0+ (1,0) [0|3] ""  HCU
+ SG_ ALM_CHRG_OCS : 17|2@0+ (1,0) [0|3] ""  HCU
+ SG_ ALM_DSCH_OCS : 31|2@0+ (1,0) [0|3] ""  HCU
+ SG_ ALM_CHRG_OCT : 29|2@0+ (1,0) [0|3] ""  HCU
+ SG_ ALM_DSCH_OCT : 27|2@0+ (1,0) [0|3] ""  HCU
+ SG_ ALM_BSU_OFFLINE : 25|2@0+ (1,0) [0|3] ""  HCU
+ SG_ ALM_BSU_FAULT : 39|1@0+ (1,0) [0|3] ""  HCU
+ SG_ ALM_LEAK_OC : 38|2@0+ (1,0) [0|3] ""  HCU
+ SG_ ALM_PRECHRG_FAIL : 36|1@0+ (1,0) [0|3] ""  HCU
+ SG_ ALM_AUX_FAIL : 35|1@0+ (1,0) [0|3] ""  HCU
+ SG_ ALM_BMU_FAIL : 34|1@0+ (1,0) [0|3] ""  HCU
+ SG_ ALM_VCU_OFFLINE : 33|2@0+ (1,0) [0|3] ""  HCU
+ SG_ ALM_HVREL_FAIL : 47|1@0+ (1,0) [0|3] ""  HCU
+ SG_ ALM_HALL_BREAK : 46|1@0+ (1,0) [0|3] ""  HCU
+
+BO_ 2550157555 BMS_HCU_CELLV_01: 8 BMS
+ SG_ CellVoltN_1 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_2 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_3 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_4 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2550223091 BMS_HCU_CELLV_02: 8 BMS
+ SG_ CellVoltN_5 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_6 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_7 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_8 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2550288627 BMS_HCU_CELLV_03: 8 BMS
+ SG_ CellVoltN_9 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_10 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_11 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_12 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2550354163 BMS_HCU_CELLV_04: 8 BMS
+ SG_ CellVoltN_13 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_14 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_15 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_16 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2550419699 BMS_HCU_CELLV_05: 8 BMS
+ SG_ CellVoltN_17 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_18 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_19 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_20 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2550485235 BMS_HCU_CELLV_06: 8 BMS
+ SG_ CellVoltN_21 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_22 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_23 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_24 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2550550771 BMS_HCU_CELLV_07: 8 BMS
+ SG_ CellVoltN_25 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_26 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_27 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_28 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2550616307 BMS_HCU_CELLV_08: 8 BMS
+ SG_ CellVoltN_29 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_30 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_31 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_32 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2550681843 BMS_HCU_CELLV_09: 8 BMS
+ SG_ CellVoltN_33 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_34 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_35 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_36 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2550747379 BMS_HCU_CELLV_10: 8 BMS
+ SG_ CellVoltN_37 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_38 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_39 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_40 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2550812915 BMS_HCU_CELLV_11: 8 BMS
+ SG_ CellVoltN_41 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_42 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_43 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_44 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2550878451 BMS_HCU_CELLV_12: 8 BMS
+ SG_ CellVoltN_45 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_46 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_47 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_48 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2550943987 BMS_HCU_CELLV_13: 8 BMS
+ SG_ CellVoltN_49 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_50 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_51 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_52 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2551009523 BMS_HCU_CELLV_14: 8 BMS
+ SG_ CellVoltN_53 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_54 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_55 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_56 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2551075059 BMS_HCU_CELLV_15: 8 BMS
+ SG_ CellVoltN_57 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_58 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_59 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_60 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2551140595 BMS_HCU_CELLV_16: 8 BMS
+ SG_ CellVoltN_61 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_62 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_63 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_64 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2551206131 BMS_HCU_CELLV_17: 8 BMS
+ SG_ CellVoltN_65 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_66 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_67 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_68 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2551271667 BMS_HCU_CELLV_18: 8 BMS
+ SG_ CellVoltN_69 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_70 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_71 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_72 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2551337203 BMS_HCU_CELLV_19: 8 BMS
+ SG_ CellVoltN_73 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_74 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_75 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_76 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2551402739 BMS_HCU_CELLV_20: 8 BMS
+ SG_ CellVoltN_77 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_78 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_79 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_80 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2551468275 BMS_HCU_CELLV_21: 8 BMS
+ SG_ CellVoltN_81 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_82 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_83 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_84 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2551533811 BMS_HCU_CELLV_22: 8 BMS
+ SG_ CellVoltN_85 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_86 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_87 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_88 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2551599347 BMS_HCU_CELLV_23: 8 BMS
+ SG_ CellVoltN_89 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_90 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_91 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_92 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2551664883 BMS_HCU_CELLV_24: 8 BMS
+ SG_ CellVoltN_93 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_94 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_95 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_96 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2551730419 BMS_HCU_CELLV_25: 8 BMS
+ SG_ CellVoltN_97 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_98 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_99 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_100 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2551795955 BMS_HCU_CELLV_26: 8 BMS
+ SG_ CellVoltN_101 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_102 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_103 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_104 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2551861491 BMS_HCU_CELLV_27: 8 BMS
+ SG_ CellVoltN_105 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_106 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_107 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_108 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2551927027 BMS_HCU_CELLV_28: 8 BMS
+ SG_ CellVoltN_109 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_110 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_111 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_112 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2551992563 BMS_HCU_CELLV_29: 8 BMS
+ SG_ CellVoltN_113 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_114 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_115 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_116 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2552058099 BMS_HCU_CELLV_30: 8 BMS
+ SG_ CellVoltN_117 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_118 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_119 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_120 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2552123635 BMS_HCU_CELLV_31: 8 BMS
+ SG_ CellVoltN_121 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_122 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_123 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_124 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2552189171 BMS_HCU_CELLV_32: 8 BMS
+ SG_ CellVoltN_125 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_126 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_127 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_128 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2552254707 BMS_HCU_CELLV_33: 8 BMS
+ SG_ CellVoltN_129 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_130 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_131 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_132 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2552320243 BMS_HCU_CELLV_34: 8 BMS
+ SG_ CellVoltN_133 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_134 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_135 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_136 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2552385779 BMS_HCU_CELLV_35: 8 BMS
+ SG_ CellVoltN_137 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_138 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_139 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_140 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2552451315 BMS_HCU_CELLV_36: 8 BMS
+ SG_ CellVoltN_141 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_142 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_143 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_144 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2552516851 BMS_HCU_CELLV_37: 8 BMS
+ SG_ CellVoltN_145 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_146 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_147 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_148 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2552582387 BMS_HCU_CELLV_38: 8 BMS
+ SG_ CellVoltN_149 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_150 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_151 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_152 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2552647923 BMS_HCU_CELLV_39: 8 BMS
+ SG_ CellVoltN_153 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_154 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_155 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_156 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2552713459 BMS_HCU_CELLV_40: 8 BMS
+ SG_ CellVoltN_157 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_158 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_159 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_160 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2552778995 BMS_HCU_CELLV_41: 8 BMS
+ SG_ CellVoltN_161 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_162 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_163 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_164 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2552844531 BMS_HCU_CELLV_42: 8 BMS
+ SG_ CellVoltN_165 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_166 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_167 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_168 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2552910067 BMS_HCU_CELLV_43: 8 BMS
+ SG_ CellVoltN_169 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_170 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_171 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_172 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2552975603 BMS_HCU_CELLV_44: 8 BMS
+ SG_ CellVoltN_173 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_174 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_175 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_176 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2553041139 BMS_HCU_CELLV_45: 8 BMS
+ SG_ CellVoltN_177 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_178 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_179 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_180 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2553106675 BMS_HCU_CELLV_46: 8 BMS
+ SG_ CellVoltN_181 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_182 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_183 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_184 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2553172211 BMS_HCU_CELLV_47: 8 BMS
+ SG_ CellVoltN_185 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_186 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_187 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_188 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2553237747 BMS_HCU_CELLV_48: 8 BMS
+ SG_ CellVoltN_189 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_190 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_191 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_192 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2553303283 BMS_HCU_CELLV_49: 8 BMS
+ SG_ CellVoltN_193 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_194 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_195 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_196 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2553368819 BMS_HCU_CELLV_50: 8 BMS
+ SG_ CellVoltN_197 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_198 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_199 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_200 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2553434355 BMS_HCU_CELLV_51: 8 BMS
+ SG_ CellVoltN_201 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_202 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_203 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_204 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2553499891 BMS_HCU_CELLV_52: 8 BMS
+ SG_ CellVoltN_205 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_206 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_207 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_208 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2553565427 BMS_HCU_CELLV_53: 8 BMS
+ SG_ CellVoltN_209 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_210 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_211 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_212 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2553630963 BMS_HCU_CELLV_54: 8 BMS
+ SG_ CellVoltN_213 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_214 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_215 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_216 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2553696499 BMS_HCU_CELLV_55: 8 BMS
+ SG_ CellVoltN_217 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_218 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_219 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_220 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2553762035 BMS_HCU_CELLV_56: 8 BMS
+ SG_ CellVoltN_221 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_222 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_223 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_224 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2553827571 BMS_HCU_CELLV_57: 8 BMS
+ SG_ CellVoltN_225 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_226 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_227 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_228 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2553893107 BMS_HCU_CELLV_58: 8 BMS
+ SG_ CellVoltN_229 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_230 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_231 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_232 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2553958643 BMS_HCU_CELLV_59: 8 BMS
+ SG_ CellVoltN_233 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_234 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_235 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_236 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2554024179 BMS_HCU_CELLV_60: 8 BMS
+ SG_ CellVoltN_237 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_238 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_239 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_240 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2554089715 BMS_HCU_CELLV_61: 8 BMS
+ SG_ CellVoltN_241 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_242 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_243 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_244 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2554155251 BMS_HCU_CELLV_62: 8 BMS
+ SG_ CellVoltN_245 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_246 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_247 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_248 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2554220787 BMS_HCU_CELLV_63: 8 BMS
+ SG_ CellVoltN_249 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_250 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_251 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_252 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2554286323 BMS_HCU_CELLV_64: 8 BMS
+ SG_ CellVoltN_253 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_254 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_255 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_256 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2554351859 BMS_HCU_CELLV_65: 8 BMS
+ SG_ CellVoltN_257 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_258 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_259 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_260 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2554417395 BMS_HCU_CELLV_66: 8 BMS
+ SG_ CellVoltN_261 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_262 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_263 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_264 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2554482931 BMS_HCU_CELLV_67: 8 BMS
+ SG_ CellVoltN_265 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_266 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_267 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_268 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2554548467 BMS_HCU_CELLV_68: 8 BMS
+ SG_ CellVoltN_269 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_270 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_271 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_272 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2554614003 BMS_HCU_CELLV_69: 8 BMS
+ SG_ CellVoltN_273 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_274 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_275 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_276 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2554679539 BMS_HCU_CELLV_70: 8 BMS
+ SG_ CellVoltN_277 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_278 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_279 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_280 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2554745075 BMS_HCU_CELLV_71: 8 BMS
+ SG_ CellVoltN_281 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_282 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_283 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_284 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2554810611 BMS_HCU_CELLV_72: 8 BMS
+ SG_ CellVoltN_285 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_286 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_287 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_288 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2554876147 BMS_HCU_CELLV_73: 8 BMS
+ SG_ CellVoltN_289 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_290 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_291 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_292 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2554941683 BMS_HCU_CELLV_74: 8 BMS
+ SG_ CellVoltN_293 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_294 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_295 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_296 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2555007219 BMS_HCU_CELLV_75: 8 BMS
+ SG_ CellVoltN_297 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_298 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_299 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_300 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2555072755 BMS_HCU_CELLV_76: 8 BMS
+ SG_ CellVoltN_301 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_302 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_303 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_304 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2555138291 BMS_HCU_CELLV_77: 8 BMS
+ SG_ CellVoltN_305 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_306 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_307 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_308 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2555203827 BMS_HCU_CELLV_78: 8 BMS
+ SG_ CellVoltN_309 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_310 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_311 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_312 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2555269363 BMS_HCU_CELLV_79: 8 BMS
+ SG_ CellVoltN_313 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_314 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_315 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_316 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2555334899 BMS_HCU_CELLV_80: 8 BMS
+ SG_ CellVoltN_317 : 7|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_318 : 23|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_319 : 39|16@0+ (1,0) [0|5000] "mV"  HCU
+ SG_ CellVoltN_320 : 55|16@0+ (1,0) [0|5000] "mV"  HCU
+
+BO_ 2556444915 BMS_HCU_INFO: 8 BMS
+ SG_ BatVoltage : 7|16@0+ (0.1,0) [0|900] "V" Vector__XXX
+ SG_ BatCurrent : 23|16@0+ (0.1,-1000) [-1000|1000] "A" Vector__XXX
+ SG_ BatSoc : 39|8@0+ (1,0) [0|0] "%" Vector__XXX
+ SG_ BatSoh : 47|8@0+ (1,0) [0|0] "%" Vector__XXX
+ SG_ BatState : 55|4@0+ (1,0) [0|7] "" Vector__XXX
+ SG_ BatAlmLv : 51|4@0+ (1,0) [0|4] "" Vector__XXX
+ SG_ BatLife : 63|8@0+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 2556510451 BMS_HCU_MAXV: 8 BMS
+ SG_ MaxCellVolt : 7|16@0+ (1,0) [0|5000] "mV" Vector__XXX
+ SG_ MinCellVolt : 23|16@0+ (1,0) [0|5000] "mV" Vector__XXX
+ SG_ MaxCellVoltNo : 39|8@0+ (1,0) [0|255] "" Vector__XXX
+ SG_ MinCellVoltNo : 47|8@0+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
+ SG_ ChrReqVolt_LSB : 47|8@0+ (1,0) [0|900] "V" Vector__XXX
+ SG_ BatVoltage_LSB : 15|8@0+ (0.1,0) [0|900] "V" Vector__XXX
+ SG_ BatCurrent_LSB : 31|8@0+ (0.1,-1000) [-1000|1000] "A" Vector__XXX
+ SG_ MaxCellVolt_LSB : 15|8@0+ (1,0) [0|5000] "mV" Vector__XXX
+ SG_ MinCellVolt_LSB : 31|8@0+ (1,0) [0|5000] "mV" Vector__XXX
+ SG_ MaxDisPowerLimit_LSB : 63|8@0+ (0.1,0) [0|300] "kW" Vector__XXX
+ SG_ MaxChrPowerLimit_LSB : 47|8@0+ (0.1,0) [0|300] "kW" Vector__XXX
+ SG_ MaxDisCurlLimit_LSB : 31|8@0+ (1,0) [0|1000] "A" Vector__XXX
+ SG_ MaxChrCurlLimit_LSB : 15|8@0+ (1,0) [0|1000] "A" Vector__XXX
+ SG_ ChrReqCurr_MSB : 63|8@0+ (1,0) [0|600] "A" Vector__XXX
+
+
+
+CM_ SG_ 1697 FA1_Motor_speed "Motor Actual Rotate Speed";
+CM_ SG_ 1697 FA1_Motor_Torque "Motor Actual Torque";
+CM_ SG_ 1697 FA1_EvSpd_Validity "Motor Actual Rotate Speed Valid";
+CM_ SG_ 1697 FA1_Motor_Torque_Validity "Motor Actual Torque Valid";
+CM_ SG_ 1697 FA1_MotorMainState "State of Motor";
+CM_ SG_ 1697 FA1_RotatingDire "Motor Rotating Direction";
+CM_ SG_ 1697 FA1_MotorWorkMode "Motor Running Mode";
+CM_ SG_ 1697 FA1_CheckSum "Message CheckSum ";
+CM_ SG_ 1697 FA1_RollingCounter "Message Rolling Counter ";
+CM_ SG_ 1698 FA2_Motor_DriveTorqueMax "Maximum Limit of Motor Torque";
+CM_ SG_ 1698 FA2_Motor_BrakeTorqueMax "Maximum Limit of Motor Torque";
+CM_ SG_ 1698 FA2_ControlerTemp "Motor Controler Temperature";
+CM_ SG_ 1698 FA2_MotorTemp "Motor Temperature";
+CM_ SG_ 1698 FA2_MotorResolverAngle "Motor Resolver Angle";
+CM_ SG_ 1698 FA2_RollingCounter "MCU_Motor_2RollingCounter";
+CM_ SG_ 1699 FA3_BusVoltage "Bus Voltage";
+CM_ SG_ 1699 FA3_IqCurrent "IQ Current IQ";
+CM_ SG_ 1699 FA3_IdCurrent "ID Current ID";
+CM_ SG_ 1699 FA3_PhaseCurrentIA "MotorPhaseCurrentIAIA";
+CM_ SG_ 1699 FA3_PhaseCurrentIB "MotorPhaseCurrentIBIA";
+CM_ SG_ 1699 FA3_RollingCounter "MCU_Motor_3RollingCounter";
+CM_ SG_ 1700 FA4_W_MotorFaultNum "Total Number Motor Fault";
+CM_ SG_ 1700 FA4_W_ControlerOverheatW "Controler Over Heat Warning";
+CM_ SG_ 1700 FA4_W_MotorOverheatW "Motor Over Heat Warning";
+CM_ SG_ 1700 FA4_W_MotorControlerW "Motor System Fault";
+CM_ SG_ 1700 FA4_W_MotorW "Motor System Fault";
+CM_ SG_ 1700 FA4_W_PhaseOverCurrFault "Phase Current Warning";
+CM_ SG_ 1700 FA4_W_RotateTransformerFault "Motor Rotate Fault";
+CM_ SG_ 1700 FA4_W_St_PhaseCurrSensor "Phase Current Sensor State";
+CM_ SG_ 1700 FA4_W_MotorOverSpdFault "Motor Over Speed Fault";
+CM_ SG_ 1700 FA4_W_DC_MainWireOverVoltFault "Bus OverVotage Warning";
+CM_ SG_ 1700 FA4_W_Drv_MotorOverCoolFault "Motor Controller Over Cool Fault";
+CM_ SG_ 1700 FA4_W_TempSensorState "MCU_Motor_ Temperature Sensor StatusMCU_Motor_";
+CM_ SG_ 1700 FA4_W_MotorTempSensorState "Motor Temperature Sensor Status";
+CM_ SG_ 1700 FA4_W_DC_VoltSensorState "";
+CM_ SG_ 1700 FA4_W_DC_LowVoltWarning "";
+CM_ SG_ 1700 FA4_W_MotorStallFault "";
+CM_ SG_ 1700 FA4_W_MotorResolverlFault "Motor Resolverl Fault";
+CM_ SG_ 1700 FA4_W_MotorLackofPhaseFault "Motor Lack of Phase Fault";
+CM_ SG_ 1700 FA4_W_HardwareFault "MCU_Motor_ Hardware FaultMCU_Motor_";
+CM_ SG_ 1700 FA4_W_SICDriveFault "";
+CM_ SG_ 1700 FA4_W_PhaseCurFault "";
+CM_ SG_ 1700 FA4_W_CanTimeoutFault "CAN";
+CM_ SG_ 1700 FA4_W_BattUvFault "12V";
+CM_ SG_ 1700 FA4_W_BattUvWarning "12V";
+CM_ SG_ 1700 FA4_W_ActiveDisChgFault "";
+CM_ SG_ 1700 FA4_W_CanBusoffFault "CAN Busoff";
+CM_ SG_ 1700 FA4_W_MgnFault "";
+CM_ SG_ 1700 FA4_W_IntDCFault "";
+CM_ SG_ 1700 FA4_W_BattOvFault "";
+CM_ SG_ 1700 FA4_W_IntComFault "";
+CM_ SG_ 1700 FA4_W_SoftFault "";
+CM_ SG_ 1700 FA4_W_InitFault "";
+CM_ SG_ 1700 FA4_W_MotorUndTempFault "";
+CM_ SG_ 1700 FA4_W_DeratingFault "";
+CM_ SG_ 1700 FA4_W_CommandOverrunFault "";
+CM_ SG_ 1700 FA4_W_RollingCounter "MCU_Motor_3RollingCounter";
+CM_ SG_ 1701 FA5_C_MotorEnableReq "MotorEnableReq";
+CM_ SG_ 1701 FA5_C_MotorWorkModeReq "Motor Work Mode Request";
+CM_ SG_ 1701 FA5_C_MotorRotateSpeedReq "";
+CM_ SG_ 1701 FA5_C_MotorTorqueReq "";
+CM_ SG_ 1701 FA5_C_MotorFaultClearReq "";
+CM_ SG_ 1701 FA5_C_CheckSum "";
+CM_ SG_ 1701 FA5_C_RollingCounter "";
+CM_ SG_ 1702 FA6_Resolver_Angle "";
+CM_ SG_ 1702 FA6_Resolver_Speed "";
+CM_ SG_ 1702 FA6_Resolver_Fault_Register "";
+CM_ SG_ 1702 FA6_Reserved "";
+CM_ SG_ 1713 FB1_Motor_speed "Motor Actual Rotate Speed";
+CM_ SG_ 1713 FB1_Motor_Torque "Motor Actual Torque";
+CM_ SG_ 1713 FB1_EvSpd_Validity "Motor Actual Rotate Speed Valid";
+CM_ SG_ 1713 FB1_Motor_Torque_Validity "Motor Actual Torque Valid";
+CM_ SG_ 1713 FB1_MotorMainState "State of Motor";
+CM_ SG_ 1713 FB1_RotatingDire "Motor Rotating Direction";
+CM_ SG_ 1713 FB1_MotorWorkMode "Motor Running Mode";
+CM_ SG_ 1713 FB1_CheckSum "Message CheckSum ";
+CM_ SG_ 1713 FB1_RollingCounter "Message Rolling Counter ";
+CM_ SG_ 1714 FB2_Motor_DriveTorqueMax "Maximum Limit of Motor Torque";
+CM_ SG_ 1714 FB2_Motor_BrakeTorqueMax "Maximum Limit of Motor Torque";
+CM_ SG_ 1714 FB2_ControlerTemp "Motor Controler Temperature";
+CM_ SG_ 1714 FB2_MotorTemp "Motor Temperature";
+CM_ SG_ 1714 FB2_MotorResolverAngle "Motor Resolver Angle";
+CM_ SG_ 1714 FB2_RollingCounter "MCU_Motor_2RollingCounter";
+CM_ SG_ 1715 FB3_BusVoltage "Bus Voltage";
+CM_ SG_ 1715 FB3_IqCurrent "IQ Current IQ";
+CM_ SG_ 1715 FB3_IdCurrent "ID Current ID";
+CM_ SG_ 1715 FB3_PhaseCurrentIA "MotorPhaseCurrentIAIA";
+CM_ SG_ 1715 FB3_PhaseCurrentIB "MotorPhaseCurrentIBIA";
+CM_ SG_ 1715 FB3_RollingCounter "MCU_Motor_3RollingCounter";
+CM_ SG_ 1716 FB4_W_MotorFaultNum "Total Number Motor Fault";
+CM_ SG_ 1716 FB4_W_ControlerOverheatW "Controler Over Heat Warning";
+CM_ SG_ 1716 FB4_W_MotorOverheatW "Motor Over Heat Warning";
+CM_ SG_ 1716 FB4_W_MotorControlerW "Motor System Fault";
+CM_ SG_ 1716 FB4_W_MotorW "Motor System Fault";
+CM_ SG_ 1716 FB4_W_PhaseOverCurrFault "Phase Current Warning";
+CM_ SG_ 1716 FB4_W_RotateTransformerFault "Motor Rotate Fault";
+CM_ SG_ 1716 FB4_W_St_PhaseCurrSensor "Phase Current Sensor State";
+CM_ SG_ 1716 FB4_W_MotorOverSpdFault "Motor Over Speed Fault";
+CM_ SG_ 1716 FB4_W_DC_MainWireOverVoltFault "Bus OverVotage Warning";
+CM_ SG_ 1716 FB4_W_Drv_MotorOverCoolFault "Motor Controller Over Cool Fault";
+CM_ SG_ 1716 FB4_W_TempSensorState "MCU_Motor_ Temperature Sensor StatusMCU_Motor_";
+CM_ SG_ 1716 FB4_W_MotorTempSensorState "Motor Temperature Sensor Status";
+CM_ SG_ 1716 FB4_W_DC_VoltSensorState "";
+CM_ SG_ 1716 FB4_W_DC_LowVoltWarning "";
+CM_ SG_ 1716 FB4_W_MotorStallFault "";
+CM_ SG_ 1716 FB4_W_MotorResolverlFault "Motor Resolverl Fault";
+CM_ SG_ 1716 FB4_W_MotorLackofPhaseFault "Motor Lack of Phase Fault";
+CM_ SG_ 1716 FB4_W_HardwareFault "MCU_Motor_ Hardware FaultMCU_Motor_";
+CM_ SG_ 1716 FB4_W_SICDriveFault "";
+CM_ SG_ 1716 FB4_W_PhaseCurFault "";
+CM_ SG_ 1716 FB4_W_CanTimeoutFault "CAN";
+CM_ SG_ 1716 FB4_W_BattUvFault "12V";
+CM_ SG_ 1716 FB4_W_BattUvWarning "12V";
+CM_ SG_ 1716 FB4_W_ActiveDisChgFault "";
+CM_ SG_ 1716 FB4_W_CanBusoffFault "CAN Busoff";
+CM_ SG_ 1716 FB4_W_MgnFault "";
+CM_ SG_ 1716 FB4_W_IntDCFault "";
+CM_ SG_ 1716 FB4_W_BattOvFault "";
+CM_ SG_ 1716 FB4_W_IntComFault "";
+CM_ SG_ 1716 FB4_W_SoftFault "";
+CM_ SG_ 1716 FB4_W_InitFault "";
+CM_ SG_ 1716 FB4_W_MotorUndTempFault "";
+CM_ SG_ 1716 FB4_W_DeratingFault "";
+CM_ SG_ 1716 FB4_W_CommandOverrunFault "";
+CM_ SG_ 1716 FB4_W_RollingCounter "MCU_Motor_3RollingCounter";
+CM_ SG_ 1717 FB5_C_MotorEnableReq "MotorEnableReq";
+CM_ SG_ 1717 FB5_C_MotorWorkModeReq "Motor Work Mode Request";
+CM_ SG_ 1717 FB5_C_MotorRotateSpeedReq "";
+CM_ SG_ 1717 FB5_C_MotorTorqueReq "";
+CM_ SG_ 1717 FB5_C_MotorFaultClearReq "";
+CM_ SG_ 1717 FB5_C_CheckSum "";
+CM_ SG_ 1717 FB5_C_RollingCounter "";
+CM_ SG_ 1718 FB6_Resolver_Angle "";
+CM_ SG_ 1718 FB6_Resolver_Speed "";
+CM_ SG_ 1718 FB6_Resolver_Fault_Register "";
+CM_ SG_ 1718 FB6_Reserved "";
+CM_ SG_ 1729 FC1_Motor_speed "Motor Actual Rotate Speed";
+CM_ SG_ 1729 FC1_Motor_Torque "Motor Actual Torque";
+CM_ SG_ 1729 FC1_EvSpd_Validity "Motor Actual Rotate Speed Valid";
+CM_ SG_ 1729 FC1_Motor_Torque_Validity "Motor Actual Torque Valid";
+CM_ SG_ 1729 FC1_MotorMainState "State of Motor";
+CM_ SG_ 1729 FC1_RotatingDire "Motor Rotating Direction";
+CM_ SG_ 1729 FC1_MotorWorkMode "Motor Running Mode";
+CM_ SG_ 1729 FC1_CheckSum "Message CheckSum ";
+CM_ SG_ 1729 FC1_RollingCounter "Message Rolling Counter ";
+CM_ SG_ 1730 FC2_Motor_DriveTorqueMax "Maximum Limit of Motor Torque";
+CM_ SG_ 1730 FC2_Motor_BrakeTorqueMax "Maximum Limit of Motor Torque";
+CM_ SG_ 1730 FC2_ControlerTemp "Motor Controler Temperature";
+CM_ SG_ 1730 FC2_MotorTemp "Motor Temperature";
+CM_ SG_ 1730 FC2_MotorResolverAngle "Motor Resolver Angle";
+CM_ SG_ 1730 FC2_RollingCounter "MCU_Motor_2RollingCounter";
+CM_ SG_ 1731 FC3_BusVoltage "Bus Voltage";
+CM_ SG_ 1731 FC3_IqCurrent "IQ Current IQ";
+CM_ SG_ 1731 FC3_IdCurrent "ID Current ID";
+CM_ SG_ 1731 FC3_PhaseCurrentIA "MotorPhaseCurrentIAIA";
+CM_ SG_ 1731 FC3_PhaseCurrentIB "MotorPhaseCurrentIBIA";
+CM_ SG_ 1731 FC3_RollingCounter "MCU_Motor_3RollingCounter";
+CM_ SG_ 1732 FC4_W_MotorFaultNum "Total Number Motor Fault";
+CM_ SG_ 1732 FC4_W_ControlerOverheatW "Controler Over Heat Warning";
+CM_ SG_ 1732 FC4_W_MotorOverheatW "Motor Over Heat Warning";
+CM_ SG_ 1732 FC4_W_MotorControlerW "Motor System Fault";
+CM_ SG_ 1732 FC4_W_MotorW "Motor System Fault";
+CM_ SG_ 1732 FC4_W_PhaseOverCurrFault "Phase Current Warning";
+CM_ SG_ 1732 FC4_W_RotateTransformerFault "Motor Rotate Fault";
+CM_ SG_ 1732 FC4_W_St_PhaseCurrSensor "Phase Current Sensor State";
+CM_ SG_ 1732 FC4_W_MotorOverSpdFault "Motor Over Speed Fault";
+CM_ SG_ 1732 FC4_W_DC_MainWireOverVoltFault "Bus OverVotage Warning";
+CM_ SG_ 1732 FC4_W_Drv_MotorOverCoolFault "Motor Controller Over Cool Fault";
+CM_ SG_ 1732 FC4_W_TempSensorState "MCU_Motor_ Temperature Sensor StatusMCU_Motor_";
+CM_ SG_ 1732 FC4_W_MotorTempSensorState "Motor Temperature Sensor Status";
+CM_ SG_ 1732 FC4_W_DC_VoltSensorState "";
+CM_ SG_ 1732 FC4_W_DC_LowVoltWarning "";
+CM_ SG_ 1732 FC4_W_MotorStallFault "";
+CM_ SG_ 1732 FC4_W_MotorResolverlFault "Motor Resolverl Fault";
+CM_ SG_ 1732 FC4_W_MotorLackofPhaseFault "Motor Lack of Phase Fault";
+CM_ SG_ 1732 FC4_W_HardwareFault "MCU_Motor_ Hardware FaultMCU_Motor_";
+CM_ SG_ 1732 FC4_W_SICDriveFault "";
+CM_ SG_ 1732 FC4_W_PhaseCurFault "";
+CM_ SG_ 1732 FC4_W_CanTimeoutFault "CAN";
+CM_ SG_ 1732 FC4_W_BattUvFault "12V";
+CM_ SG_ 1732 FC4_W_BattUvWarning "12V";
+CM_ SG_ 1732 FC4_W_ActiveDisChgFault "";
+CM_ SG_ 1732 FC4_W_CanBusoffFault "CAN Busoff";
+CM_ SG_ 1732 FC4_W_MgnFault "";
+CM_ SG_ 1732 FC4_W_IntDCFault "";
+CM_ SG_ 1732 FC4_W_BattOvFault "";
+CM_ SG_ 1732 FC4_W_IntComFault "";
+CM_ SG_ 1732 FC4_W_SoftFault "";
+CM_ SG_ 1732 FC4_W_InitFault "";
+CM_ SG_ 1732 FC4_W_MotorUndTempFault "";
+CM_ SG_ 1732 FC4_W_DeratingFault "";
+CM_ SG_ 1732 FC4_W_CommandOverrunFault "";
+CM_ SG_ 1732 FC4_W_RollingCounter "MCU_Motor_3RollingCounter";
+CM_ SG_ 1733 FC5_C_MotorEnableReq "MotorEnableReq";
+CM_ SG_ 1733 FC5_C_MotorWorkModeReq "Motor Work Mode Request";
+CM_ SG_ 1733 FC5_C_MotorRotateSpeedReq "";
+CM_ SG_ 1733 FC5_C_MotorTorqueReq "";
+CM_ SG_ 1733 FC5_C_MotorFaultClearReq "";
+CM_ SG_ 1733 FC5_C_CheckSum "";
+CM_ SG_ 1733 FC5_C_RollingCounter "";
+CM_ SG_ 1734 FC6_Resolver_Angle "";
+CM_ SG_ 1734 FC6_Resolver_Speed "";
+CM_ SG_ 1734 FC6_Resolver_Fault_Register "";
+CM_ SG_ 1734 FC6_Reserved "";
+CM_ SG_ 1745 FD1_Motor_speed "Motor Actual Rotate Speed";
+CM_ SG_ 1745 FD1_Motor_Torque "Motor Actual Torque";
+CM_ SG_ 1745 FD1_EvSpd_Validity "Motor Actual Rotate Speed Valid";
+CM_ SG_ 1745 FD1_Motor_Torque_Validity "Motor Actual Torque Valid";
+CM_ SG_ 1745 FD1_MotorMainState "State of Motor";
+CM_ SG_ 1745 FD1_RotatingDire "Motor Rotating Direction";
+CM_ SG_ 1745 FD1_MotorWorkMode "Motor Running Mode";
+CM_ SG_ 1745 FD1_CheckSum "Message CheckSum ";
+CM_ SG_ 1745 FD1_RollingCounter "Message Rolling Counter ";
+CM_ SG_ 1746 FD2_Motor_DriveTorqueMax "Maximum Limit of Motor Torque";
+CM_ SG_ 1746 FD2_Motor_BrakeTorqueMax "Maximum Limit of Motor Torque";
+CM_ SG_ 1746 FD2_ControlerTemp "Motor Controler Temperature";
+CM_ SG_ 1746 FD2_MotorTemp "Motor Temperature";
+CM_ SG_ 1746 FD2_MotorResolverAngle "Motor Resolver Angle";
+CM_ SG_ 1746 FD2_RollingCounter "MCU_Motor_2RollingCounter";
+CM_ SG_ 1747 FD3_BusVoltage "Bus Voltage";
+CM_ SG_ 1747 FD3_IqCurrent "IQ Current IQ";
+CM_ SG_ 1747 FD3_IdCurrent "ID Current ID";
+CM_ SG_ 1747 FD3_PhaseCurrentIA "MotorPhaseCurrentIAIA";
+CM_ SG_ 1747 FD3_PhaseCurrentIB "MotorPhaseCurrentIBIA";
+CM_ SG_ 1747 FD3_RollingCounter "MCU_Motor_3RollingCounter";
+CM_ SG_ 1748 FD4_W_MotorFaultNum "Total Number Motor Fault";
+CM_ SG_ 1748 FD4_W_ControlerOverheatW "Controler Over Heat Warning";
+CM_ SG_ 1748 FD4_W_MotorOverheatW "Motor Over Heat Warning";
+CM_ SG_ 1748 FD4_W_MotorControlerW "Motor System Fault";
+CM_ SG_ 1748 FD4_W_MotorW "Motor System Fault";
+CM_ SG_ 1748 FD4_W_PhaseOverCurrFault "Phase Current Warning";
+CM_ SG_ 1748 FD4_W_RotateTransformerFault "Motor Rotate Fault";
+CM_ SG_ 1748 FD4_W_St_PhaseCurrSensor "Phase Current Sensor State";
+CM_ SG_ 1748 FD4_W_MotorOverSpdFault "Motor Over Speed Fault";
+CM_ SG_ 1748 FD4_W_DC_MainWireOverVoltFault "Bus OverVotage Warning";
+CM_ SG_ 1748 FD4_W_Drv_MotorOverCoolFault "Motor Controller Over Cool Fault";
+CM_ SG_ 1748 FD4_W_TempSensorState "MCU_Motor_ Temperature Sensor StatusMCU_Motor_";
+CM_ SG_ 1748 FD4_W_MotorTempSensorState "Motor Temperature Sensor Status";
+CM_ SG_ 1748 FD4_W_DC_VoltSensorState "";
+CM_ SG_ 1748 FD4_W_DC_LowVoltWarning "";
+CM_ SG_ 1748 FD4_W_MotorStallFault "";
+CM_ SG_ 1748 FD4_W_MotorResolverlFault "Motor Resolverl Fault";
+CM_ SG_ 1748 FD4_W_MotorLackofPhaseFault "Motor Lack of Phase Fault";
+CM_ SG_ 1748 FD4_W_HardwareFault "MCU_Motor_ Hardware FaultMCU_Motor_";
+CM_ SG_ 1748 FD4_W_SICDriveFault "";
+CM_ SG_ 1748 FD4_W_PhaseCurFault "";
+CM_ SG_ 1748 FD4_W_CanTimeoutFault "CAN";
+CM_ SG_ 1748 FD4_W_BattUvFault "12V";
+CM_ SG_ 1748 FD4_W_BattUvWarning "12V";
+CM_ SG_ 1748 FD4_W_ActiveDisChgFault "";
+CM_ SG_ 1748 FD4_W_CanBusoffFault "CAN Busoff";
+CM_ SG_ 1748 FD4_W_MgnFault "";
+CM_ SG_ 1748 FD4_W_IntDCFault "";
+CM_ SG_ 1748 FD4_W_BattOvFault "";
+CM_ SG_ 1748 FD4_W_IntComFault "";
+CM_ SG_ 1748 FD4_W_SoftFault "";
+CM_ SG_ 1748 FD4_W_InitFault "";
+CM_ SG_ 1748 FD4_W_MotorUndTempFault "";
+CM_ SG_ 1748 FD4_W_DeratingFault "";
+CM_ SG_ 1748 FD4_W_CommandOverrunFault "";
+CM_ SG_ 1748 FD4_W_RollingCounter "MCU_Motor_3RollingCounter";
+CM_ SG_ 1749 FD5_C_MotorEnableReq "MotorEnableReq";
+CM_ SG_ 1749 FD5_C_MotorWorkModeReq "Motor Work Mode Request";
+CM_ SG_ 1749 FD5_C_MotorRotateSpeedReq "";
+CM_ SG_ 1749 FD5_C_MotorTorqueReq "";
+CM_ SG_ 1749 FD5_C_MotorFaultClearReq "";
+CM_ SG_ 1749 FD5_C_CheckSum "";
+CM_ SG_ 1749 FD5_C_RollingCounter "";
+CM_ SG_ 1750 FD6_Resolver_Angle "";
+CM_ SG_ 1750 FD6_Resolver_Speed "";
+CM_ SG_ 1750 FD6_Resolver_Fault_Register "";
+CM_ SG_ 1750 FD6_Reserved "";
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 65535;
+BA_DEF_ BO_  "GenMsgCycleTimeActive" INT 0 65535;
+BA_DEF_ BO_  "GenMsgDelayTime" INT 0 65535;
+BA_DEF_ BO_  "GenMsgNrOfRepetitions" INT 0 65535;
+BA_DEF_ BO_  "GenMsgSendType" ENUM  ;
+BA_DEF_ SG_  "GenSigSNA" STRING ;
+BA_DEF_ SG_  "GenSigStartValue" FLOAT 0 1215752192;
+BA_DEF_DEF_  "GenMsgCycleTime" 0;
+BA_DEF_DEF_  "GenMsgCycleTimeActive" 0;
+BA_DEF_DEF_  "GenMsgDelayTime" 0;
+BA_DEF_DEF_  "GenMsgNrOfRepetitions" 0;
+BA_DEF_DEF_  "GenMsgSendType" "";
+BA_DEF_DEF_  "GenSigSNA" "";
+BA_DEF_DEF_  "GenSigStartValue" 0;
+BA_ "GenMsgCycleTime" BO_ 1697 10;
+BA_ "GenMsgCycleTime" BO_ 1698 10;
+BA_ "GenMsgCycleTime" BO_ 1699 10;
+BA_ "GenMsgCycleTime" BO_ 1700 50;
+BA_ "GenMsgCycleTime" BO_ 1701 10;
+BA_ "GenMsgCycleTime" BO_ 1702 10;
+BA_ "GenMsgCycleTime" BO_ 1713 10;
+BA_ "GenMsgCycleTime" BO_ 1714 10;
+BA_ "GenMsgCycleTime" BO_ 1715 10;
+BA_ "GenMsgCycleTime" BO_ 1716 50;
+BA_ "GenMsgCycleTime" BO_ 1717 10;
+BA_ "GenMsgCycleTime" BO_ 1718 10;
+BA_ "GenMsgCycleTime" BO_ 1729 10;
+BA_ "GenMsgCycleTime" BO_ 1730 10;
+BA_ "GenMsgCycleTime" BO_ 1731 10;
+BA_ "GenMsgCycleTime" BO_ 1732 50;
+BA_ "GenMsgCycleTime" BO_ 1733 10;
+BA_ "GenMsgCycleTime" BO_ 1734 10;
+BA_ "GenMsgCycleTime" BO_ 1745 10;
+BA_ "GenMsgCycleTime" BO_ 1746 10;
+BA_ "GenMsgCycleTime" BO_ 1747 10;
+BA_ "GenMsgCycleTime" BO_ 1748 50;
+BA_ "GenMsgCycleTime" BO_ 1749 10;
+BA_ "GenMsgCycleTime" BO_ 1750 10;
+VAL_ 1697 FA1_EvSpd_Validity 0 "Invalid" 1 "Valid" ;
+VAL_ 1697 FA1_Motor_Torque_Validity 0 "Invalid" 1 "Valid" ;
+VAL_ 1697 FA1_MotorMainState 0 "Off" 1 "StandBy" 2 "Motor" 3 "Generator" 4 "Failure" 5 "Invalid" 6 "Reserved" 7 "Reserved" ;
+VAL_ 1697 FA1_RotatingDire 0 "Inversion " 1 "Corotation" 2 "Reserved" 3 "Reserved" ;
+VAL_ 1697 FA1_MotorWorkMode 1 "Ualpha_test_mode" 2 "id_test_mode" 3 "id_loop_mode" 4 "iq_loop_mode" 5 "speed_loop_mode" 6 "if_starttest_mode" 7 "auto_positioning_mode" ;
+VAL_ 1700 FA4_W_MotorControlerW 0 "Normal" 1 "Level1" 2 "Level2" 3 "Level3" ;
+VAL_ 1700 FA4_W_MotorW 0 "Normal" 1 "Level1" 2 "Level2" 3 "Level3" ;
+VAL_ 1701 FA5_C_MotorWorkModeReq 1 "Ualpha_test_mode" 2 "id_test_mode" 3 "id_loop_mode" 4 "iq_loop_mode" 5 "speed_loop_mode" 6 "if_starttest_mode" 7 "auto_positioning_mode" ;
+VAL_ 1713 FB1_EvSpd_Validity 0 "Invalid" 1 "Valid" ;
+VAL_ 1713 FB1_Motor_Torque_Validity 0 "Invalid" 1 "Valid" ;
+VAL_ 1713 FB1_MotorMainState 0 "Off" 1 "StandBy" 2 "Motor" 3 "Generator" 4 "Failure" 5 "Invalid" 6 "Reserved" 7 "Reserved" ;
+VAL_ 1713 FB1_RotatingDire 0 "Inversion " 1 "Corotation" 2 "Reserved" 3 "Reserved" ;
+VAL_ 1713 FB1_MotorWorkMode 1 "Ualpha_test_mode" 2 "id_test_mode" 3 "id_loop_mode" 4 "iq_loop_mode" 5 "speed_loop_mode" 6 "if_starttest_mode" 7 "auto_positioning_mode" ;
+VAL_ 1716 FB4_W_MotorControlerW 0 "Normal" 1 "Level1" 2 "Level2" 3 "Level3" ;
+VAL_ 1716 FB4_W_MotorW 0 "Normal" 1 "Level1" 2 "Level2" 3 "Level3" ;
+VAL_ 1717 FB5_C_MotorWorkModeReq 1 "Ualpha_test_mode" 2 "id_test_mode" 3 "id_loop_mode" 4 "iq_loop_mode" 5 "speed_loop_mode" 6 "if_starttest_mode" 7 "auto_positioning_mode" ;
+VAL_ 1729 FC1_EvSpd_Validity 0 "Invalid" 1 "Valid" ;
+VAL_ 1729 FC1_Motor_Torque_Validity 0 "Invalid" 1 "Valid" ;
+VAL_ 1729 FC1_MotorMainState 0 "Off" 1 "StandBy" 2 "Motor" 3 "Generator" 4 "Failure" 5 "Invalid" 6 "Reserved" 7 "Reserved" ;
+VAL_ 1729 FC1_RotatingDire 0 "Inversion " 1 "Corotation" 2 "Reserved" 3 "Reserved" ;
+VAL_ 1729 FC1_MotorWorkMode 1 "Ualpha_test_mode" 2 "id_test_mode" 3 "id_loop_mode" 4 "iq_loop_mode" 5 "speed_loop_mode" 6 "if_starttest_mode" 7 "auto_positioning_mode" ;
+VAL_ 1732 FC4_W_MotorControlerW 0 "Normal" 1 "Level1" 2 "Level2" 3 "Level3" ;
+VAL_ 1732 FC4_W_MotorW 0 "Normal" 1 "Level1" 2 "Level2" 3 "Level3" ;
+VAL_ 1733 FC5_C_MotorWorkModeReq 1 "Ualpha_test_mode" 2 "id_test_mode" 3 "id_loop_mode" 4 "iq_loop_mode" 5 "speed_loop_mode" 6 "if_starttest_mode" 7 "auto_positioning_mode" ;
+VAL_ 1745 FD1_EvSpd_Validity 0 "Invalid" 1 "Valid" ;
+VAL_ 1745 FD1_Motor_Torque_Validity 0 "Invalid" 1 "Valid" ;
+VAL_ 1745 FD1_MotorMainState 0 "Off" 1 "StandBy" 2 "Motor" 3 "Generator" 4 "Failure" 5 "Invalid" 6 "Reserved" 7 "Reserved" ;
+VAL_ 1745 FD1_RotatingDire 0 "Inversion " 1 "Corotation" 2 "Reserved" 3 "Reserved" ;
+VAL_ 1745 FD1_MotorWorkMode 1 "Ualpha_test_mode" 2 "id_test_mode" 3 "id_loop_mode" 4 "iq_loop_mode" 5 "speed_loop_mode" 6 "if_starttest_mode" 7 "auto_positioning_mode" ;
+VAL_ 1748 FD4_W_MotorControlerW 0 "Normal" 1 "Level1" 2 "Level2" 3 "Level3" ;
+VAL_ 1748 FD4_W_MotorW 0 "Normal" 1 "Level1" 2 "Level2" 3 "Level3" ;
+VAL_ 1749 FD5_C_MotorWorkModeReq 1 "Ualpha_test_mode" 2 "id_test_mode" 3 "id_loop_mode" 4 "iq_loop_mode" 5 "speed_loop_mode" 6 "if_starttest_mode" 7 "auto_positioning_mode" ;
+VAL_ 2556641523 PosRlyStr 0 "Open" 1 "Close" 2 "Error" ;
+VAL_ 2556641523 NegRlyStr 0 "Open" 1 "Close" 2 "Error" ;
+VAL_ 2556641523 PreRlyStr 0 "Open" 1 "Close" 2 "Error" ;
+VAL_ 2556641523 OnChrRlyStr 0 "Open" 1 "Close" 2 "Error" ;
+VAL_ 2556641523 OffChrRlyStr 0 "Open" 1 "Close" 2 "Error" ;
+VAL_ 2556641523 ChrState 0 "Charging stopped" 1 "Charging initiated" 2 "Constant-current charging" 3 "Trickle charging" 4 "Charging complete" ;
+VAL_ 2556641523 ChrCommunication 0 "Communication Timeout" 1 "??" ;
+VAL_ 2556641523 ChrOFFCC2 0 "Not connected" 1 "Connected" ;
+VAL_ 2556641523 ChrONCC 0 "No connected" 1 "220" 2 "680" 3 "Unknown" ;
+VAL_ 2556444915 BatState 1 "Sleep" 2 "Power Up" 3 "Standby" 4 "Pre-charge" 5 "Run" 6 "Shutdown" 7 "Error" ;
+

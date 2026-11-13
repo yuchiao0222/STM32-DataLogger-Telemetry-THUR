@@ -22,28 +22,22 @@
 /* USER CODE BEGIN 0 */
 
 /* -------------------------------------------------------------------------- */
-/* DBC message IDs (see All.dbc).                                            */
-/*   Motor Frame2 (standard 11-bit, little-endian):                          */
-/*     byte[3] = ControlerTemp (1, -40) degC                                  */
-/*     byte[4] = MotorTemp     (1, -40) degC                                  */
-/*   BMS_HCU_INFO (extended 29-bit, Motorola):                                */
-/*     byte[4] = BatSoc        (1, 0)   %                                     */
+/* DBC message IDs (see PNL.dbc / BMS_M79C7_XWD.dbc / IMU_CH110.dbc).        */
+/*   MotorAndMCUTemp (PNL, std 11-bit): 8 temps, MCU offset -60, motor -40.   */
+/*   PadelAndTrq    (PNL, std 11-bit): VehSpd_kph @ byte[2].                  */
+/*   BMS_SYS_IFO    (BMS, ext 29-bit, little-endian):                         */
+/*     byte[0..1] = SysVoltage (0.1 V), byte[4] = SOC (%).                    */
 /* -------------------------------------------------------------------------- */
-#define CANID_MOTOR_A_FRAME2    0x6A2U   /* 1698 */
-#define CANID_MOTOR_B_FRAME2    0x6B2U   /* 1714 */
-#define CANID_MOTOR_C_FRAME2    0x6C2U   /* 1730 */
-#define CANID_MOTOR_D_FRAME2    0x6D2U   /* 1746 */
-#define CANID_MOTOR_A_FRAME1    0x6A1U   /* 1697, FA1 (motor speed)            */
-#define CANID_MOTOR_A_FRAME3    0x6A3U   /* 1699, FA3 (bus voltage)            */
-#define CANID_CH110_ACCEL       392U     /* 0x188, CH110_TPDO1 (accel X/Y/Z)   */
+#define CANID_MOTOR_MCU_TEMP   226U       /* 0x0E2, MotorAndMCUTemp           */
+#define CANID_PADEL_AND_TRQ    1560U      /* 0x618, VehSpd_kph                */
+#define CANID_CH110_ACCEL      392U       /* 0x188, CH110_TPDO1 (accel X/Y/Z) */
 
-/* DBC lists 2556444915 (0x986040F3) which exceeds the 29-bit CAN ID range.
- * The value actually seen on the wire is the low 29 bits. If the BMS reports
- * a different ID, adjust this constant (see All.dbc BMS_HCU_INFO). */
-#define CANID_BMS_HCU_INFO      0x186040F3U
+/* DBC lists the BMS ID in full 32-bit form; the low 29 bits are used on wire. */
+#define CANID_BMS_SYS_IFO      0x186040F0U
 
-#define TEMP_OFFSET_DEGC        (-40)     /* DBC factor/offset for temps      */
-#define TEMP_SCALE              (10)      /* store 0.1 degC                   */
+#define MCU_TEMP_OFFSET_DEGC    (-60)     /* DBC offset for MCU temp           */
+#define MOTOR_TEMP_OFFSET_DEGC  (-40)     /* DBC offset for motor temp         */
+#define TEMP_SCALE              (10)      /* store 0.1 degC                    */
 
 /* USER CODE END 0 */
 
@@ -63,15 +57,17 @@ static uint8_t s_motor_temp_valid[4] = {0, 0, 0, 0};
 static uint8_t s_ctrl_temp_valid[4]  = {0, 0, 0, 0};
 static uint8_t s_soc_valid = 0;
 
-/* Acceleration (milli-g), voltages, motor speed. */
+/* Acceleration (milli-g), voltages, motor speed, vehicle speed. */
 static int16_t  s_acc_x = 0, s_acc_y = 0, s_acc_z = 0;
 static uint16_t s_bat_voltage = 0;   /* 0.1 V */
 static uint16_t s_bus_voltage = 0;   /* V     */
 static int16_t  s_motor_speed = 0;   /* rpm   */
+static uint8_t  s_veh_speed = 0;     /* km/h  */
 static uint8_t  s_acc_valid = 0;
 static uint8_t  s_bat_volt_valid = 0;
 static uint8_t  s_bus_volt_valid = 0;
 static uint8_t  s_speed_valid = 0;
+static uint8_t  s_veh_speed_valid = 0;
 
 /* USER CODE BEGIN PV */
 
@@ -109,19 +105,38 @@ void APP_Init(void)
   */
 static void app_decode(const can_rx_msg_t *m)
 {
-  int32_t t;
-
   if (m->ide == 0U)
   {
-    /* Standard 11-bit: motor Frame2 (temperature). */
-    uint8_t idx;
-
+    /* Standard 11-bit frames. */
     switch (m->id)
     {
-      case CANID_MOTOR_A_FRAME2: idx = 0U; break;
-      case CANID_MOTOR_B_FRAME2: idx = 1U; break;
-      case CANID_MOTOR_C_FRAME2: idx = 2U; break;
-      case CANID_MOTOR_D_FRAME2: idx = 3U; break;
+      case CANID_MOTOR_MCU_TEMP:
+        /* MotorAndMCUTemp: 8 temps (FL/RL/FR/RR), MCU offset -60, motor -40. */
+        if (m->dlc >= 8U)
+        {
+          s_ctrl_temp[0]  = (int16_t)(((int32_t)m->data[0] + MCU_TEMP_OFFSET_DEGC)   * TEMP_SCALE);
+          s_motor_temp[0] = (int16_t)(((int32_t)m->data[1] + MOTOR_TEMP_OFFSET_DEGC) * TEMP_SCALE);
+          s_ctrl_temp[1]  = (int16_t)(((int32_t)m->data[2] + MCU_TEMP_OFFSET_DEGC)   * TEMP_SCALE);
+          s_motor_temp[1] = (int16_t)(((int32_t)m->data[3] + MOTOR_TEMP_OFFSET_DEGC) * TEMP_SCALE);
+          s_ctrl_temp[2]  = (int16_t)(((int32_t)m->data[4] + MCU_TEMP_OFFSET_DEGC)   * TEMP_SCALE);
+          s_motor_temp[2] = (int16_t)(((int32_t)m->data[5] + MOTOR_TEMP_OFFSET_DEGC) * TEMP_SCALE);
+          s_ctrl_temp[3]  = (int16_t)(((int32_t)m->data[6] + MCU_TEMP_OFFSET_DEGC)   * TEMP_SCALE);
+          s_motor_temp[3] = (int16_t)(((int32_t)m->data[7] + MOTOR_TEMP_OFFSET_DEGC) * TEMP_SCALE);
+          for (uint8_t i = 0U; i < 4U; i++)
+          {
+            s_ctrl_temp_valid[i] = 1U;
+            s_motor_temp_valid[i] = 1U;
+          }
+        }
+        return;
+      case CANID_PADEL_AND_TRQ:
+        /* VehSpd_kph @ byte[2], unit km/h. */
+        if (m->dlc >= 3U)
+        {
+          s_veh_speed = m->data[2];
+          s_veh_speed_valid = 1U;
+        }
+        return;
       case CANID_CH110_ACCEL:
         /* Acc_X/Y/Z: 16-bit little-endian signed, unit milli-g. */
         if (m->dlc >= 6U)
@@ -132,46 +147,18 @@ static void app_decode(const can_rx_msg_t *m)
           s_acc_valid = 1U;
         }
         return;
-      case CANID_MOTOR_A_FRAME1:
-        /* Motor speed: 16-bit little-endian unsigned, offset -30000 -> rpm. */
-        if (m->dlc >= 2U)
-        {
-          uint16_t raw = (uint16_t)m->data[0] | ((uint16_t)m->data[1] << 8);
-          s_motor_speed = (int16_t)((int32_t)raw - 30000);
-          s_speed_valid = 1U;
-        }
-        return;
-      case CANID_MOTOR_A_FRAME3:
-        /* Bus voltage: 10-bit little-endian unsigned, unit V. */
-        if (m->dlc >= 2U)
-        {
-          s_bus_voltage = (uint16_t)m->data[0] | ((uint16_t)(m->data[1] & 0x03U) << 8);
-          s_bus_volt_valid = 1U;
-        }
-        return;
       default: return;
-    }
-
-    if (m->dlc >= 5U)
-    {
-      t = ((int32_t)m->data[3] + TEMP_OFFSET_DEGC) * TEMP_SCALE;
-      s_ctrl_temp[idx] = (int16_t)t;
-      s_ctrl_temp_valid[idx] = 1U;
-
-      t = ((int32_t)m->data[4] + TEMP_OFFSET_DEGC) * TEMP_SCALE;
-      s_motor_temp[idx] = (int16_t)t;
-      s_motor_temp_valid[idx] = 1U;
     }
   }
   else
   {
-    /* Extended 29-bit: BMS_HCU_INFO (battery voltage + SOC). */
-    if (m->id == CANID_BMS_HCU_INFO)
+    /* Extended 29-bit: BMS_SYS_IFO (system voltage + SOC). */
+    if (m->id == CANID_BMS_SYS_IFO)
     {
       if (m->dlc >= 5U)
       {
-        /* BatVoltage: 16-bit Motorola @ byte0..1, unit 0.1 V. */
-        s_bat_voltage = ((uint16_t)m->data[0] << 8) | (uint16_t)m->data[1];
+        /* SysVoltage: 16-bit little-endian @ byte0..1, unit 0.1 V. */
+        s_bat_voltage = (uint16_t)m->data[0] | ((uint16_t)m->data[1] << 8);
         s_bat_volt_valid = 1U;
         s_soc = m->data[4];
         s_soc_valid = 1U;
@@ -226,6 +213,11 @@ static void app_transmit(void)
   if (s_speed_valid != 0U)
   {
     (void)pkt_add_i16(&frame, TAG_MOTOR_SPEED, s_motor_speed);
+  }
+
+  if (s_veh_speed_valid != 0U)
+  {
+    (void)pkt_add_u8(&frame, TAG_VEH_SPEED, s_veh_speed);
   }
 
   /* Test counter: increments every packet, used to verify the RF link. */
